@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>primeoire bench — the number line</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='78' font-size='80'>▥</text></svg>">
+<style>
+  :root {
+    --bg: #0b0e14; --panel: #111725; --line: #1e2942; --text: #d7dee9;
+    --dim: #7c89a5; --hole: #ffffff; --ok: #7fd4a8; --hot: #ff6b6b;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 13px/1.55 ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  .wrap { max-width: none; margin: 0; padding: 18px 20px 60px; }
+  h1 { font-size: 15px; font-weight: 600; margin: 0 0 2px; letter-spacing: .02em; }
+  h1 span { color: var(--dim); font-weight: 400; }
+  .sub { color: var(--dim); margin: 0 0 16px; font-size: 12px; max-width: 120ch; }
+  a { color: var(--ok); }
+
+  .panel {
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 6px; padding: 12px 14px; margin-bottom: 14px;
+  }
+  .panel h2 {
+    font-size: 11px; text-transform: uppercase; letter-spacing: .09em;
+    color: var(--dim); margin: 0 0 10px; font-weight: 600;
+  }
+
+  .controls { display: flex; flex-wrap: wrap; gap: 18px; align-items: flex-end; }
+  .ctl { display: flex; flex-direction: column; gap: 4px; }
+  .ctl label { color: var(--dim); font-size: 11px; }
+  .ctl .val { color: var(--text); font-weight: 600; }
+  input[type=range] { width: 180px; accent-color: #f0b429; }
+  button {
+    background: #17203a; color: var(--text); border: 1px solid var(--line);
+    border-radius: 4px; font: inherit; padding: 4px 8px; cursor: pointer;
+  }
+  button:hover { background: #1f2b4a; }
+  button.on { border-color: #f0b429; color: #f0b429; }
+  .toggles { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    background: #0d1424; border: 1px solid var(--line); border-radius: 4px;
+    padding: 6px 10px; min-width: 100px;
+  }
+  .chip b { display: block; font-size: 15px; font-weight: 600; color: #fff; }
+  .chip i { font-style: normal; color: var(--dim); font-size: 10.5px;
+            text-transform: uppercase; letter-spacing: .07em; }
+
+  canvas { display: block; width: 100%; background: #080b12; border-radius: 4px; cursor: grab; }
+  canvas.drag { cursor: grabbing; }
+  .legend { color: var(--dim); font-size: 11.5px; margin-top: 10px; max-width: 120ch; }
+  .sw { display: inline-flex; align-items: center; gap: 5px; margin-right: 14px; }
+  .sw i { width: 11px; height: 11px; border-radius: 2px; display: inline-block; }
+  .sw u { width: 20px; height: 0; display: inline-block; text-decoration: none; }
+  #hover { min-height: 42px; color: var(--text); font-size: 12px; }
+  #hover .none { color: var(--dim); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>primeoire bench <span>/ the number line — stacking the strikes</span></h1>
+  <p class="sub">
+    Every integer gets a column, and every stacked prime gets a row. A prime's
+    block starts at its own row and hangs down until it meets the next prime
+    that struck. So the skyline is the largest stacked prime dividing each
+    number, and empty is a hole. Two holes two apart is a slot.
+    <a href="index.html">the grain census →</a>
+    <a href="dimensions.html">the dimension of a hole →</a>
+  </p>
+
+  <div class="panel">
+    <div class="controls">
+      <div class="ctl">
+        <label>primes stacked <span class="val" id="kLabel">2 3 5 7</span></label>
+        <div style="display:flex; gap:6px; align-items:center">
+          <button id="kPrev" title="drop the largest prime (or ↓)">−1</button>
+          <input type="range" id="k" min="1" max="25" value="4" style="width:130px">
+          <button id="kNext" title="stack the next prime (or ↑)">+1</button>
+        </div>
+      </div>
+      <div class="ctl">
+        <label>zoom <span class="val" id="zLabel">6 px</span></label>
+        <input type="range" id="z" min="1" max="28" value="6">
+      </div>
+      <div class="ctl">
+        <label>block height <span class="val" id="hLabel">9 px</span></label>
+        <input type="range" id="h" min="3" max="16" value="9">
+      </div>
+      <div class="ctl">
+        <label>jump to</label>
+        <div class="toggles">
+          <button id="jOrigin">origin</button>
+          <button id="jFrontier">frontier p²</button>
+          <button id="jMirror">mirror p#/2</button>
+          <button id="jSeam">tile edge p#</button>
+          <button id="jGap" title="the widest run with no slot anywhere in the tile">largest gap</button>
+        </div>
+      </div>
+      <div class="ctl">
+        <label>born at fold</label>
+        <select id="birth" style="background:#17203a; color:#d7dee9; border:1px solid #1e2942; border-radius:4px; font:inherit; padding:4px 8px">
+          <option value="all">all</option>
+        </select>
+      </div>
+      <div class="ctl">
+        <label>render</label>
+        <div class="toggles">
+          <button id="mStack">stack</button>
+          <button id="mRows" class="on">rows</button>
+        </div>
+      </div>
+      <div class="ctl">
+        <label>show</label>
+        <div class="toggles">
+          <button id="tHoles" class="on">holes</button>
+          <button id="tTwins" class="on">slots</button>
+          <button id="tTile" class="on">tile edges</button>
+          <button id="tMirror" class="on">mirror</button>
+          <button id="tFrontier" class="on">frontier</button>
+          <button id="tNums" class="on">numbers</button>
+          <button id="tGap">largest gaps</button>
+        </div>
+      </div>
+    </div>
+    <div class="ctl" style="margin-top:12px">
+      <label>position <span class="val" id="startLabel">0</span> — step with the buttons, drag the canvas, or use ← →</label>
+      <div style="display:flex; gap:8px; align-items:center">
+        <button id="prev" title="back one position (shift for ten)">−1</button>
+        <input type="range" id="start" min="0" max="10000" value="0" style="flex:1">
+        <button id="next" title="forward one position (shift for ten)">+1</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>readouts</h2>
+    <div class="chips" id="chips"></div>
+  </div>
+
+  <div class="panel">
+    <canvas id="line" height="230"></canvas>
+    <div class="legend" id="primeKey"></div>
+    <div class="legend" id="modeNote"></div>
+    <div class="legend" id="birthKey"></div>
+    <div class="legend">
+      A slot's bar is filled when it sits below the frontier p², where holes are
+      certified primes and the slot is a real twin prime pair. It is hollow past
+      the frontier, where a later prime can still kill it.
+    </div>
+    <div class="legend">
+      <b style="color:#d7dee9">lines</b> &nbsp;
+      <span class="sw"><u style="border-top:1px dashed rgba(215,222,233,.7)"></u>tile edge p#</span>
+      <span class="sw"><u style="border-top:1px solid #e879f9"></u>mirror axis</span>
+      <span class="sw"><u style="border-top:1px solid #ff6b6b"></u>frontier p²</span>
+      <span class="sw"><u style="border-top:1px dashed rgba(255,255,255,.7)"></u>a gap of maximal width G₂</span>
+    </div>
+    <div class="legend">
+      The tile is a palindrome. Fold the picture along the mirror axis and every
+      strike column lands on another strike column, so the axis is drawn at the
+      centre of each tile, at p#/2. Reflection about 0 is the same map mod p#,
+      one symmetry whose two fixed points sit half a period apart, so the
+      boundary axis is forced by periodicity and shows nothing the centre does
+      not. The internal seams of the last fold are axes of the previous tile,
+      not of this one: the new prime's strikes break all but this one.
+    </div>
+    <div class="legend">
+      Boundaries and positions are drawn differently. A tile edge is a boundary
+      between copies, so it sits at the left edge of its column: a fold lays
+      down whole sets of positions, never half a position. A mirror axis is a
+      position, so it runs through the middle of its column, because folding
+      there has to land that column on itself. The frontier is a boundary too:
+      everything strictly below p² is settled, and p² itself is composite.
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>under the cursor</h2>
+    <div id="hover"><span class="none">move over the line</span></div>
+  </div>
+
+</div>
+<script src="kernel.js"></script>
+<script src="numberline.js"></script>
+</body>
+</html>

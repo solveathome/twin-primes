@@ -1,0 +1,30 @@
+==============================================================================
+  NATAL@5 VARIANCE — exact J5 pair-correlation, run of 2026-08-14
+==============================================================================
+
+--- A. Exact variance over rotations (window L = W, scour to y = maxprime<=sqrt(W)) ---
+  x  |    W     |  y  |    E[N]   |   Var    | Var/E | sigma |  E/sigma | empty<= (Var/E^2)
+  7 |      210 |  13 |      6.92 |     1.05 | 0.152 |  1.03 |     6.7 | 2.20e-2   [0.0s]
+ 11 |     2310 |  47 |     39.27 |    10.06 | 0.256 |  3.17 |    12.4 | 6.53e-3   [0.0s]
+ 13 |    30030 | 173 |    304.28 |    91.13 | 0.299 |  9.55 |    31.9 | 9.84e-4   [0.0s]
+ 17 |   510510 | 709 |   3245.51 |  1060.54 | 0.327 | 32.57 |    99.7 | 1.01e-4   [0.0s]
+ 19 |  9699690 | 3109 |  41441.19 | 14392.59 | 0.347 | 119.97 |   345.4 | 8.38e-6   [1.2s]
+
+--- B. Brute force @7: ALL rotations of L=210 in the deep tile (period 30030, y=13) ---
+  brute: mean=6.923077  var=1.052824  min=4  max=10  empty=0/30030
+  formula: E=6.923077  Var=1.052824  match=true
+
+--- C. Anchored window [0,W): actual count, ratio to E, z-score ---
+  x  | anchored actual |    E[N]   | actual/E | z = (act-E)/sigma
+  7 |           8     |       6.9 |  1.1556  |  1.05
+ 11 |          45     |      39.3 |  1.1458  |  1.81
+ 13 |         307     |     304.3 |  1.0089  |  0.28
+ 17 |        3099     |    3245.5 |  0.9549  |  -4.50
+ 19 |       38380     |   41441.2 |  0.9261  |  -25.52
+  (x=17 anchored must equal 3099 = the march result — self-check.)
+
+--- D. Monte-Carlo random rotations (CRT residue sampling) ---
+  @11 (y=47, n=300000): MC mean=39.268 (formula 39.274)  MC var=10.058 (formula 10.065)  min=24  empty=0   [1s]
+  @13 (y=173, n=20000): MC mean=304.402 (formula 304.282)  MC var=91.610 (formula 91.132)  min=264  empty=0   [1s]
+
+DONE. READINGS are in the header-companion block at the end of natal5-variance.js.

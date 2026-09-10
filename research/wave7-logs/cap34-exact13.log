@@ -1,0 +1,20 @@
+[0.0s] --- [E] exact @13 decomposition, 10 workers ---
+[1857.0s] @13 EXACT: T4 = 352253669.87624460
+[1857.0s] @13 cap-27 certified:  352253669.8762445   REL = 3.384189e-16
+[1857.0s] @13 layers (exact):  A = 68943985960.279144
+[1857.0s]   C1 = -2294790388.9899592   (-3.479294e-2 of G)
+[1857.0s]   C2 = -184829668.85234207   (-2.802333e-3 of G)
+[1857.0s]   C3 = -553554086.94408917   (-8.392825e-3 of G)
+[1857.0s]   Multi = 44821955.443329073   (6.795774e-4 of G)
+[1857.0s]   G = 65955633770.936089   quads=39,782,707,965
+[1857.0s]   quadruples with a kappa-prime: 26,845,968,566 (67.48%), kappa-prime visits 41,880,208,754, max primes on one quadruple = 12
+[1857.0s] @13 the JOINT layer, opened up (all exact):
+[1857.0s]   Multi           = 44821955.4433291   (6.795774e-4 of G)
+[1857.0s]   2-prime part e2 = 45090019.6365043   (6.836417e-4 of G)
+[1857.0s]   3-prime part e3 = -268718.409425233   (-4.074230e-6 of G)
+[1857.0s]   4-prime and up  = 654.216249991616   (9.919035e-9 of G)
+[1857.0s]   Multi with the pair weight w set to 1 (a pure class-histogram count):
+[1857.0s]     = 15975541.2040702   error vs exact = -4.373609e-4 of G  (-64.36% of the layer)
+[1857.0s]   Lin with w set to 1 = -1350912108.70099  vs exact -3033174144.78639  (-55.46%)
+[1857.0s] truth written to /private/tmp/claude-501/-Users-benjaminsen-Files-Git-primeoire/2f238b79-1ea1-4999-ad8e-4521a9a57231/scratchpad/nc/nc34-exact13.json
+[1857.0s] [4 checks passed]

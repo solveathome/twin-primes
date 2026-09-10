@@ -1,0 +1,148 @@
+{
+  "schema": 1,
+  "scope": "Finite identities and exact rational pricing only. No asymptotic saving is proved; the target (21) remains OPEN.",
+  "recipChecks": 2203,
+  "pairSplitChecks": 350050,
+  "correctionSplitChecks": 350050,
+  "complexChecks": 6896,
+  "maxComplexError": 2.1606320662431672e-14,
+  "controls": {
+    "recipWrongSign": 2113,
+    "splitWrongModulus": 267156,
+    "splitDroppedTheta": 165422,
+    "correctionProductForm": 347196
+  },
+  "corrSamples": 19956,
+  "maxCorr": 0.000002844674754668634,
+  "maxCorrVar": 0.000002779007837149458,
+  "corrBudget": 0.00006399999999999996,
+  "classical": [
+    "39/50",
+    "103/100",
+    "14/25"
+  ],
+  "trivialBlock": "53/50",
+  "bc": {
+    "term1": "129/125",
+    "term2": "399/400",
+    "max": "129/125",
+    "deficit": "4/125"
+  },
+  "dfi": "1267/1200",
+  "wright": "1023/1000",
+  "kappaThreshold": "27/140",
+  "gammaThreshold": "9/28",
+  "bandRows": [
+    {
+      "alpha": "0/1",
+      "term1": "981/1000",
+      "term2": "15/16"
+    },
+    {
+      "alpha": "1/100",
+      "term1": "1979/2000",
+      "term2": "379/400"
+    },
+    {
+      "alpha": "1/50",
+      "term1": "499/500",
+      "term2": "383/400"
+    },
+    {
+      "alpha": "3/100",
+      "term1": "2013/2000",
+      "term2": "387/400"
+    },
+    {
+      "alpha": "1/25",
+      "term1": "203/200",
+      "term2": "391/400"
+    },
+    {
+      "alpha": "1/20",
+      "term1": "2047/2000",
+      "term2": "79/80"
+    },
+    {
+      "alpha": "3/50",
+      "term1": "129/125",
+      "term2": "399/400"
+    }
+  ],
+  "region": {
+    "grid": 19005,
+    "bcPoints": 3218,
+    "existingPoints": 7004,
+    "existingOnly": 3786,
+    "violations": 0,
+    "controlViolations": 722
+  },
+  "specRows": [
+    {
+      "j": "0/1",
+      "L": "1/2",
+      "H2overL": "-19/50",
+      "factor": "0/1"
+    },
+    {
+      "j": "1/100",
+      "L": "49/100",
+      "H2overL": "-37/100",
+      "factor": "0/1"
+    },
+    {
+      "j": "1/50",
+      "L": "12/25",
+      "H2overL": "-9/25",
+      "factor": "0/1"
+    },
+    {
+      "j": "3/100",
+      "L": "47/100",
+      "H2overL": "-7/20",
+      "factor": "0/1"
+    },
+    {
+      "j": "1/25",
+      "L": "23/50",
+      "H2overL": "-17/50",
+      "factor": "0/1"
+    },
+    {
+      "j": "1/20",
+      "L": "9/20",
+      "H2overL": "-33/100",
+      "factor": "0/1"
+    },
+    {
+      "j": "1/10",
+      "L": "2/5",
+      "H2overL": "-7/25",
+      "factor": "0/1"
+    },
+    {
+      "j": "1/5",
+      "L": "3/10",
+      "H2overL": "-9/50",
+      "factor": "0/1"
+    },
+    {
+      "j": "3/10",
+      "L": "1/5",
+      "H2overL": "-2/25",
+      "factor": "0/1"
+    },
+    {
+      "j": "19/50",
+      "L": "3/25",
+      "H2overL": "0/1",
+      "factor": "0/1"
+    },
+    {
+      "j": "9/20",
+      "L": "1/20",
+      "H2overL": "7/100",
+      "factor": "7/100"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+P1 — the trapezoid cancellation identity:
+P1 @11: 40 (q,branch) pairs — closed form vs definition, max relerr 4.8e-13; min slack in |Snum| ≤ 8Mσ: 53.8×
+P1 @13: 80 (q,branch) pairs — closed form vs definition, max relerr 1.2e-10; min slack in |Snum| ≤ 8Mσ: 53.8×
+P1 @17: 96 (q,branch) pairs — closed form vs definition, max relerr 1.5e-8; min slack in |Snum| ≤ 8Mσ: 94.6×
+P1 @19: 124 (q,branch) pairs — closed form vs definition, max relerr 6.0e-6; min slack in |Snum| ≤ 8Mσ: 94.6×
+
+P0/P2 — chain of custody, and the two uniform bounds:
+P0 @11: W=2310 K=10  W·ΣNUMsk < 15·ΣV: CERTIFIED  G30_agg=0.2132  ΣCov<0: YES
+P2 @11: calm ΣV/ΣLδ = 0.2349;  Abel(cap-26) agg 1.828e+1 best-q 8.66e+0 certified 0/10;  trapezoid agg 5.695e+2 best-q 3.85e+2 certified 0/10
+P0 @13: W=30030 K=34  W·ΣNUMsk < 15·ΣV: CERTIFIED  G30_agg=0.1113  ΣCov<0: YES
+P2 @13: calm ΣV/ΣLδ = 0.1149;  Abel(cap-26) agg 5.254e+1 best-q 2.10e+1 certified 0/34;  trapezoid agg 1.701e+3 best-q 6.07e+2 certified 0/34
+P0 @17: W=510510 K=120  W·ΣNUMsk < 15·ΣV: CERTIFIED  G30_agg=0.1011  ΣCov<0: YES
+P2 @17: calm ΣV/ΣLδ = 0.0505;  Abel(cap-26) agg 1.579e+2 best-q 3.63e+1 certified 0/120;  trapezoid agg 5.146e+3 best-q 1.38e+3 certified 0/120
+P0 @19: W=9699690 K=435  W·ΣNUMsk < 15·ΣV: CERTIFIED  G30_agg=0.1259  ΣCov<0: YES
+P2 @19: calm ΣV/ΣLδ = 0.0198;  Abel(cap-26) agg 5.210e+2 best-q 9.31e+1 certified 0/435;  trapezoid agg 1.768e+4 best-q 4.72e+3 certified 0/435
+P0 @23: W=223092870 K=1739  W·ΣNUMsk < 15·ΣV: CERTIFIED  G30_agg=0.0945  ΣCov<0: YES
+P2 @23: calm ΣV/ΣLδ = 0.0080;  Abel(cap-26) agg 1.593e+3 best-q 1.57e+2 certified 0/1739;  trapezoid agg 5.605e+4 best-q 8.90e+3 certified 0/1739
+
+P3 — the door: equidistribution of (q mod 30, ⌊W/q⌋ mod 30), and cancellation over q:
+P3 @17: K=120  χ²[(q, ⌊W/q⌋) mod 30, 240 cells, df 239] = 280.0  | M=30: |Σ|/Σ|·| = 1.16e-1 | M=210: |Σ|/Σ|·| = 3.29e-2 | M=2310: |Σ|/Σ|·| = 3.89e-1 | M=30030: |Σ|/Σ|·| = 6.86e-1  (K^−1/2 = 9.13e-2)
+P3 @19: K=435  χ²[(q, ⌊W/q⌋) mod 30, 240 cells, df 239] = 219.9  | M=30: |Σ|/Σ|·| = 6.80e-2 | M=210: |Σ|/Σ|·| = 3.28e-2 | M=2310: |Σ|/Σ|·| = 7.71e-2 | M=30030: |Σ|/Σ|·| = 3.42e-1  (K^−1/2 = 4.79e-2)
+P3 @23: K=1739  χ²[(q, ⌊W/q⌋) mod 30, 240 cells, df 239] = 276.1  | M=30: |Σ|/Σ|·| = 6.10e-2 | M=210: |Σ|/Σ|·| = 1.08e-2 | M=2310: |Σ|/Σ|·| = 3.23e-2 | M=30030: |Σ|/Σ|·| = 1.63e-1  (K^−1/2 = 2.40e-2)
+P3 @29: K=7863  χ²[(q, ⌊W/q⌋) mod 30, 240 cells, df 239] = 250.8  | M=30: |Σ|/Σ|·| = 1.05e-2 | M=210: |Σ|/Σ|·| = 4.42e-4 | M=2310: |Σ|/Σ|·| = 5.50e-3 | M=30030: |Σ|/Σ|·| = 7.98e-2  (K^−1/2 = 1.13e-2)
+P3 @31: K=37534  χ²[(q, ⌊W/q⌋) mod 30, 240 cells, df 239] = 174.1  | M=30: |Σ|/Σ|·| = 1.56e-2 | M=210: |Σ|/Σ|·| = 9.04e-3 | M=2310: |Σ|/Σ|·| = 7.96e-3  (K^−1/2 = 5.16e-3)
+P3 @37: K=198274  χ²[(q, ⌊W/q⌋) mod 30, 240 cells, df 239] = 241.6  | M=30: |Σ|/Σ|·| = 1.68e-2 | M=210: |Σ|/Σ|·| = 3.09e-3 | M=2310: |Σ|/Σ|·| = 1.26e-3  (K^−1/2 = 2.25e-3)
+
+P4 — where the skeleton mass actually sits:
+P4 @13 (34 primes, step 1): Σ_TΣ_q Snum_T = 2.9021e+1  [custody: Σ_q NUMsk/(15W) = 2.9021e+1]
+     M_T ≤ lB (P1 gives an L-free bound; door is fixed-modulus): 2.667e+0 = 9.2%
+     M_T > lB (open; door is at modulus ~W):                     2.635e+1 = 90.8%
+     open mass by depth |T|−1: 0.0e+0 -2.3e+0 1.9e+1 9.5e+0
+P4 @17 (120 primes, step 1): Σ_TΣ_q Snum_T = 2.2650e+2  [custody: Σ_q NUMsk/(15W) = 2.2650e+2]
+     M_T ≤ lB (P1 gives an L-free bound; door is fixed-modulus): -2.004e+0 = -0.9%
+     M_T > lB (open; door is at modulus ~W):                     2.285e+2 = 100.9%
+     open mass by depth |T|−1: 0.0e+0 0.0e+0 -8.1e+0 2.2e+2 2.2e+1
+P4 @19 (40 primes, step 11): Σ_TΣ_q Snum_T = 1.8153e+2
+     M_T ≤ lB (P1 gives an L-free bound; door is fixed-modulus): -1.952e+1 = -10.8%
+     M_T > lB (open; door is at modulus ~W):                     2.010e+2 = 110.8%
+     open mass by depth |T|−1: 0.0e+0 0.0e+0 -8.2e+0 1.1e+2 9.9e+1 2.4e+0
+P4 @23 (29 primes, step 60): Σ_TΣ_q Snum_T = 3.8400e+2
+     M_T ≤ lB (P1 gives an L-free bound; door is fixed-modulus): 2.099e+1 = 5.5%
+     M_T > lB (open; door is at modulus ~W):                     3.630e+2 = 94.5%
+     open mass by depth |T|−1: 0.0e+0 0.0e+0 0.0e+0 9.5e+0 2.9e+2 5.5e+1 5.5e+0
+
+P5 — the decay-law shortcut:
+P5 G30_agg = 0.2132, 0.1113, 0.1011, 0.1259, 0.0945   increments −0.1019 −0.0102 0.0248 −0.0313
+     fit ln G30 ~ b·(ln ln W): b = -0.699  R² = 0.601  residuals 0.204 -0.246 -0.173 0.188 0.027
+     fit ln G30 ~ b·(x): b = -0.049  R² = 0.511  residuals 0.276 -0.278 -0.180 0.137 0.045
+     fit ln G30 ~ b·(ln K): b = -0.116  R² = 0.526  residuals 0.255 -0.254 -0.204 0.164 0.038
+     @13..@23 mean 0.1082, spread 0.0313 — flat within its own spread, non-monotone at @19
+
+TOTAL 65.2s

@@ -1,0 +1,425 @@
+{
+  "schema": 1,
+  "scope": "Exact rational bookkeeping over stated block-budget inequalities. No arithmetic sum, rate or onset is measured, and no imported analytic estimate is validated.",
+  "cutoffs": {
+    "w": "6/25",
+    "v": "1/20",
+    "deltaRange": [
+      "6/25",
+      "19/25"
+    ],
+    "nuRange": [
+      "1/20",
+      "19/20"
+    ]
+  },
+  "margin": "1/1000",
+  "domainArea": "117/250",
+  "budgetChecks": 2438,
+  "regionChecks": 6156,
+  "usableCount": 4405,
+  "edgeChecks": 286,
+  "stripWitnesses": 10,
+  "dEdge": {
+    "min": "11/10",
+    "sup": "2",
+    "aboveCheapest": 180
+  },
+  "eEdge": {
+    "min": "37/25",
+    "sup": "2",
+    "aboveCheapest": 104
+  },
+  "cornerChecks": 14,
+  "polyRows": [
+    {
+      "gamma": "0",
+      "nvert": 6,
+      "area": "35347/120000",
+      "areaDec": 0.2945583333333333,
+      "pct": 62.93981481481481,
+      "verts": [
+        "(19/25,17/60)",
+        "(19/25,19/20)",
+        "(47/150,67/150)",
+        "(6/25,19/20)",
+        "(6/25,63/100)",
+        "(67/200,17/40)"
+      ]
+    },
+    {
+      "gamma": "3/50",
+      "nvert": 5,
+      "area": "27863/97500",
+      "areaDec": 0.285774358974359,
+      "pct": 61.06289721674337,
+      "verts": [
+        "(101/325,589/1300)",
+        "(19/25,19/20)",
+        "(19/25,91/300)",
+        "(6/25,19/20)",
+        "(6/25,63/100)"
+      ]
+    },
+    {
+      "gamma": "1/5",
+      "nvert": 5,
+      "area": "651/2500",
+      "areaDec": 0.2604,
+      "pct": 55.64102564102564,
+      "verts": [
+        "(19/25,19/20)",
+        "(19/25,7/20)",
+        "(31/100,1/2)",
+        "(6/25,19/20)",
+        "(6/25,71/100)"
+      ]
+    },
+    {
+      "gamma": "39/100",
+      "nvert": 5,
+      "area": "25871/120000",
+      "areaDec": 0.21559166666666665,
+      "pct": 46.066595441595446,
+      "verts": [
+        "(143/400,219/400)",
+        "(19/25,19/20)",
+        "(19/25,31/75)",
+        "(6/25,19/20)",
+        "(6/25,9/10)"
+      ]
+    },
+    {
+      "gamma": "1/2",
+      "nvert": 4,
+      "area": "3/16",
+      "areaDec": 0.1875,
+      "pct": 40.06410256410257,
+      "verts": [
+        "(13/50,19/20)",
+        "(19/25,19/20)",
+        "(19/25,9/20)",
+        "(77/200,23/40)"
+      ]
+    },
+    {
+      "gamma": "1",
+      "nvert": 4,
+      "area": "1/12",
+      "areaDec": 0.08333333333333333,
+      "pct": 17.806267806267805,
+      "verts": [
+        "(19/25,19/20)",
+        "(19/25,37/60)",
+        "(32/75,19/20)",
+        "(51/100,7/10)"
+      ]
+    },
+    {
+      "gamma": "11/10",
+      "nvert": 4,
+      "area": "27/400",
+      "areaDec": 0.0675,
+      "pct": 14.423076923076922,
+      "verts": [
+        "(107/200,29/40)",
+        "(19/25,13/20)",
+        "(19/25,19/20)",
+        "(23/50,19/20)"
+      ]
+    },
+    {
+      "gamma": "3/2",
+      "nvert": 4,
+      "area": "1/48",
+      "areaDec": 0.020833333333333332,
+      "pct": 4.451566951566951,
+      "verts": [
+        "(127/200,33/40)",
+        "(19/25,19/20)",
+        "(19/25,47/60)",
+        "(89/150,19/20)"
+      ]
+    },
+    {
+      "gamma": "37/25",
+      "nvert": 4,
+      "area": "169/7500",
+      "areaDec": 0.022533333333333332,
+      "pct": 4.814814814814815,
+      "verts": [
+        "(19/25,19/20)",
+        "(19/25,233/300)",
+        "(44/75,19/20)",
+        "(63/100,41/50)"
+      ]
+    },
+    {
+      "gamma": "7/4",
+      "nvert": 4,
+      "area": "1/192",
+      "areaDec": 0.005208333333333333,
+      "pct": 1.1128917378917378,
+      "verts": [
+        "(19/25,13/15)",
+        "(19/25,19/20)",
+        "(203/300,19/20)",
+        "(279/400,71/80)"
+      ]
+    },
+    {
+      "gamma": "2",
+      "nvert": 1,
+      "area": "0",
+      "areaDec": 0,
+      "pct": 0,
+      "verts": [
+        "(19/25,19/20)"
+      ]
+    },
+    {
+      "gamma": "9/4",
+      "nvert": 0,
+      "area": "0",
+      "areaDec": 0,
+      "pct": 0,
+      "verts": []
+    }
+  ],
+  "wDaggerArea": "142537/480000",
+  "wDaggerPieces": [
+    "141979/480000",
+    "93/80000"
+  ],
+  "reqRows": [
+    {
+      "delta": "2/5",
+      "nu": "2/5",
+      "p": "9/25",
+      "q": "11/20",
+      "gammaRight": "-1/100",
+      "gammaLeft": "37/100",
+      "rightUsable": true,
+      "leftUsable": true,
+      "gammaReq": "-1/100",
+      "gammaReqDec": -0.01
+    },
+    {
+      "delta": "47/150",
+      "nu": "67/150",
+      "p": "67/150",
+      "q": "151/300",
+      "gammaRight": "13/300",
+      "gammaLeft": "47/300",
+      "rightUsable": true,
+      "leftUsable": true,
+      "gammaReq": "13/300",
+      "gammaReqDec": 0.043333333333333335
+    },
+    {
+      "delta": "8/25",
+      "nu": "9/20",
+      "p": "11/25",
+      "q": "1/2",
+      "gammaRight": "3/50",
+      "gammaLeft": "9/50",
+      "rightUsable": true,
+      "leftUsable": true,
+      "gammaReq": "3/50",
+      "gammaReqDec": 0.06
+    },
+    {
+      "delta": "1/2",
+      "nu": "1/2",
+      "p": "13/50",
+      "q": "9/20",
+      "gammaRight": "39/100",
+      "gammaLeft": "77/100",
+      "rightUsable": true,
+      "leftUsable": true,
+      "gammaReq": "39/100",
+      "gammaReqDec": 0.39
+    },
+    {
+      "delta": "6/25",
+      "nu": "63/100",
+      "p": "13/25",
+      "q": "8/25",
+      "gammaRight": "13/25",
+      "gammaLeft": "3/25",
+      "rightUsable": true,
+      "leftUsable": true,
+      "gammaReq": "3/25",
+      "gammaReqDec": 0.12
+    },
+    {
+      "delta": "1/2",
+      "nu": "7/10",
+      "p": "13/50",
+      "q": "1/4",
+      "gammaRight": "99/100",
+      "gammaLeft": "97/100",
+      "rightUsable": true,
+      "leftUsable": true,
+      "gammaReq": "97/100",
+      "gammaReqDec": 0.97
+    },
+    {
+      "delta": "19/25",
+      "nu": "9/20",
+      "p": "0",
+      "q": "1/2",
+      "gammaRight": "1/2",
+      "gammaLeft": "3/2",
+      "rightUsable": false,
+      "leftUsable": true,
+      "gammaReq": "3/2",
+      "gammaReqDec": 1.5
+    },
+    {
+      "delta": "19/25",
+      "nu": "1/2",
+      "p": "0",
+      "q": "9/20",
+      "gammaRight": "13/20",
+      "gammaLeft": "31/20",
+      "rightUsable": false,
+      "leftUsable": true,
+      "gammaReq": "31/20",
+      "gammaReqDec": 1.55
+    },
+    {
+      "delta": "19/25",
+      "nu": "1/20",
+      "p": "0",
+      "q": "9/10",
+      "gammaRight": "-7/10",
+      "gammaLeft": "11/10",
+      "rightUsable": false,
+      "leftUsable": true,
+      "gammaReq": "11/10",
+      "gammaReqDec": 1.1
+    },
+    {
+      "delta": "6/25",
+      "nu": "19/20",
+      "p": "13/25",
+      "q": "0",
+      "gammaRight": "37/25",
+      "gammaLeft": "11/25",
+      "rightUsable": true,
+      "leftUsable": false,
+      "gammaReq": "37/25",
+      "gammaReqDec": 1.48
+    },
+    {
+      "delta": "19/25",
+      "nu": "19/20",
+      "p": "0",
+      "q": "0",
+      "gammaRight": "2",
+      "gammaLeft": "2",
+      "rightUsable": false,
+      "leftUsable": false,
+      "gammaReq": "unbounded",
+      "gammaReqDec": null
+    }
+  ],
+  "blockRows": [
+    {
+      "jExp": 1024,
+      "logx": 709.782712893384,
+      "eta0": 0.027747754766762996,
+      "perSide": 56.82740176233062,
+      "dTotalBoxes": 532,
+      "eTotalBoxes": 921,
+      "dBoxes": 56,
+      "eBoxes": 56,
+      "boxes": 3136,
+      "savingAsLogPower": -3,
+      "lastBoxZeroBudgetDeficit": 0.00048828125,
+      "saving": 2.796557459195057e-9
+    },
+    {
+      "jExp": 65536,
+      "logx": 45426.093625176574,
+      "eta0": 0.0007082168713556719,
+      "perSide": 92.82740176233062,
+      "dTotalBoxes": 34078,
+      "eTotalBoxes": 58982,
+      "dBoxes": 92,
+      "eBoxes": 92,
+      "boxes": 8464,
+      "savingAsLogPower": -3,
+      "lastBoxZeroBudgetDeficit": 0.00000762939453125,
+      "saving": 1.0668020092754581e-14
+    },
+    {
+      "jExp": 16777216,
+      "logx": 11629079.968045203,
+      "eta0": 0.000004196983628342468,
+      "perSide": 140.82740176233062,
+      "dTotalBoxes": 8724152,
+      "eTotalBoxes": 15099494,
+      "dBoxes": 140,
+      "eBoxes": 140,
+      "boxes": 19600,
+      "savingAsLogPower": -3,
+      "lastBoxZeroBudgetDeficit": 2.9802322387695312e-8,
+      "saving": 6.358635480853665e-22
+    },
+    {
+      "jExp": 4294967296,
+      "logx": 2977044471.819572,
+      "eta0": 2.198240274590564e-8,
+      "perSide": 188.82740176233065,
+      "dTotalBoxes": 2233382993,
+      "eTotalBoxes": 3865470566,
+      "dBoxes": 188,
+      "eBoxes": 188,
+      "boxes": 35344,
+      "savingAsLogPower": -3,
+      "lastBoxZeroBudgetDeficit": 1.1641532182693481e-10,
+      "saving": 3.790042090924779e-29
+    },
+    {
+      "jExp": 1099511627776,
+      "logx": 762123384785.8104,
+      "eta0": 1.0769663356874419e-10,
+      "perSide": 236.82740176233065,
+      "dTotalBoxes": 571746046443,
+      "eTotalBoxes": 989560464998,
+      "dBoxes": 236,
+      "eBoxes": 236,
+      "boxes": 55696,
+      "savingAsLogPower": -3,
+      "lastBoxZeroBudgetDeficit": 4.547473508864641e-13,
+      "saving": 2.2590411251335018e-36
+    }
+  ],
+  "massRows": [
+    {
+      "jExp": 1024,
+      "oneBoxLeadingMass": 0.4748558586888422,
+      "limit": 0.4804530139182014
+    },
+    {
+      "jExp": 4096,
+      "oneBoxLeadingMass": 0.47904022612568725,
+      "limit": 0.4804530139182014
+    },
+    {
+      "jExp": 16384,
+      "oneBoxLeadingMass": 0.4800989619432099,
+      "limit": 0.4804530139182014
+    }
+  ],
+  "controls": {
+    "droppedZeroBudget": 1,
+    "cheapestPointClearsEdge": 284,
+    "limitingCutsMismatch": 1,
+    "wrongCauchyDictionary": 1,
+    "periodUsedAsBinding": 41,
+    "droppedVerticalCut": 12
+  }
+}

@@ -1,0 +1,45 @@
+P1 — the skeleton collapse identity:
+P1a @11: Σ_{T∋30}∏φ∏m̄ = K(m)/(15W) pointwise, all 2310 lags: max abs err 3.5e-18
+P1b @11: kernel closed form vs 2ⁿ mask ledger, 10/10 scour primes: max relerr 1.9e-13
+P1b @13: kernel closed form vs 2ⁿ mask ledger, 34/34 scour primes: max relerr 1.0e-11
+P1b @17: kernel closed form vs 2ⁿ mask ledger, 120/120 scour primes: max relerr 1.6e-10
+P1b @19: kernel closed form vs 2ⁿ mask ledger, 58/435 scour primes: max relerr 1.5e-7
+
+===== @11: W=2310 K=10 (q=13..47) =====
+P2 THEOREM  W·ΣNUMsk < 15·ΣV: CERTIFIED (exact BigInt);  G30_agg = 0.2132, margin 1/2−G30_agg = 0.2868
+   dev_agg = 0.2133 = G30_agg + 0.00009;  R_agg = -0.2867;  ΣCov_adj < 0 exact: YES;  max|no30| 0.0024;  Cov>0: 1/10
+P4 resonances G30>1/2: 13 (0.625);  near (>0.45): none
+P3 blockers: APBsk_agg = 18.23 (per-q APBsk<1/2: 0/10);  ∏(1+2/(p−2))−1 = 0.711;  POS_agg = 24.5   [0.0s]
+
+===== @13: W=30030 K=34 (q=17..173) =====
+P2 THEOREM  W·ΣNUMsk < 15·ΣV: CERTIFIED (exact BigInt);  G30_agg = 0.1113, margin 1/2−G30_agg = 0.3887
+   dev_agg = 0.1109 = G30_agg + -0.00035;  R_agg = -0.3891;  ΣCov_adj < 0 exact: YES;  max|no30| 0.0068;  Cov>0: 0/34
+P4 resonances G30>1/2: none;  near (>0.45): none
+P3 blockers: APBsk_agg = 52.51 (per-q APBsk<1/2: 0/34);  ∏(1+2/(p−2))−1 = 1.022;  POS_agg = 317.3   [0.0s]
+
+===== @17: W=510510 K=120 (q=19..709) =====
+P2 THEOREM  W·ΣNUMsk < 15·ΣV: CERTIFIED (exact BigInt);  G30_agg = 0.1011, margin 1/2−G30_agg = 0.3989
+   dev_agg = 0.1013 = G30_agg + 0.00027;  R_agg = -0.3987;  ΣCov_adj < 0 exact: YES;  max|no30| 0.0070;  Cov>0: 1/120
+P4 resonances G30>1/2: 107 (0.544);  near (>0.45): 101 (0.476), 149 (0.494), 653 (0.466)
+P3 blockers: APBsk_agg = 157.88 (per-q APBsk<1/2: 0/120);  ∏(1+2/(p−2))−1 = 1.292;  POS_agg = 6855.9   [0.0s]
+
+===== @19: W=9699690 K=435 (q=23..3109) =====
+P2 THEOREM  W·ΣNUMsk < 15·ΣV: CERTIFIED (exact BigInt);  G30_agg = 0.1259, margin 1/2−G30_agg = 0.3741
+   dev_agg = 0.1262 = G30_agg + 0.00031;  R_agg = -0.3738;  ΣCov_adj < 0 exact: YES;  max|no30| 0.0060;  Cov>0: 2/435
+P4 resonances G30>1/2: 2083 (0.606), 2221 (0.521);  near (>0.45): 911 (0.456), 1181 (0.462), 1249 (0.452), 1291 (0.494), 1571 (0.465), 2441 (0.472)
+P3 blockers: APBsk_agg = 520.98 (per-q APBsk<1/2: 0/435);  ∏(1+2/(p−2))−1 = 1.561;  POS_agg = 198558.2   [0.5s]
+
+===== @23: W=223092870 K=1739 (q=29..14929) =====
+P2 THEOREM  W·ΣNUMsk < 15·ΣV: CERTIFIED (exact BigInt);  G30_agg = 0.0945, margin 1/2−G30_agg = 0.4055
+   dev_agg = 0.0948 = G30_agg + 0.00024;  R_agg = -0.4052;  ΣCov_adj < 0 exact: YES;  max|no30| 0.0039;  Cov>0: 1/1739
+P4 resonances G30>1/2: 2339 (0.575);  near (>0.45): 107 (0.483)
+P3 blockers: APBsk_agg = 1592.73 (per-q APBsk<1/2: 0/1739);  ∏(1+2/(p−2))−1 = 1.805;  POS_agg = 7299002.1   [17.3s]
+
+================ SUMMARY — the aggregate 30-skeleton bound ================
+@11: G30_agg = 0.2132 < 1/2 CERTIFIED (margin 0.287);  dev_agg 0.2133;  resonances: 13 (1 Cov>0)
+@13: G30_agg = 0.1113 < 1/2 CERTIFIED (margin 0.389);  dev_agg 0.1109;  resonances: none (0 Cov>0)
+@17: G30_agg = 0.1011 < 1/2 CERTIFIED (margin 0.399);  dev_agg 0.1013;  resonances: 107 (1 Cov>0)
+@19: G30_agg = 0.1259 < 1/2 CERTIFIED (margin 0.374);  dev_agg 0.1262;  resonances: 2083,2221 (2 Cov>0)
+@23: G30_agg = 0.0945 < 1/2 CERTIFIED (margin 0.405);  dev_agg 0.0948;  resonances: 2339 (1 Cov>0)
+Leg (iii) status: −1/2 exact (cap-26 Thm 2) + collapse (P1, proven all x,q) + G30_agg < 1/2 exact-certified @11..@23 ⟹ THEOREM at every computed level; all-x uniform bound OPEN (blockers in P3).
+TOTAL 18.872s

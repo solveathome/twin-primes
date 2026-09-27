@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>primeoire bench — the grain</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='78' font-size='80'>▦</text></svg>">
+<style>
+  :root {
+    --bg: #0b0e14; --panel: #111725; --line: #1e2942; --text: #d7dee9;
+    --dim: #7c89a5; --slot: #f0b429; --hole: #2f3b5c; --seam: #5b8def;
+    --hot: #ff6b6b; --ok: #7fd4a8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 13px/1.55 ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  .wrap { max-width: none; margin: 0; padding: 18px 20px 60px; }
+  h1 { font-size: 15px; font-weight: 600; margin: 0 0 2px; letter-spacing: .02em; }
+  h1 span { color: var(--dim); font-weight: 400; }
+  .sub { color: var(--dim); margin: 0 0 16px; font-size: 12px; max-width: 120ch; }
+
+  .panel {
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 6px; padding: 12px 14px; margin-bottom: 14px;
+  }
+  .panel h2 {
+    font-size: 11px; text-transform: uppercase; letter-spacing: .09em;
+    color: var(--dim); margin: 0 0 10px; font-weight: 600;
+  }
+
+  .controls { display: flex; flex-wrap: wrap; gap: 18px; align-items: flex-end; }
+  .ctl { display: flex; flex-direction: column; gap: 4px; }
+  .ctl label { color: var(--dim); font-size: 11px; }
+  .ctl .val { color: var(--text); font-weight: 600; }
+  input[type=range] { width: 190px; accent-color: var(--slot); }
+  select, button {
+    background: #17203a; color: var(--text); border: 1px solid var(--line);
+    border-radius: 4px; font: inherit; padding: 4px 8px; cursor: pointer;
+  }
+  button:hover, select:hover { background: #1f2b4a; }
+  button.on { border-color: var(--slot); color: var(--slot); }
+  .toggles { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    background: #0d1424; border: 1px solid var(--line); border-radius: 4px;
+    padding: 6px 10px; min-width: 108px;
+  }
+  .chip b { display: block; font-size: 15px; font-weight: 600; color: #fff; }
+  .chip i { font-style: normal; color: var(--dim); font-size: 10.5px;
+            text-transform: uppercase; letter-spacing: .07em; }
+
+  canvas { display: block; width: 100%; border-radius: 4px; background: #080b12; }
+  .legend { color: var(--dim); font-size: 11px; margin-top: 8px; max-width: 120ch; }
+  .legend em { font-style: normal; }
+  .k { display: inline-block; width: 9px; height: 9px; border-radius: 2px;
+       margin: 0 4px 0 12px; vertical-align: baseline; }
+
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 900px) { .cols { grid-template-columns: 1fr; } }
+
+  table { border-collapse: collapse; width: 100%; font-size: 12px; }
+  th, td { text-align: right; padding: 3px 8px; border-bottom: 1px solid #161f36; }
+  th { color: var(--dim); font-weight: 600; font-size: 10.5px;
+       text-transform: uppercase; letter-spacing: .07em; }
+  td:first-child, th:first-child { text-align: left; }
+  tbody tr:hover { background: #16203a; }
+  .grew { color: var(--ok); }
+  .new { color: var(--slot); }
+
+  #status { color: var(--dim); font-size: 11.5px; }
+  #selftest.pass { color: var(--ok); }
+  #selftest.fail { color: var(--hot); }
+  textarea {
+    width: 100%; height: 90px; background: #080b12; color: var(--dim);
+    border: 1px solid var(--line); border-radius: 4px; font: 11px/1.4 inherit;
+    padding: 8px; resize: vertical;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>primeoire bench <span>/ instrument 1 — the grain census</span></h1>
+  <p class="sub">
+    The gap sizes between consecutive twin slots, and how many of each. The law
+    behind this table is settled: <code>research/grain-census.js</code> (2026-08-14)
+    gives the exact CRT identity and its fold covariance. This instrument builds
+    the same censuses the other way round, by folding, so agreement between the
+    two is a check on both. <span id="selftest">checking…</span><br>
+    <a href="numberline.html">the number line →</a>
+    <a href="dimensions.html">the dimension of a hole →</a>
+  </p>
+
+  <div class="panel">
+    <div class="controls">
+      <div class="ctl">
+        <label>level <span class="val" id="levelLabel">T13</span></label>
+        <input type="range" id="level" min="1" max="9" value="5">
+      </div>
+      <div class="ctl">
+        <label>offset d <span class="val" id="dLabel">2</span></label>
+        <input type="range" id="d" min="2" max="60" step="2" value="2">
+      </div>
+      <div class="ctl">
+        <label>highlight gaps</label>
+        <select id="top">
+          <option value="0">none</option>
+          <option value="1">largest only</option>
+          <option value="10" selected>top 10</option>
+          <option value="50">top 50</option>
+          <option value="200">top 200</option>
+        </select>
+      </div>
+      <div class="ctl">
+        <label>overlays</label>
+        <div class="toggles">
+          <button id="tHoles" class="on">holes</button>
+          <button id="tSeams" class="on">seams</button>
+          <button id="tMirror" class="on">mirror</button>
+        </div>
+      </div>
+      <div class="ctl">
+        <label>&nbsp;</label>
+        <div class="toggles">
+          <button id="play">▶ fold up</button>
+          <button id="copyUrl">copy link</button>
+        </div>
+      </div>
+    </div>
+    <p class="legend" id="status" style="margin-bottom:0"></p>
+  </div>
+
+  <div class="panel">
+    <h2>readouts</h2>
+    <div class="chips" id="chips"></div>
+  </div>
+
+  <div class="panel">
+    <h2>the tile — every slot in the period, folded to the window</h2>
+    <canvas id="tile" height="140"></canvas>
+    <p class="legend">
+      <span class="k" style="background:var(--slot)"></span>slots (above the mean, in deviation mode)
+      <span class="k" style="background:#9b6bff"></span>below the mean
+      <span class="k" style="background:var(--hole)"></span>holes
+      <span class="k" style="background:var(--seam)"></span>seams
+      <span class="k" style="background:var(--hot)"></span>highlighted gaps
+      <em id="tileNote"></em>
+    </p>
+    <p class="legend">
+      One pixel column is one slice of the tile. Up to T13 a slice holds about
+      one slot, so the bars are counts. From T17 up a slice holds 17 to 6,000
+      slots and counts saturate, so the bars become the deviation from the mean
+      instead: gold above the centre line is a denser slice, violet below is a
+      sparser one, and the corner labels give the size of the largest deviation
+      on screen.
+    </p>
+  </div>
+
+  <div class="cols">
+    <div class="panel">
+      <h2>grain census — count per gap size</h2>
+      <canvas id="hist" height="260"></canvas>
+      <p class="legend">Ghost bars are the previous level's shares, so you can see
+      what a single fold does to the distribution.</p>
+    </div>
+    <div class="panel">
+      <h2>the grain word — gaps in tile order</h2>
+      <canvas id="word" height="260"></canvas>
+      <div class="ctl" style="margin-top:8px">
+        <label>window start <span class="val" id="wordLabel">0</span></label>
+        <input type="range" id="wordAt" min="0" max="0" value="0" style="width:100%">
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>the table — count, share, and the per-fold multiplier</h2>
+    <table id="table"><thead><tr>
+      <th>gap size</th><th>count</th><th>share</th>
+      <th>prev count</th><th>×</th><th>size/d</th>
+    </tr></thead><tbody></tbody></table>
+  </div>
+
+  <div class="panel">
+    <h2>export</h2>
+    <div class="toggles" style="margin-bottom:10px">
+      <button data-export="census">census as CSV</button>
+      <button data-export="grain">grain word</button>
+      <button data-export="sizes">gap sizes only</button>
+      <button data-export="top">highlighted gaps</button>
+      <button data-export="slots">slots (first 5000)</button>
+      <button data-export="ladder">G_d ladder over all levels</button>
+    </div>
+    <textarea id="out" readonly placeholder="pick an export"></textarea>
+  </div>
+
+</div>
+<script src="kernel.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

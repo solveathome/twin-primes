@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>primeoire — the fold ladder, worst case</title>
+<!--
+================================================================================
+ VALIDATION, run before this file was finished. Scratch script kept out of the
+ repo; every number below is reproducible from the engine in this file.
+================================================================================
+
+ (a) NATAL@5 COMB.
+     Holes mod 30 (coprime to 30):        1, 7, 11, 13, 17, 19, 23, 29
+     r with r AND r+2 both holes:         11, 17, 29        <- matches the spec
+     First true twin pairs and r mod 30:
+        (11,13) -> 11   (17,19) -> 17   (29,31) -> 29   (41,43) -> 11
+        (59,61) -> 29   (71,73) -> 11
+     Every twin pair above 5 sits in one of the three houses 11 / 17 / 29.
+     PASS.
+
+ (b) PINNED FOLDS 7, 11, 13 (a_p = 0), SURVIVORS BELOW 169 = 13^2.
+     survivors r:   17, 29, 41, 59, 71, 101, 107, 137, 149
+     as pairs:      (17,19) (29,31) (41,43) (59,61) (71,73)
+                    (101,103) (107,109) (137,139) (149,151)
+     real twin pairs with 13 < r and r+2 < 169: exactly the same nine.
+     Exact list equality: TRUE. PASS.
+     (This is the frontier / crystallization statement of GLOSSARY.md: below
+     p'^2 the tile is finished forever, slots there are real twin primes.)
+
+ (c) WORST-CASE L JUMP AT THE FIRST FOLD (p = 7), FULL-PERIOD WINDOW.
+     Window [0, 210) is exactly one period of T_7, and holds the 21 natal@5
+     slots 11,17,29,41,47,59,71,77,89,101,107,119,131,137,149,161,167,179,
+     191,197,209. Brute force over all 7 alignments a = 0..6, cyclic:
+
+        a   kills(slots)  L(slots)  longest new gap(integers)  survivors
+        0        6           2                30                  15
+        1        6           2                30                  15
+        2        6           2                30                  15
+        3        6           2                30                  15
+        4        6           2                30                  15
+        5        6           2                30                  15
+        6        6           2                30                  15
+
+     worst-case L = 2 slots, attained at EVERY a. Pinned a = 0 also gives 2.
+     Agrees with the true diagonal L at fold 7 = 2 (a3-05-bound-L.md line 185),
+     and the longest new gap 30 integers is exactly G2(T_7) = 30
+     (exact-g2-ladder.js). PASS.
+
+     THE TIE IS NOT AN ACCIDENT AND IT IS THE MOST IMPORTANT THING THIS TOOL
+     TEACHES. On a FULL PERIOD every alignment gives an identical answer.
+     Translation by u*|T_prev|, with u chosen so u*|T_prev| = 1 (mod p), maps
+     the slot set to itself and shifts the fold's residue by one, so all p
+     alignments are conjugate. That is THE-LENS.md section 3, the misalignment
+     principle, in its sharpest form: on a whole tile the adversary wins
+     nothing at a single fold. Verified here cyclically at p = 7, 11, 13, 17,
+     19 (worst = pinned = true L = 2, 1, 2, 2, 2 and worst new gap = G2 =
+     30, 42, 66, 108, 150 at every one).
+     The adversary only gains on a SEGMENT. That is why the window matters,
+     and it is why honesty label (ii) below is load-bearing rather than polite.
+
+ ENGINE CROSS-CHECKS, run on the code in this file, not on a reimplementation:
+
+   * scanAll (the O(2M + p) all-alignments pass that feeds the ranking table)
+     was compared against statsFor (an independent O(M) single-alignment scan)
+     for EVERY alignment at 14 folds, p = 7 … 59, N = 100,000. All three of
+     L, kills and gap agree at every one of the 331 alignments.
+
+   * PINNED RUNNING MAX GAP AGAINST THE G2 LADDER. In [0, 100,000) the pinned
+     track's largest twin-slot gap after folds 7, 11, 13, 17, 19 reads
+     30, 42, 66, 108, 150 integers — exactly G2(T_7 … T_19) from
+     research/exact-g2-ladder.js. It stops matching at fold 23, where the tile
+     period 223,092,870 first exceeds the window and the reading turns into a
+     strict lower bound (150 against G2 = 204). That crossover is visible in
+     the tool on metric 3.
+
+   * SPEED. N = 2,000,000 (200,000 natal slots): the window builds in 31 ms,
+     a full fold action — scan all p alignments, apply, rescan, redraw — costs
+     11 ms, and a ribbon repaint costs 5 ms. Target was under 100 ms.
+
+   * The greedy track really does dip below the pinned track. At N = 3,000 the
+     adversarial L reads 1 slot at fold 41 while pinned reads 2; at
+     N = 100,000 the same happens at fold 43. Honesty label (i), demonstrated.
+================================================================================
+-->
+<style>
+:root{
+  --bg:#0b0e14; --panel:#111725; --panel2:#0d1424; --line:#1e2942;
+  --text:#d7dee9; --dim:#7c89a5; --dim2:#56617a;
+  --alive:#7fe3ff; --chA:#f0a63a; --chB:#c266e8;
+  --adv:#ff6b6b; --pin:#7fd4a8; --gold:#f0b429; --warn:#ffcf70;
+}
+*{box-sizing:border-box}
+html,body{background:var(--bg)}
+body{margin:0;color:var(--text);
+  font:13px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  -webkit-font-smoothing:antialiased}
+.wrap{padding:16px 18px 70px}
+h1{font-size:15px;font-weight:600;margin:0 0 2px;letter-spacing:.02em}
+h1 span{color:var(--dim);font-weight:400}
+.sub{color:var(--dim);margin:0 0 14px;font-size:12px;max-width:132ch}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:6px;
+  padding:11px 13px;margin-bottom:12px}
+.panel h2{font-size:11px;text-transform:uppercase;letter-spacing:.09em;
+  color:var(--dim);margin:0 0 9px;font-weight:600}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start}
+.grow{flex:1 1 520px;min-width:340px}
+.side{flex:0 0 430px;max-width:100%}
+.controls{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end}
+.ctl{display:flex;flex-direction:column;gap:4px}
+.ctl label{color:var(--dim);font-size:10.5px;text-transform:uppercase;letter-spacing:.07em}
+button{background:#17203a;color:var(--text);border:1px solid var(--line);
+  border-radius:4px;font:inherit;font-size:12px;padding:4px 9px;cursor:pointer}
+button:hover{background:#1f2b4a}
+button:disabled{opacity:.35;cursor:default}
+button.on{border-color:var(--gold);color:var(--gold)}
+button.hot{border-color:var(--adv);color:var(--adv)}
+select,input[type=number]{background:#0d1424;color:var(--text);border:1px solid var(--line);
+  border-radius:4px;font:inherit;font-size:12px;padding:3px 6px}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{background:var(--panel2);border:1px solid var(--line);border-radius:4px;
+  padding:5px 9px;min-width:96px}
+.chip b{display:block;font-size:14px;font-weight:600;color:#fff;
+  font-variant-numeric:tabular-nums}
+.chip i{font-style:normal;color:var(--dim);font-size:10px;text-transform:uppercase;
+  letter-spacing:.06em}
+.chip u{display:block;text-decoration:none;color:var(--dim2);font-size:10px}
+canvas{display:block;width:100%;background:#070a10;border-radius:4px;cursor:crosshair}
+.legend{color:var(--dim);font-size:11px;margin-top:8px;line-height:1.7}
+.sw{display:inline-flex;align-items:center;gap:5px;margin-right:13px;white-space:nowrap}
+.sw i{width:10px;height:10px;border-radius:2px;display:inline-block;font-style:normal}
+table{border-collapse:collapse;width:100%;font-size:11.5px;
+  font-variant-numeric:tabular-nums}
+th{color:var(--dim);font-weight:600;text-align:right;padding:3px 6px;
+  border-bottom:1px solid var(--line);font-size:10px;text-transform:uppercase;
+  letter-spacing:.05em;white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+td{padding:2px 6px;text-align:right;border-bottom:1px solid #161d2e;white-space:nowrap}
+tr.pick{cursor:pointer}
+tr.pick:hover td{background:#18213a}
+tr.worst td{background:#2a1520;color:#ffd0d0}
+tr.pinned td{color:var(--pin)}
+tr.worst.pinned td{color:#ffd0d0}
+.bar{display:inline-block;height:7px;background:var(--adv);border-radius:1px;
+  vertical-align:middle;opacity:.75}
+.scroll{max-height:330px;overflow:auto}
+.honest{border-color:#4a3210;background:#1a1206}
+.honest ul{margin:0;padding-left:17px}
+.honest li{color:var(--warn);font-size:11.5px;margin:3px 0;line-height:1.6}
+.honest b{color:#ffe3a8}
+details{margin-top:2px}
+summary{cursor:pointer;color:var(--gold);font-size:11.5px;
+  text-transform:uppercase;letter-spacing:.07em;outline:none}
+details .body{color:var(--dim);font-size:12px;margin-top:9px;
+  columns:2;column-gap:26px;max-width:none}
+details .body p{margin:0 0 10px;break-inside:avoid}
+details .body b{color:var(--text)}
+#tip{position:fixed;pointer-events:none;background:#0d1424;border:1px solid #2c3a5c;
+  border-radius:4px;padding:6px 9px;font-size:11px;line-height:1.6;
+  color:var(--text);display:none;z-index:9;box-shadow:0 6px 22px #000a;
+  font-variant-numeric:tabular-nums;white-space:pre}
+.mono{font-variant-numeric:tabular-nums}
+.note{color:var(--dim2);font-size:10.5px;margin-top:6px;line-height:1.6}
+.unit{color:var(--dim2)}
+.ladder{display:flex;flex-wrap:wrap;gap:3px;margin-top:8px}
+.ladder button{padding:2px 6px;font-size:11px;min-width:30px}
+.ladder button.done{border-color:#2d4a3a;color:var(--pin)}
+.ladder button.cur{border-color:var(--gold);color:var(--gold);background:#22190a}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>the fold ladder, worst case <span>— adversarial vs pinned, natal@5 onward</span></h1>
+<p class="sub">Fold the twin-slot comb by one prime at a time. Each fold in the <b>covering form</b>
+strikes two classes {a<sub>p</sub>, a<sub>p</sub>&minus;2} mod p: channel <b>A</b> takes the lower
+member of the pair, channel <b>B</b> the upper. The adversary picks a<sub>p</sub>; real folding is
+pinned at a<sub>p</sub> = 0. Everything below is computed inside the window [0, N) only — a segment,
+never a tile.</p>
+
+<div class="panel honest">
+<h2>honesty, kept visible</h2>
+<ul>
+<li><b>(i) Greedy worst case per fold is NOT the joint covering optimum.</b> This tool picks the
+worst single alignment given the survivors it happens to have. The true adversary optimises all
+folds jointly — branch-and-bound territory — and can accept a weak fold now to buy a worse one
+later. Watch for the give-away: the greedy track sometimes scores <em>below</em> the pinned track
+at a later fold, because its own earlier choices left it a different survivor set.</li>
+<li><b>(ii) The window is [0, N), a segment, not the tile.</b> Worst-case-in-window is a
+<em>lower bound</em> on worst-case-in-tile. And the converse bites: on a whole period all p
+alignments are conjugate (translate by a multiple of the previous tile width), so the adversary
+gains exactly nothing — the misalignment principle, THE-LENS.md &sect;3. When the readout below
+says the window covers one or more full periods, expect the ranking to be flat or nearly so.
+That flatness is the mathematics, not a bug.</li>
+<li><b>(iii) Units are on every number: <span class="mono">slots</span> or
+<span class="mono">integers</span>.</b> A twin slot occurs once per m&#772; integers, so the two
+counts differ by that factor and are never comparable raw (qc/units.js item 2, the corpus's most
+expensive confusion).</li>
+</ul>
+<details>
+<summary>what am i looking at</summary>
+<div class="body">
+<p><b>Twin slot.</b> A position r where both r and r+2 are still holes — no folded prime has hit
+either one. It is a <em>possible</em> twin pair, not a promised one. Below the frontier p&prime;&sup2;
+every surviving slot is a real twin prime; above it, a candidate.</p>
+<p><b>Natal@5.</b> The comb you start from: fold 3 and 5 and what is left is r &equiv; 11, 17, 29
+(mod 30). Those are the three houses, and every twin pair above 5 lives in one of them forever.
+The ribbon's leftmost ticks are 11, 17, 29, 41, 47, 59, …</p>
+<p><b>Fold.</b> Adding prime p lays p copies of the tile end to end and strikes p residue classes
+through every copy. On twin slots that is exactly two classes deleted from one fixed pattern. A
+composite fold kills nothing (Inertness Lemma), so only primes appear on the ladder.</p>
+<p><b>Channel A and channel B.</b> The fold kills class a<sub>p</sub> and class a<sub>p</sub>&minus;2.
+A slot dies to <b>A</b> when p hits its lower member r, to <b>B</b> when p hits its upper member r+2.
+The two channels are the same set translated by 2, and how they interleave is the whole structure —
+so they get separate colours everywhere.</p>
+<p><b>Worst vs pinned.</b> Pinned is a<sub>p</sub> = 0, which is what real sieving does: p strikes
+its own multiples. Worst is the adversary in the covering form, free to translate the pair to
+wherever it hurts most. Same symbols, opposite freedom (qc/units.js item 5).</p>
+<p><b>Dead run, and L.</b> A stretch of consecutive twin slots all killed by the same fold. Its
+length in <em>slots</em> is L, the adjacent-kill run; the hole it leaves, measured in
+<em>integers</em>, is the new gap. Long runs are what make G&#8322; grow, and CRT scattering is
+what keeps them short.</p>
+</div>
+</details>
+</div>
+
+<div class="panel">
+<h2>window &amp; ladder</h2>
+<div class="controls">
+  <div class="ctl"><label>window N (integers)</label>
+    <span><input id="win" type="number" min="600" max="2000000" step="1000" value="100000">
+    <button id="winset">set &amp; reset</button></span></div>
+  <div class="ctl"><label>damage metric</label>
+    <select id="metric">
+      <option value="L">1 &nbsp;longest dead run — L jump (slots)</option>
+      <option value="kills">2 &nbsp;twin slots killed (slots)</option>
+      <option value="gap">3 &nbsp;longest dead run as gap (integers)</option>
+    </select></div>
+  <div class="ctl"><label>next fold</label><b id="nextp" class="mono" style="font-size:15px">7</b></div>
+  <div class="ctl"><label>step</label>
+    <span><button id="applyWorst" class="hot">apply worst &rarr;</button>
+    <button id="applyPinned">apply pinned 0 &rarr;</button>
+    <button id="back">&larr; back</button>
+    <button id="reset">reset to natal@5</button></span></div>
+  <div class="ctl"><label>ribbon x-axis</label>
+    <select id="xmode">
+      <option value="int">integers (true spacing)</option>
+      <option value="slot">slot index (L reads directly)</option>
+    </select></div>
+</div>
+<div class="ladder" id="ladder"></div>
+<div class="note" id="periodnote"></div>
+</div>
+
+<div class="chips" style="margin-bottom:12px" id="chips"></div>
+
+<div class="panel">
+<h2>the comb — <span id="ribtitle" style="color:var(--text)"></span></h2>
+<canvas id="ribbon" height="230"></canvas>
+<div class="controls" style="margin-top:8px">
+  <div class="ctl"><label>view</label>
+    <span><button id="zin">zoom +</button><button id="zout">zoom &minus;</button>
+    <button id="pl">&larr;</button><button id="pr">&rarr;</button>
+    <button id="fit">fit window</button>
+    <button id="gorun">go to worst dead run</button></span></div>
+  <div class="ctl"><label>range</label><span id="viewinfo" class="mono" style="font-size:11.5px"></span></div>
+</div>
+<div class="legend">
+  <span class="sw"><i style="background:var(--alive)"></i>alive twin slot</span>
+  <span class="sw"><i style="background:var(--chA)"></i>killed, channel A (p hits r)</span>
+  <span class="sw"><i style="background:var(--chB)"></i>killed, channel B (p hits r+2)</span>
+  <span class="sw">dimmer = earlier fold, brighter = later fold</span>
+  <span class="sw"><i style="background:var(--gold)"></i>the last fold's longest dead run</span>
+  <br>Wheel over the ribbon to zoom at the cursor, drag to pan, hover a tick for its full record.
+</div>
+</div>
+
+<div class="row">
+  <div class="grow panel">
+  <h2>fold p = <span id="rankp" style="color:var(--text)"></span> — all alignments ranked by the selected metric</h2>
+  <div class="scroll"><table id="ranktbl"></table></div>
+  <div class="note" id="ranknote"></div>
+  </div>
+
+  <div class="side panel">
+  <h2>two tracks, per fold — <span id="charttitle" style="color:var(--text)"></span></h2>
+  <canvas id="chart" height="260"></canvas>
+  <div class="legend" id="chartleg"></div>
+  </div>
+</div>
+
+<div class="panel">
+<h2>landmarks used, each verified at source</h2>
+<div class="legend" style="color:var(--dim);max-width:150ch">
+<b style="color:var(--text)">L &le; 0.18 p</b> — A5 Theorem B, the first unconditional bound on the
+adjacent-kill run, quoted at <span class="mono">research/U-FRAME.md &sect;10</span>. Units: slots.
+Drawn on metric 1.<br>
+<b style="color:var(--text)">true diagonal L = 2, 1, 2, 2, 2, 3, 2, 4</b> at folds p = 7, 11, 13,
+17, 19, 23, 29, 31 — <span class="mono">research/a3-05-bound-L.md</span> line 185, the "true L" row.
+Units: slots. These are <em>tile-wide</em> values for the pinned fold; the window's reading can only
+be less than or equal. Drawn as points on metric 1.<br>
+<b style="color:var(--text)">Localized Merge Lemma</b> — an interval of length below p&minus;2 holds
+at most one kill (<span class="mono">research/LOCALIZED-GAP.md</span> &sect;2 Fact B, &sect;3).
+Units: integers. Drawn as the p&minus;2 line on metric 3: a new gap reaching that line is the first
+one that can have fused more than two old gaps.<br>
+<b style="color:var(--text)">G&#8322; ladder = 12, 30, 42, 66, 108, 150, 204, 258, 348, 528, 546, 618</b>
+at x = 5 … 43 — <span class="mono">research/exact-g2-ladder.js</span>, lower-certificate table.
+Units: integers. G&#8322;(T<sub>x</sub>) is the largest twin-slot gap in the whole tile after folding
+through x, so it bounds the window's running max gap from above; that running max is plotted against
+it on metric 3 and the two agree exactly while the window still covers a full period.
+</div>
+</div>
+
+</div>
+<div id="tip"></div>
+
+<script>
+"use strict";
+/* ===========================================================================
+   ENGINE. Segmented: the window [0,N) is the only thing ever materialised.
+   Everything per fold is O(alive slots + p). No tile is built, ever.
+   =========================================================================== */
+
+function primesFrom7(limit){
+  const s=new Uint8Array(limit+1), out=[];
+  for(let i=2;i<=limit;i++){ if(!s[i]){ if(i>=7) out.push(i); for(let j=i*i;j<=limit;j+=i) s[j]=1; } }
+  return out;
+}
+const PRIMES = primesFrom7(2003);
+
+/* natal@5: r = 11, 17, 29 (mod 30), with r+2 kept inside the window */
+function buildNatal(N){
+  const cap = Math.ceil(N/30)*3+3, arr=new Int32Array(cap);
+  let n=0;
+  for(let b=0;b<N;b+=30){
+    if(b+11+2<N) arr[n++]=b+11;
+    if(b+17+2<N) arr[n++]=b+17;
+    if(b+29+2<N) arr[n++]=b+29;
+  }
+  return arr.slice(0,n);
+}
+
+function freshTrack(natal){
+  return { alive:natal.slice(), aliveIdx:Int32Array.from(natal.keys()),
+           killFold:new Int16Array(natal.length), killCh:new Uint8Array(natal.length),
+           hist:[] };
+}
+
+/* stats for ONE alignment, O(M) */
+function statsFor(alive,p,a){
+  const M=alive.length;
+  let kills=0,best=0,bestU=-1,bestV=-1,maxGap=0,gU=-1,gV=-1,inRun=false,u=0;
+  for(let i=0;i<M;i++){
+    const r=alive[i];
+    const k=(r%p===a)||((r+2)%p===a);
+    if(k){ kills++; if(!inRun){inRun=true;u=i;} }
+    else if(inRun){
+      inRun=false; const v=i-1, len=v-u+1;
+      if(len>best){best=len;bestU=u;bestV=v;}
+      if(u-1>=0&&v+1<M){ const g=alive[v+1]-alive[u-1]; if(g>maxGap){maxGap=g;gU=u;gV=v;} }
+    }
+  }
+  if(inRun){ const v=M-1,len=v-u+1; if(len>best){best=len;bestU=u;bestV=v;} }
+  return {a,kills,L:best,LU:bestU,LV:bestV,gap:maxGap,gU:gU,gV:gV};
+}
+
+/* stats for ALL p alignments in one pass. Each slot falls in exactly two
+   buckets (r mod p for channel A, (r+2) mod p for channel B), so the total
+   work is 2M + p, not p*M. */
+function scanAll(alive,p){
+  const M=alive.length;
+  const cnt=new Int32Array(p);
+  for(let i=0;i<M;i++){ const r=alive[i]; cnt[r%p]++; cnt[(r+2)%p]++; }
+  const off=new Int32Array(p+1);
+  for(let a=0,s=0;a<p;a++){ off[a]=s; s+=cnt[a]; off[a+1]=s; }
+  const cur=off.slice(0,p), buf=new Int32Array(2*M);
+  for(let i=0;i<M;i++){ const r=alive[i]; buf[cur[r%p]++]=i; buf[cur[(r+2)%p]++]=i; }
+  const res=new Array(p);
+  for(let a=0;a<p;a++){
+    const s=off[a], e=off[a+1];
+    let best=0,bestU=-1,bestV=-1,maxGap=0,gU=-1,gV=-1;
+    let u=-1,prev=-2;
+    for(let t=s;t<e;t++){
+      const i=buf[t];
+      if(i!==prev+1){
+        if(u>=0){
+          const v=prev,len=v-u+1;
+          if(len>best){best=len;bestU=u;bestV=v;}
+          if(u-1>=0&&v+1<M){const g=alive[v+1]-alive[u-1]; if(g>maxGap){maxGap=g;gU=u;gV=v;}}
+        }
+        u=i;
+      }
+      prev=i;
+    }
+    if(u>=0){
+      const v=prev,len=v-u+1;
+      if(len>best){best=len;bestU=u;bestV=v;}
+      if(u-1>=0&&v+1<M){const g=alive[v+1]-alive[u-1]; if(g>maxGap){maxGap=g;gU=u;gV=v;}}
+    }
+    res[a]={a,kills:e-s,L:best,LU:bestU,LV:bestV,gap:maxGap,gU:gU,gV:gV};
+  }
+  return res;
+}
+
+function applyFold(tr,p,a,level){
+  const M=tr.alive.length, na=new Int32Array(M), ni=new Int32Array(M);
+  let n=0;
+  for(let i=0;i<M;i++){
+    const r=tr.alive[i], idx=tr.aliveIdx[i];
+    if(r%p===a){ tr.killFold[idx]=level; tr.killCh[idx]=1; }
+    else if((r+2)%p===a){ tr.killFold[idx]=level; tr.killCh[idx]=2; }
+    else { na[n]=r; ni[n]=idx; n++; }
+  }
+  tr.alive=na.slice(0,n); tr.aliveIdx=ni.slice(0,n);
+}
+function maxGapOf(al){ let m=0; for(let i=1;i<al.length;i++){const g=al[i]-al[i-1]; if(g>m)m=g;} return m; }
+
+/* ===========================================================================
+   STATE
+   =========================================================================== */
+const S = { N:100000, metric:'L', level:0, xmode:'int',
+            natal:null, adv:null, pin:null, aligns:[], scan:null,
+            lo:0, hi:0 };
+
+function rebuild(N, keepAligns){
+  S.N = N;
+  S.natal = buildNatal(N);
+  S.adv = freshTrack(S.natal);
+  S.pin = freshTrack(S.natal);
+  const want = keepAligns ? S.aligns.slice(0,S.level) : [];
+  S.aligns = []; S.level = 0;
+  for(let l=0;l<want.length;l++) stepUp(want[l], true);
+  rescan();
+}
+function stepUp(a, quiet){
+  const p = PRIMES[S.level];
+  if(p===undefined) return;
+  const lvl = S.level+1;
+  const sa = statsFor(S.adv.alive,p,a);
+  const sp = statsFor(S.pin.alive,p,0);
+  // pin the run endpoints to NATAL indices now, while the pre-fold alive list
+  // still exists; the ribbon then needs no rescan to draw the bracket.
+  const nat = (tr,k)=> k>=0 ? tr.aliveIdx[k] : -1;
+  const saN={LUn:nat(S.adv,sa.LU), LVn:nat(S.adv,sa.LV)};
+  const spN={LUn:nat(S.pin,sp.LU), LVn:nat(S.pin,sp.LV)};
+  applyFold(S.adv,p,a,lvl);
+  applyFold(S.pin,p,0,lvl);
+  S.adv.hist.push({p,a,...sa,...saN,maxGapAfter:maxGapOf(S.adv.alive),aliveAfter:S.adv.alive.length});
+  S.pin.hist.push({p,a:0,...sp,...spN,maxGapAfter:maxGapOf(S.pin.alive),aliveAfter:S.pin.alive.length});
+  S.aligns[S.level]=a; S.level=lvl;
+  if(!quiet) rescan();
+}
+function stepDown(){
+  if(S.level===0) return;
+  const keep=S.aligns.slice(0,S.level-1);
+  S.aligns=keep.slice(); const lv=keep.length;
+  S.natal=buildNatal(S.N); S.adv=freshTrack(S.natal); S.pin=freshTrack(S.natal);
+  S.aligns=[]; S.level=0;
+  for(let i=0;i<lv;i++) stepUp(keep[i],true);
+  rescan();
+}
+function rescan(){
+  const p=PRIMES[S.level];
+  S.scan = p===undefined ? null : scanAll(S.adv.alive,p);
+}
+function metricOf(r){ return S.metric==='L'?r.L : S.metric==='kills'?r.kills : r.gap; }
+function metricUnit(){ return S.metric==='gap' ? 'integers' : 'slots'; }
+function metricName(){ return S.metric==='L'?'L — longest dead run'
+                     : S.metric==='kills'?'twin slots killed'
+                     : 'longest dead run as gap'; }
+
+/* period of the current tile, as a float, and how many fit in the window */
+function periodApprox(){ let w=30; for(let i=0;i<S.level;i++) w*=PRIMES[i]; return w; }
+
+/* ===========================================================================
+   VIEW / RIBBON
+   =========================================================================== */
+const rib=document.getElementById('ribbon'), rctx=rib.getContext('2d');
+const chart=document.getElementById('chart'), cctx=chart.getContext('2d');
+const tip=document.getElementById('tip');
+const ROW=92, PAD=10;
+
+function unitMax(){ return S.xmode==='int' ? S.N : S.natal.length; }
+function fitView(){ S.lo=0; S.hi=unitMax(); }
+
+function lowerBound(arr,v){ let a=0,b=arr.length; while(a<b){const m=(a+b)>>1; if(arr[m]<v)a=m+1;else b=m;} return a; }
+function idxRange(){
+  if(S.xmode==='int') return [lowerBound(S.natal,S.lo), lowerBound(S.natal,S.hi)];
+  return [Math.max(0,Math.floor(S.lo)), Math.min(S.natal.length,Math.ceil(S.hi))];
+}
+function unitOf(i){ return S.xmode==='int' ? S.natal[i] : i; }
+
+function foldTint(base, lvl){
+  const t = S.level? Math.min(1,(lvl-1)/Math.max(1,S.level-1)) : 0;
+  return `rgba(${base[0]},${base[1]},${base[2]},${(0.34+0.62*t).toFixed(3)})`;
+}
+const A_RGB=[240,166,58], B_RGB=[194,102,232];
+
+function sizeCanvas(cv,ctx,h){
+  const dpr=window.devicePixelRatio||1, w=cv.clientWidth||900;
+  if(cv.width!==Math.round(w*dpr)||cv.height!==Math.round(h*dpr)){
+    cv.width=Math.round(w*dpr); cv.height=Math.round(h*dpr); cv.style.height=h+'px';
+  }
+  ctx.setTransform(dpr,0,0,dpr,0,0); ctx.clearRect(0,0,w,h);
+  return w;
+}
+
+function drawRibbon(){
+  const H=230, W=sizeCanvas(rib,rctx,H);
+  const span=S.hi-S.lo;
+  const px = u => (u-S.lo)/span*W;
+  const [i0,i1]=idxRange();
+  const dense = (i1-i0) > W*1.1;
+
+  drawTrack(S.adv, PAD, 'ADVERSARIAL — greedy worst per fold', W, i0, i1, dense);
+  drawTrack(S.pin, PAD+ROW+14, 'PINNED — a_p = 0, what real folding does', W, i0, i1, dense);
+
+  // axis
+  const ay=PAD+2*ROW+22;
+  rctx.strokeStyle='#1e2942'; rctx.beginPath(); rctx.moveTo(0,ay); rctx.lineTo(W,ay); rctx.stroke();
+  rctx.fillStyle='#56617a'; rctx.font='10px ui-monospace,monospace'; rctx.textAlign='left';
+  for(let t=0;t<=8;t++){
+    const u=S.lo+span*t/8, x=px(u);
+    rctx.fillStyle='#1e2942'; rctx.fillRect(x,ay,1,4);
+    rctx.fillStyle='#56617a';
+    rctx.textAlign = t===0?'left':(t===8?'right':'center');
+    rctx.fillText(fmt(Math.round(u)), Math.min(W-1,Math.max(0,x)), ay+14);
+  }
+  rctx.textAlign='right'; rctx.fillStyle='#3d4761';
+  rctx.fillText(S.xmode==='int'?'integers':'slot index', W, ay-6);
+
+  function drawTrack(tr,y,label,W,i0,i1,dense){
+    rctx.fillStyle='#0a0d15'; rctx.fillRect(0,y,W,ROW);
+    rctx.strokeStyle='#141b2b'; rctx.strokeRect(.5,y+.5,W-1,ROW-1);
+    const top=y+16, base=y+ROW-6, full=base-top;
+
+    if(dense){
+      const nc=Math.max(1,Math.round(W));
+      const cA=new Int32Array(nc), cF=new Int32Array(nc).fill(32767), cC=new Uint8Array(nc), cT=new Int32Array(nc);
+      for(let i=i0;i<i1;i++){
+        const c=Math.floor(px(unitOf(i))); if(c<0||c>=nc) continue;
+        cT[c]++;
+        if(tr.killFold[i]===0) cA[c]++;
+        else if(tr.killFold[i]<cF[c]){ cF[c]=tr.killFold[i]; cC[c]=tr.killCh[i]; }
+      }
+      // height is the column's ALIVE FRACTION, so a stretch that is mostly dead
+      // reads as a trough. Columns with nothing alive get the kill-coloured stub.
+      for(let c=0;c<nc;c++){
+        if(!cT[c]) continue;
+        const dead=full*0.30;
+        if(cA[c]===0){
+          rctx.fillStyle=foldTint(cC[c]===1?A_RGB:B_RGB,cF[c]);
+          rctx.fillRect(c,base-dead,1,dead);
+          continue;
+        }
+        const fr=cA[c]/cT[c];
+        rctx.fillStyle='rgba(90,120,150,0.30)';
+        rctx.fillRect(c,base-dead,1,dead);
+        const h=Math.max(4,dead+(full-dead)*fr);
+        rctx.fillStyle=`rgba(127,227,255,${(0.45+0.55*fr).toFixed(3)})`;
+        rctx.fillRect(c,base-h,1,h);
+      }
+    } else {
+      const w=Math.max(1,Math.min(7,(W/Math.max(1,i1-i0))*0.55));
+      for(let i=i0;i<i1;i++){
+        const x=px(unitOf(i));
+        if(tr.killFold[i]===0){
+          rctx.fillStyle='#7fe3ff'; rctx.fillRect(x-w/2,top,w,full);
+        } else {
+          const h=full*0.34;
+          rctx.fillStyle=foldTint(tr.killCh[i]===1?A_RGB:B_RGB,tr.killFold[i]);
+          rctx.fillRect(x-w/2,base-h,w,h);
+        }
+      }
+    }
+    // bracket the last fold's longest dead run
+    const h=tr.hist[tr.hist.length-1];
+    if(h && h.LU>=0){
+      const run=lastRunUnits(tr,h);
+      if(run){
+        const x0=px(run[0]), x1=px(run[1]);
+        if(x1>=-40&&x0<=W+40){
+          rctx.strokeStyle='#f0b429'; rctx.lineWidth=1.5;
+          rctx.beginPath(); rctx.moveTo(x0,y+9); rctx.lineTo(x1,y+9); rctx.stroke();
+          rctx.fillStyle='#f0b429'; rctx.fillRect(x0-1,y+6,2,7); rctx.fillRect(x1-1,y+6,2,7);
+        }
+      }
+    }
+    rctx.fillStyle='#56617a'; rctx.font='10px ui-monospace,monospace'; rctx.textAlign='left';
+    rctx.fillText(label,5,y+11);
+    rctx.textAlign='right'; rctx.fillStyle='#3d4761';
+    rctx.fillText(fmt(tr.alive.length)+' alive slots',W-5,y+11);
+  }
+}
+/* where the last fold's L-run sits, in current x units. Endpoints were pinned
+   to natal indices at apply time, so this is O(1). */
+function lastRunUnits(tr,h){
+  const u=h.LUn, v=h.LVn;
+  if(u==null||v==null||u<0||v<0) return null;
+  return S.xmode==='int' ? [S.natal[u]-2,S.natal[v]+4] : [u-0.5, v+0.5];
+}
+
+/* ===========================================================================
+   CHART
+   =========================================================================== */
+function drawChart(){
+  const H=260, W=sizeCanvas(chart,cctx,H);
+  const L=44,R=10,T=14,B=30, iw=W-L-R, ih=H-T-B;
+  const nPts=Math.max(1,S.level);
+  const av=S.adv.hist.map(metricOf), pv=S.pin.hist.map(metricOf);
+  const refs=[];
+  if(S.metric==='L'){
+    for(let i=0;i<nPts;i++) refs.push(0.18*PRIMES[i]);
+  } else if(S.metric==='gap'){
+    for(let i=0;i<nPts;i++) refs.push(PRIMES[i]-2);
+  }
+  const TRUE_L=[2,1,2,2,2,3,2,4];
+  const G2=[30,42,66,108,150,204,258,348,528,546,618]; // after folds 7,11,...,43
+  let ymax=1;
+  const pool=av.concat(pv,refs);
+  if(S.metric==='gap') pool.push(...S.pin.hist.map(h=>h.maxGapAfter), ...G2.slice(0,nPts));
+  if(S.metric==='L') pool.push(...TRUE_L.slice(0,nPts));
+  for(const v of pool) if(v>ymax) ymax=v;
+  ymax*=1.12;
+
+  const X=i=>L+(nPts<=1?iw/2:iw*i/(nPts-1));
+  const Y=v=>T+ih-(v/ymax)*ih;
+
+  cctx.strokeStyle='#141b2b'; cctx.fillStyle='#56617a'; cctx.font='10px ui-monospace,monospace';
+  for(let t=0;t<=4;t++){
+    const v=ymax*t/4, y=Y(v);
+    cctx.beginPath(); cctx.moveTo(L,y); cctx.lineTo(W-R,y); cctx.stroke();
+    cctx.textAlign='right'; cctx.fillStyle='#56617a';
+    cctx.fillText(fmtShort(v),L-6,y+3);
+  }
+  cctx.save(); cctx.translate(11,T+ih/2); cctx.rotate(-Math.PI/2);
+  cctx.textAlign='center'; cctx.fillStyle='#3d4761';
+  cctx.fillText(metricUnit(),0,0); cctx.restore();
+
+  if(S.level===0){
+    cctx.fillStyle='#56617a'; cctx.textAlign='center';
+    cctx.fillText('no folds applied — step the ladder',L+iw/2,T+ih/2);
+    return;
+  }
+  // x labels
+  cctx.textAlign='center'; cctx.fillStyle='#56617a';
+  for(let i=0;i<nPts;i++){
+    if(nPts>18 && i%Math.ceil(nPts/18)!==0 && i!==nPts-1) continue;
+    cctx.fillText(String(PRIMES[i]),X(i),H-10);
+  }
+  cctx.fillStyle='#3d4761'; cctx.textAlign='right'; cctx.fillText('fold p',W-R,T+9);
+
+  const line=(vals,color,dash,wd)=>{
+    cctx.save(); cctx.setLineDash(dash||[]); cctx.strokeStyle=color; cctx.lineWidth=wd||1.6;
+    cctx.beginPath();
+    vals.forEach((v,i)=>{ if(v==null)return; const x=X(i),y=Y(v); i?cctx.lineTo(x,y):cctx.moveTo(x,y); });
+    cctx.stroke(); cctx.restore();
+  };
+  const dots=(vals,color,r)=>{ cctx.fillStyle=color;
+    vals.forEach((v,i)=>{ if(v==null)return; cctx.beginPath(); cctx.arc(X(i),Y(v),r||2.6,0,7); cctx.fill(); }); };
+  const rings=(vals,color)=>{ cctx.strokeStyle=color; cctx.lineWidth=1.5;
+    vals.forEach((v,i)=>{ if(v==null)return; cctx.beginPath(); cctx.arc(X(i),Y(v),4.5,0,7); cctx.stroke(); }); };
+
+  if(refs.length) line(refs,'#4a5f8a',[4,3],1.2);
+  if(S.metric==='gap') line(S.pin.hist.map(h=>h.maxGapAfter),'#2f6b52',[2,3],1.3);
+  line(pv,'#7fd4a8'); dots(pv,'#7fd4a8',2.2);
+  line(av,'#ff6b6b'); dots(av,'#ff6b6b',2.6);
+  // landmarks last, as rings, so they read even where they sit under a track
+  if(S.metric==='L')   rings(TRUE_L.slice(0,nPts),'#f0b429');
+  if(S.metric==='gap') rings(G2.slice(0,nPts),'#f0b429');
+}
+
+/* ===========================================================================
+   RENDER: chips, ladder, table, notes
+   =========================================================================== */
+function fmt(n){ return n.toLocaleString('en-US'); }
+function fmtRatio(r){ return r<1000? r.toFixed(1) : r<1e6? Math.round(r).toLocaleString('en-US') : r.toExponential(2); }
+function fmtShort(v){ return v>=1000? (v/1000).toFixed(v>=10000?0:1)+'k' : (v%1?v.toFixed(1):String(v)); }
+function el(id){ return document.getElementById(id); }
+
+function render(){
+  const p=PRIMES[S.level];
+  el('nextp').textContent = p===undefined?'—':String(p);
+  el('rankp').textContent = p===undefined?'—':String(p);
+  el('charttitle').textContent = metricName()+' ('+metricUnit()+')';
+  el('ribtitle').textContent = S.level===0 ? 'natal@5, no folds applied'
+    : 'through fold '+PRIMES[S.level-1]+'  ('+S.level+' folds)';
+
+  // chips
+  const ah=S.adv.hist[S.level-1], ph=S.pin.hist[S.level-1];
+  const chips=[
+    ['window N', fmt(S.N), 'integers'],
+    ['natal@5 slots', fmt(S.natal.length), 'slots'],
+    ['alive · adversarial', fmt(S.adv.alive.length), 'slots'],
+    ['alive · pinned', fmt(S.pin.alive.length), 'slots'],
+    ['last fold', S.level?('p = '+PRIMES[S.level-1]):'—', S.level?('a = '+S.aligns[S.level-1]+(S.aligns[S.level-1]===0?' (pinned)':'')):''],
+    ['L this fold · adv', ah?String(ah.L):'—','slots'],
+    ['L this fold · pin', ph?String(ph.L):'—','slots'],
+    ['max gap now · adv', S.level?fmt(S.adv.hist[S.level-1].maxGapAfter):fmt(maxGapOf(S.adv.alive)),'integers'],
+    ['max gap now · pin', S.level?fmt(S.pin.hist[S.level-1].maxGapAfter):fmt(maxGapOf(S.pin.alive)),'integers'],
+  ];
+  el('chips').innerHTML = chips.map(c=>
+    `<div class="chip"><i>${c[0]}</i><b>${c[1]}</b><u>${c[2]}</u></div>`).join('');
+
+  // ladder
+  const lad=el('ladder'); lad.innerHTML='';
+  const show=Math.min(PRIMES.length, Math.max(24,S.level+8));
+  for(let i=0;i<show;i++){
+    const b=document.createElement('button');
+    b.textContent=PRIMES[i];
+    if(i<S.level) b.className='done'; else if(i===S.level) b.className='cur';
+    b.title = i<S.level ? ('applied at a = '+S.aligns[i]) : 'jump the ladder to here (worst at every fold)';
+    b.addEventListener('click',()=>jumpTo(i+(i<S.level?0:1)));
+    lad.appendChild(b);
+  }
+
+  // period note
+  const per=periodApprox(), cov=S.N/per;
+  el('periodnote').innerHTML = S.level===0
+    ? 'Tile period after natal@5 is 30 integers; the window holds '+cov.toFixed(0)+' full periods.'
+    : 'Tile period after folding through '+PRIMES[S.level-1]+' is '+
+      (per>1e9?per.toExponential(3):fmt(per))+' integers. The window is '+
+      (cov>=1 ? '<b style="color:var(--warn)">'+cov.toFixed(2)+' full periods</b> — alignments are conjugate on a whole period, so expect the ranking to be flat or near-flat'
+              : '<b style="color:var(--warn)">'+fmtRatio(1/cov)+'&times; shorter than one period</b>, a proper segment — the adversary has real freedom here')+'.';
+
+  renderTable(); drawRibbon(); drawChart(); renderChartLegend(); updateViewInfo();
+  el('back').disabled = S.level===0;
+}
+
+function renderTable(){
+  const t=el('ranktbl'); const p=PRIMES[S.level];
+  if(!S.scan){ t.innerHTML='<tr><td>ladder exhausted</td></tr>'; el('ranknote').textContent=''; return; }
+  const rows=S.scan.slice().sort((x,y)=>metricOf(y)-metricOf(x)||x.a-y.a);
+  const worstV=metricOf(rows[0]);
+  const pinned=S.scan[0];
+  const CAP=48;
+  let shown=rows.slice(0,CAP);
+  if(!shown.some(r=>r.a===0)) shown=shown.concat([pinned]);
+  const mx=Math.max(1,worstV);
+  let html='<tr><th>a</th><th>classes mod '+p+'</th><th>L <span class="unit">slots</span></th>'+
+           '<th>kills <span class="unit">slots</span></th><th>gap <span class="unit">int</span></th>'+
+           '<th style="width:120px">'+metricName().split('—')[0].trim()+'</th></tr>';
+  for(const r of shown){
+    const cls=['pick']; if(metricOf(r)===worstV) cls.push('worst'); if(r.a===0) cls.push('pinned');
+    const w=Math.round(118*metricOf(r)/mx);
+    html+=`<tr class="${cls.join(' ')}" data-a="${r.a}">`+
+      `<td>${r.a}${r.a===0?' <span class="unit">pin</span>':''}</td>`+
+      `<td class="unit">{${r.a}, ${((r.a-2)%p+p)%p}}</td>`+
+      `<td>${r.L}</td><td>${fmt(r.kills)}</td><td>${fmt(r.gap)}</td>`+
+      `<td><span class="bar" style="width:${w}px"></span></td></tr>`;
+  }
+  t.innerHTML=html;
+  t.querySelectorAll('tr.pick').forEach(tr=>tr.addEventListener('click',()=>{
+    stepUp(+tr.dataset.a); render();
+  }));
+  const nWorst=S.scan.filter(r=>metricOf(r)===worstV).length;
+  el('ranknote').innerHTML =
+    `Ranked on <b>${metricName()}</b> (${metricUnit()}). Worst = <b>${worstV} ${metricUnit()}</b>, `+
+    `attained by <b>${nWorst} of ${p}</b> alignments`+
+    (nWorst===p?' — a total tie, which is what a window covering whole periods must give.':'.')+
+    ` Pinned a = 0 scores ${metricOf(pinned)} ${metricUnit()}.`+
+    (shown.length<p?` Showing the top ${CAP} plus the pinned row.`:'')+
+    ` Click any row to fold at that alignment.`;
+}
+
+function renderChartLegend(){
+  let s='<span class="sw"><i style="background:var(--adv)"></i>adversarial greedy</span>'+
+        '<span class="sw"><i style="background:var(--pin)"></i>pinned a=0</span>';
+  if(S.metric==='L') s+='<span class="sw"><i style="background:#4a5f8a"></i>0.18p — A5 Theorem B bound (slots)</span>'+
+        '<span class="sw"><i style="background:var(--gold)"></i>true diagonal L, tile-wide (slots)</span>';
+  if(S.metric==='gap') s+='<span class="sw"><i style="background:#4a5f8a"></i>p&minus;2 — Localized Merge Lemma threshold (int)</span>'+
+        '<span class="sw"><i style="background:#2f6b52"></i>running max gap in window, pinned (int)</span>'+
+        '<span class="sw"><i style="background:var(--gold)"></i>G&#8322;(T<sub>x</sub>), tile-wide (int)</span>';
+  if(S.metric==='kills') s+='<span class="sw">no verified landmark for this metric — none drawn.</span>';
+  s+='<br><span style="color:var(--dim2)">Both tracks fold the same primes in the same order. '+
+     'The adversarial track keeps whatever survivors its own earlier choices left it, which is exactly why it can dip below the pinned track.</span>';
+  el('chartleg').innerHTML=s;
+}
+function updateViewInfo(){
+  el('viewinfo').textContent = `[${fmt(Math.round(S.lo))}, ${fmt(Math.round(S.hi))}) `+
+    (S.xmode==='int'?'integers':'slot index')+`   span ${fmt(Math.round(S.hi-S.lo))}`;
+}
+
+/* ===========================================================================
+   ACTIONS
+   =========================================================================== */
+function worstA(){
+  if(!S.scan) return 0;
+  let bi=0,bv=-1;
+  for(const r of S.scan){ const v=metricOf(r); if(v>bv){bv=v;bi=r.a;} }
+  return bi;
+}
+function jumpTo(level){
+  level=Math.max(0,Math.min(PRIMES.length,level));
+  if(level<S.level){
+    const keep=S.aligns.slice(0,level);
+    S.natal=buildNatal(S.N); S.adv=freshTrack(S.natal); S.pin=freshTrack(S.natal);
+    S.aligns=[]; S.level=0;
+    for(const a of keep) stepUp(a,true);
+    rescan();
+  } else {
+    while(S.level<level){ rescan(); stepUp(worstA(),true); }
+    rescan();
+  }
+  render();
+}
+
+el('applyWorst').addEventListener('click',()=>{ stepUp(worstA()); render(); });
+el('applyPinned').addEventListener('click',()=>{ stepUp(0); render(); });
+el('back').addEventListener('click',()=>{ stepDown(); render(); });
+el('reset').addEventListener('click',()=>{ S.aligns=[]; S.level=0; rebuild(S.N,false); fitView(); render(); });
+el('metric').addEventListener('change',e=>{ S.metric=e.target.value; render(); });
+el('xmode').addEventListener('change',e=>{ S.xmode=e.target.value; fitView(); render(); });
+el('winset').addEventListener('click',()=>{
+  let v=Math.round(+el('win').value||100000);
+  v=Math.max(600,Math.min(2000000,v)); el('win').value=v;
+  const t0=performance.now();
+  rebuild(v,true); fitView(); render();
+  el('periodnote').innerHTML += ` <span class="unit">rebuild ${(performance.now()-t0).toFixed(0)} ms</span>`;
+});
+el('zin').addEventListener('click',()=>zoomAt(0.5,1/1.6));
+el('zout').addEventListener('click',()=>zoomAt(0.5,1.6));
+el('pl').addEventListener('click',()=>pan(-0.3));
+el('pr').addEventListener('click',()=>pan(0.3));
+el('fit').addEventListener('click',()=>{ fitView(); drawRibbon(); updateViewInfo(); });
+el('gorun').addEventListener('click',()=>{
+  const h=S.adv.hist[S.level-1]; if(!h||h.LU<0) return;
+  const r=lastRunUnits(S.adv,h); if(!r) return;
+  const c=(r[0]+r[1])/2, w=Math.max((r[1]-r[0])*4, S.xmode==='int'?400:30);
+  S.lo=Math.max(0,c-w/2); S.hi=Math.min(unitMax(),c+w/2);
+  drawRibbon(); updateViewInfo();
+});
+function zoomAt(frac,k){
+  const c=S.lo+(S.hi-S.lo)*frac; let w=(S.hi-S.lo)*k;
+  const minW = S.xmode==='int'? 60 : 6;
+  w=Math.max(minW,Math.min(unitMax(),w));
+  S.lo=c-w*frac; S.hi=S.lo+w;
+  if(S.lo<0){S.lo=0;S.hi=w;} if(S.hi>unitMax()){S.hi=unitMax();S.lo=Math.max(0,S.hi-w);}
+  drawRibbon(); updateViewInfo();
+}
+function pan(f){ const w=S.hi-S.lo, d=w*f;
+  S.lo=Math.max(0,Math.min(unitMax()-w,S.lo+d)); S.hi=S.lo+w; drawRibbon(); updateViewInfo(); }
+
+rib.addEventListener('wheel',e=>{
+  e.preventDefault();
+  const r=rib.getBoundingClientRect();
+  zoomAt(Math.max(0,Math.min(1,(e.clientX-r.left)/r.width)), e.deltaY>0?1.22:1/1.22);
+},{passive:false});
+let drag=null;
+rib.addEventListener('mousedown',e=>{ drag={x:e.clientX,lo:S.lo,hi:S.hi}; });
+window.addEventListener('mouseup',()=>{drag=null;});
+window.addEventListener('mousemove',e=>{
+  if(!drag) return;
+  const r=rib.getBoundingClientRect(), w=drag.hi-drag.lo;
+  let d=-(e.clientX-drag.x)/r.width*w;
+  S.lo=Math.max(0,Math.min(unitMax()-w,drag.lo+d)); S.hi=S.lo+w;
+  drawRibbon(); updateViewInfo();
+});
+rib.addEventListener('mousemove',e=>{
+  if(drag){tip.style.display='none';return;}
+  const r=rib.getBoundingClientRect();
+  const y=e.clientY-r.top;
+  let tr=null,name='';
+  if(y>=PAD&&y<PAD+ROW){tr=S.adv;name='adversarial';}
+  else if(y>=PAD+ROW+14&&y<PAD+ROW+14+ROW){tr=S.pin;name='pinned';}
+  if(!tr){tip.style.display='none';return;}
+  const u=S.lo+(e.clientX-r.left)/r.width*(S.hi-S.lo);
+  let i;
+  if(S.xmode==='int'){
+    i=lowerBound(S.natal,u);
+    const cands=[i-1,i].filter(k=>k>=0&&k<S.natal.length);
+    if(!cands.length){tip.style.display='none';return;}
+    i=cands.reduce((a,b)=>Math.abs(S.natal[a]-u)<=Math.abs(S.natal[b]-u)?a:b);
+    const tol=(S.hi-S.lo)/r.width*6;
+    if(Math.abs(S.natal[i]-u)>Math.max(tol,1)){tip.style.display='none';return;}
+  } else {
+    i=Math.round(u); if(i<0||i>=S.natal.length){tip.style.display='none';return;}
+  }
+  const pos=S.natal[i], kf=tr.killFold[i];
+  let txt=`${name} track\nslot index  ${fmt(i)}  (slots)\nposition r  ${fmt(pos)}  (integers)\npair        (${fmt(pos)}, ${fmt(pos+2)})\nhouse       r mod 30 = ${pos%30}\n`;
+  if(kf===0){
+    txt+=`status      ALIVE after ${S.level} fold${S.level===1?'':'s'}`;
+    if(S.level){ const nxt=PRIMES[S.level-1]; if(pos+2<nxt*nxt) txt+=`\n            crystallized — below ${nxt}² = ${fmt(nxt*nxt)}, so this is a real twin pair`; }
+  } else {
+    const p=PRIMES[kf-1], a=(name==='pinned')?0:S.aligns[kf-1];
+    const a2=((a-2)%p+p)%p;
+    txt+=`status      KILLED at fold ${kf}, p = ${p}\n`+
+         `alignment   a = ${a}, classes {${a}, ${a2}} mod ${p}\n`+
+         `channel     ${tr.killCh[i]===1?'A — p hits the lower member r':'B — p hits the upper member r+2'}\n`+
+         `witness     ${tr.killCh[i]===1?fmt(pos)+' ≡ '+a:fmt(pos+2)+' ≡ '+a} (mod ${p})`;
+  }
+  tip.textContent=txt; tip.style.display='block';
+  tip.style.left=Math.min(window.innerWidth-330,e.clientX+14)+'px';
+  tip.style.top=Math.min(window.innerHeight-190,e.clientY+14)+'px';
+});
+rib.addEventListener('mouseleave',()=>{tip.style.display='none';});
+window.addEventListener('keydown',e=>{
+  if(e.target.tagName==='INPUT'||e.target.tagName==='SELECT') return;
+  if(e.key==='ArrowRight'){ stepUp(worstA()); render(); }
+  else if(e.key==='ArrowLeft'){ stepDown(); render(); }
+});
+window.addEventListener('resize',()=>{ drawRibbon(); drawChart(); });
+
+/* boot */
+rebuild(100000,false); fitView(); render();
+</script>
+</body>
+</html>

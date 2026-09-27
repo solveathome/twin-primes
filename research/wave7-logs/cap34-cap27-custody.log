@@ -1,0 +1,36 @@
+V. ENGINE VERIFICATION (mark-union engine vs cap-21 methods)
+ @11 full: engine = direct on all of T3,T4; mu=39.2735 Var=9.6305 mu4=277.14 kurt=2.9881; quartic 1.16e-4, opt-square 7.80e-5 -- all match cap-21
+ @13: T1,T2 = Thm5 difference-class path exactly; subset[120] T3,T4 = direct
+      distinct-count exactly (8,214,570 quadruples at the real moduli)
+==============================================================================
+T. THE @13 FOURTH MOMENT (C(990,4) = 39,782,707,965 quadruples, 34 primes)
+   T2 = 46186.769663306746
+   T3 = 4662945.6578926444  (C(990,3) = 160,940,540 triples, 25s)
+   10 workers launched (round-robin pair split)...
+   ... 12.2% of quadruples, 2.0 min
+   ... 26.2% of quadruples, 4.0 min
+   ... 38.7% of quadruples, 6.0 min
+   ... 50.8% of quadruples, 8.0 min
+   ... 61.3% of quadruples, 10.0 min
+   ... 70.9% of quadruples, 12.0 min
+   ... 83.4% of quadruples, 14.0 min
+   ... 90.2% of quadruples, 16.0 min
+   ... 96.1% of quadruples, 18.0 min
+   T4 = 352253669.87624449  (10 workers, 19.4 min wall; partition sum-checks exact)
+   error budget: per-term <= 68u = 7.55e-15 rel; Kahan (positive terms) <= 2u;
+   combine <= 20u  =>  |dT4|/T4 <= 9.99e-15;  E[S^4] = 8.623e+9, assembly
+   amplification 24407 <- 4.93e+6x  =>  |dmu4|/mu4 <= 4.92e-8  (target 1e-7: met)
+   MC 20k marches: mu=304.30 m2=89.83 m3=7.1 m4=23915  zeros=0  minS=265
+   mu=304.2821  Var=90.1995  mu3=0.609 (skew 0.0007)  mu4=24407.37
+   kurtosis = 2.9999  (Gaussian 3; @11 was 2.9881);  mu4/3Var^2 = 1.0000
+   UNCONDITIONAL BOUNDS on P(S=0), rotation ensemble @13:
+     Chebyshev Var/mu^2        = 9.74e-4   (e^-6.93)   [= cap-14]
+     Cantelli                  = 9.73e-4   (e^-6.93)
+     quartic Markov mu4/mu^4   = 2.85e-6   (e^-12.77)  BEATS Chebyshev x342
+     optimal quadratic-square  = 1.90e-6   (e^-13.17)  BEATS Chebyshev x513
+   THEOREM (finite computation): P(S=0) <= 1.898e-6 at @13 -- the first
+   beyond-Chebyshev bound at a level where P(S=0)=0 is NOT capacity-provable
+   (cap-21 Thm 3 is @11-only: here kill capacity exceeds N by ~15%).
+   NEXT: (i) T5/T6 @13 (C(990,6) = 1.1e15: needs the same identity as @17);
+   (ii) the 4-point wrap identity for @17's 4.9e16 quadruples -- compute is dead there.
+[23 checks passed, 1202.5s]

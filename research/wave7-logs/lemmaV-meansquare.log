@@ -1,0 +1,96 @@
+S0 CUSTODY --- pilot rows re-derived (pilot slide) and corrected (true window)
+  z=13 u=2.8 s=2.6 H=1315 D=788 |D+|=14 |D-|=16 N=372
+    pilot : minT=50  T<=0: 0/2317  meanT=52.9  sdT=1.5  minS=73
+    true  : minT=50  meanT=52.941558  H*M=52.941558  sup|R|=5.058441558441324  offset c(1)-c(H+1)=0   [0.0s]
+  z=17 u=2.8 s=2.6 H=2788 D=1582 |D+|=26 |D-|=28 N=980
+    pilot : minT=103  T<=0: 0/30037  meanT=109.0  sdT=2.1  minS=133
+    true  : minT=104  meanT=110.015984  H*M=110.015984  sup|R|=6.984015984014604  offset c(1)-c(H+1)=-1   [0.0s]
+  z=19 u=2.8 s=2.6 H=3806 D=2112 |D+|=28 |D-|=36 N=1284
+    pilot : minT=112  T<=0: 0/510517  meanT=119.9  sdT=2.3  minS=158
+    true  : minT=112  meanT=119.948158  H*M=119.948158  sup|R|=7.94815772462843  offset c(1)-c(H+1)=0   [0.1s]
+  z=20 u=2.8 s=2.6 H=4394 D=2414 |D+|=40 |D-|=48 N=2652
+    pilot : minT=107  T<=0: 0/9699697  meanT=119.7  sdT=2.7  minS=160
+    true  : minT=107  meanT=119.673282  H*M=119.673282  sup|R|=12.673282135823882  offset c(1)-c(H+1)=0   [0.9s]
+  z=20 u=2.2 s=2.6 H=728 D=2414 |D+|=40 |D-|=48 N=2652
+    pilot : minT=8  T<=0: 0/9699697  meanT=19.8  sdT=2.5  minS=20
+    true  : minT=8  meanT=19.827526  H*M=19.827526  sup|R|=11.827526034337684  offset c(1)-c(H+1)=0   [1.7s]
+S1 IDENTITY --- T(x) - H*M - R(x) over full periods
+  z=13 u=2.8: positions=2310 (FULL PERIOD)  N=372  max|T-(H*M+R)| = 2.416e-13   [1.8s]
+  z=17 u=2.8: positions=30030 (FULL PERIOD)  N=980  max|T-(H*M+R)| = 1.393e-12   [3.6s]
+  z=19 u=2.8: positions=200000 (sampled prefix)  N=1284  max|T-(H*M+R)| = 1.563e-13   [21.8s]
+  z=20 u=2.8: positions=200000 (sampled prefix)  N=2652  max|T-(H*M+R)| = 3.084e-12   [49.8s]
+  z=20 u=2.2: positions=200000 (sampled prefix)  N=2652  max|T-(H*M+R)| = 5.613e-13   [77.7s]
+S2 MEAN SQUARE --- closed form against brute force over the FULL period
+  (a) brute force by re-summing the divisor-pair terms at every x, independent of the pilot arrays:
+    z=13 u=2.8 s=2.6 N=372 W=2310: closed=2.312169000  brute=2.312169000  rel=7.87e-15  max|Psi|/(h(g-h))=1.000000   [77.9s]
+    z=17 u=2.8 s=2.6 N=980 W=30030: closed=4.314096826  brute=4.314096826  rel=1.01e-13  max|Psi|/(h(g-h))=1.000000   [79.4s]
+    z=19 u=2.8 s=2.6 N=1284 W=510510: closed=5.354335747  brute=5.354335747  rel=1.74e-12  max|Psi|/(h(g-h))=1.000000   [124.3s]
+    z=17 u=3.2 s=3 N=2236 W=30030: closed=4.786499388  brute=4.786499388  rel=2.60e-15  max|Psi|/(h(g-h))=1.000000   [126.8s]
+  (b) brute force by walking the pilot arrays, R = T - H*M:
+    z=20 u=2.8 s=2.6 N=2652 W=9699690: closed=7.433496208  brute=7.433496208  rel=1.20e-11  max|Psi|/(h(g-h))=1.000000   [128.0s]
+    z=20 u=2.2 s=2.6 N=2652 W=9699690: closed=6.434469629  brute=6.434469629  rel=2.56e-11  max|Psi|/(h(g-h))=1.000000   [128.7s]
+    z=19 u=3.2 s=3 N=4764 W=510510: closed=11.158524293  brute=11.158524293  rel=5.64e-14  max|Psi|/(h(g-h))=1.000000   [129.8s]
+S3 SPECTRAL --- <R^2> as a sum over moduli e | P(z), and the phase factorisation
+  z=13 u=2.8 s=2.6: spectral=2.312169000  closed=2.312169000  rel=4.96e-14
+     phase factorisation: 2785 (e,term) pairs, 0 violations;  max_e,a |Theta_e(a)|*e/2^nu(e) = 1.635e-1 at e=21,a=16   [129.9s]
+  z=13 u=3.2 s=3: spectral=3.697734300  closed=3.697734300  rel=1.82e-13
+     phase factorisation: 9753 (e,term) pairs, 0 violations;  max_e,a |Theta_e(a)|*e/2^nu(e) = 1.663e-1 at e=330,a=257   [130.1s]
+  z=17 u=2.8 s=2.6: spectral=4.314096826  closed=4.314096826  rel=3.84e-13
+     phase factorisation: 11389 (e,term) pairs, 0 violations;  max_e,a |Theta_e(a)|*e/2^nu(e) = 1.611e-1 at e=105,a=88   [130.4s]
+S4a Z-LADDER at (u,s) = (2.8, 2.6)   [s below 1+sqrt(e): main term positive only by finite-size]
+  z= 13 u=2.8 s=2.6 H=    1315 D=    788 N=    372  H*M=     52.94  <R^2>=     2.3122  rms=   1.5206  rms/H*M=0.028722  <R^2>/H=1.758e-3  diag=     62.6  sqrt(gcdBd)/H*M=1.311   [130.4s]
+  z= 17 u=2.8 s=2.6 H=    2788 D=   1582 N=    980  H*M=    110.02  <R^2>=     4.3141  rms=   2.0770  rms/H*M=0.018879  <R^2>/H=1.547e-3  diag=    168.6  sqrt(gcdBd)/H*M=1.333   [130.5s]
+  z= 19 u=2.8 s=2.6 H=    3806 D=   2112 N=   1284  H*M=    119.95  <R^2>=     5.3543  rms=   2.3139  rms/H*M=0.019291  <R^2>/H=1.407e-3  diag=    227.3  sqrt(gcdBd)/H*M=1.358   [130.6s]
+  z= 20 u=2.8 s=2.6 H=    4394 D=   2414 N=   2652  H*M=    119.67  <R^2>=     7.4335  rms=   2.7264  rms/H*M=0.022782  <R^2>/H=1.692e-3  diag=    431.7  sqrt(gcdBd)/H*M=2.073   [130.8s]
+  z= 23 u=2.8 s=2.6 H=    6499 D=   3471 N=   2748  H*M=    179.13  <R^2>=     7.7203  rms=   2.7785  rms/H*M=0.015512  <R^2>/H=1.188e-3  diag=    457.4  sqrt(gcdBd)/H*M=1.437   [131.1s]
+  z= 29 u=2.8 s=2.6 H=   12437 D=   6342 N=   6060  H*M=    326.05  <R^2>=    20.5028  rms=   4.5280  rms/H*M=0.013887  <R^2>/H=1.649e-3  diag=   1061.0  sqrt(gcdBd)/H*M=1.382   [132.7s]
+  z= 31 u=2.8 s=2.6 H=   14990 D=   7543 N=  10660  H*M=    343.60  <R^2>=    33.7370  rms=   5.8084  rms/H*M=0.016904  <R^2>/H=2.251e-3  diag=   1810.4  sqrt(gcdBd)/H*M=1.779   [136.8s]
+  z= 37 u=2.8 s=2.6 H=   24602 D=  11949 N=  14196  H*M=    521.37  <R^2>=    41.1899  rms=   6.4179  rms/H*M=0.012310  <R^2>/H=1.674e-3  diag=   2368.7  sqrt(gcdBd)/H*M=1.340   [146.7s]
+  z= 41 u=2.8 s=2.6 H=   32794 D=  15604 N=  23292  H*M=    631.99  <R^2>=    63.0813  rms=   7.9424  rms/H*M=0.012567  <R^2>/H=1.924e-3  diag=   3809.6  sqrt(gcdBd)/H*M=1.456   [171.6s]
+  z= 43 u=2.8 s=2.6 H=   37472 D=  17661 N=  26724  H*M=    645.54  <R^2>=    78.1611  rms=   8.8409  rms/H*M=0.013695  <R^2>/H=2.086e-3  diag=   4450.1  sqrt(gcdBd)/H*M=1.539   [203.1s]
+  z= 47 u=2.8 s=2.6 H=   48070 D=  22256 N=  30316  H*M=    757.10  <R^2>=   100.0660  rms=  10.0033  rms/H*M=0.013213  <R^2>/H=2.082e-3  diag=   4905.6  sqrt(gcdBd)/H*M=1.414   [241.3s]
+S4b Z-LADDER at (u,s) = (3.2, 3.0)   [s > 1+sqrt(e) = 2.6487: main term asymptotically positive]
+  z= 13 u=3.2 s=3.0 H=    3670 D=   2197 N=    852  H*M=    204.95  <R^2>=     3.6977  rms=   1.9229  rms/H*M=0.009383  <R^2>/H=1.008e-3  diag=    149.0  sqrt(gcdBd)/H*M=0.729   [241.3s]
+  z= 17 u=3.2 s=3.0 H=    8658 D=   4913 N=   2236  H*M=    406.81  <R^2>=     4.7865  rms=   2.1878  rms/H*M=0.005378  <R^2>/H=5.528e-4  diag=    373.0  sqrt(gcdBd)/H*M=0.703   [241.5s]
+  z= 19 u=3.2 s=3.0 H=   12360 D=   6859 N=   4764  H*M=    489.43  <R^2>=    11.1585  rms=   3.3404  rms/H*M=0.006825  <R^2>/H=9.028e-4  diag=    819.4  sqrt(gcdBd)/H*M=0.889   [242.4s]
+  z= 20 u=3.2 s=3.0 H=   14565 D=   8000 N=   8868  H*M=    486.83  <R^2>=    18.8294  rms=   4.3393  rms/H*M=0.008913  <R^2>/H=1.293e-3  diag=   1460.0  sqrt(gcdBd)/H*M=1.226   [245.7s]
+  z= 23 u=3.2 s=3.0 H=   22779 D=  12167 N=   9636  H*M=    778.34  <R^2>=    12.4549  rms=   3.5291  rms/H*M=0.004534  <R^2>/H=5.468e-4  diag=   1663.0  sqrt(gcdBd)/H*M=0.839   [249.5s]
+  z= 29 u=3.2 s=3.0 H=   47827 D=  24389 N=  20700  H*M=   1522.94  <R^2>=    27.8098  rms=   5.2735  rms/H*M=0.003463  <R^2>/H=5.815e-4  diag=   3388.8  sqrt(gcdBd)/H*M=0.696   [269.0s]
+  z= 31 u=3.2 s=3.0 H=   59205 D=  29791 N=  35868  H*M=   1731.90  <R^2>=    38.6931  rms=   6.2204  rms/H*M=0.003592  <R^2>/H=6.535e-4  diag=   5665.7  sqrt(gcdBd)/H*M=0.816   [334.3s]
+S4c U-SCAN at z = 29, s = 2.6   [tests <R^2> proportional to H]
+  u=1.80 H=     429  <R^2>=    6.52667  <R^2>/H=1.5214e-2  H*M=    11.25  rms/H*M=0.227152   [336.2s]
+  u=2.20 H=    1649  <R^2>=   13.85597  <R^2>/H=8.4027e-3  H*M=    43.23  rms/H*M=0.086104   [337.9s]
+  u=2.60 H=    6342  <R^2>=   16.68025  <R^2>/H=2.6301e-3  H*M=   166.26  rms/H*M=0.024564   [339.1s]
+  u=2.80 H=   12437  <R^2>=   20.50283  <R^2>/H=1.6485e-3  H*M=   326.05  rms/H*M=0.013887   [340.7s]
+  u=3.20 H=   47827  <R^2>=   21.45944  <R^2>/H=4.4869e-4  H*M=  1253.85  rms/H*M=0.003695   [342.3s]
+  u=3.60 H=  183922  <R^2>=   21.52157  <R^2>/H=1.1701e-4  H*M=  4821.76  rms/H*M=0.000962   [344.1s]
+  u=4.00 H=  707281  <R^2>=   18.27890  <R^2>/H=2.5844e-5  H*M= 18542.32  rms/H*M=0.000231   [345.4s]
+  u=4.40 H= 2719889  <R^2>=   22.51302  <R^2>/H=8.2772e-6  H*M= 71305.54  rms/H*M=0.000067   [347.1s]
+S5 SUP/RMS --- how far the worst position sits above the mean square
+  z=13 u=2.8 s=2.6 W=2310: rms=1.5206  sup|R|=5.0584  sup/rms=3.327  sqrt(2 lnW)=3.936  H*M=52.94  sup|R|/H*M=0.0955  minT=50   [347.1s]
+  z=17 u=2.8 s=2.6 W=30030: rms=2.0770  sup|R|=6.9840  sup/rms=3.362  sqrt(2 lnW)=4.541  H*M=110.02  sup|R|/H*M=0.0635  minT=104   [347.1s]
+  z=19 u=2.8 s=2.6 W=510510: rms=2.3139  sup|R|=7.9482  sup/rms=3.435  sqrt(2 lnW)=5.127  H*M=119.95  sup|R|/H*M=0.0663  minT=112   [347.1s]
+  z=20 u=2.8 s=2.6 W=9699690: rms=2.7264  sup|R|=12.6733  sup/rms=4.648  sqrt(2 lnW)=5.672  H*M=119.67  sup|R|/H*M=0.1059  minT=107   [347.8s]
+  z=20 u=2.2 s=2.6 W=9699690: rms=2.5366  sup|R|=11.8275  sup/rms=4.663  sqrt(2 lnW)=5.672  H*M=19.83  sup|R|/H*M=0.5965  minT=8   [348.1s]
+  z=19 u=3.2 s=3 W=510510: rms=3.3404  sup|R|=12.4270  sup/rms=3.720  sqrt(2 lnW)=5.127  H*M=489.43  sup|R|/H*M=0.0254  minT=477   [348.2s]
+  z=20 u=3.2 s=3 W=9699690: rms=4.3393  sup|R|=18.8274  sup/rms=4.339  sqrt(2 lnW)=5.672  H*M=486.83  sup|R|/H*M=0.0387  minT=468   [348.6s]
+  sampled sup over 8e6 consecutive positions (period far larger; LOWER bound on the true sup):
+  z=29 u=2.8 s=2.6 H=12437: sampled sd=4.529  sampled sup dev=21.1  sup/sd=4.649  sqrt(2 ln W)=6.200  minT=305  meanT=326.1   [349.3s]
+  z=41 u=2.8 s=2.6 H=32794: sampled sd=7.733  sampled sup dev=37.1  sup/sd=4.792  sqrt(2 ln W)=7.699  minT=602  meanT=631.9   [350.2s]
+  z=50 u=2.8 s=2.6 H=57163: sampled sd=11.463  sampled sup dev=46.7  sup/sd=4.070  sqrt(2 ln W)=9.051  minT=785  meanT=831.7   [350.7s]
+  z=100 u=2.8 s=2.6 H=398107: sampled sd=31.960  sampled sup dev=124.1  sup/sd=3.884  sqrt(2 ln W)=12.941  minT=4326  meanT=4430.9   [351.3s]
+  z=100 u=3.2 s=3 H=2511886: sampled sd=28.003  sampled sup dev=96.2  sup/sd=3.435  sqrt(2 ln W)=12.941  minT=40440  meanT=40512.8   [352.0s]
+S6 ALMOST-ALL --- sieve mean square against the elementary second moment
+  cols: delta = tile twin-candidate density; sieve bound = <R^2>/(H*M)^2 (Chebyshev on the certificate);
+        elementary bound = F/(delta*H) with Fano F = 0.30 (natal5-variance measured 0.15..0.40)
+  z= 13 u=2.8 s=2.6 H=    1315  delta=5.844e-2  expected twins in H =     76.9  sieve bound=8.249e-4  elementary bound=3.904e-3  ratio sieve/elem=0.211
+  z= 19 u=2.8 s=2.6 H=    3806  delta=4.363e-2  expected twins in H =    166.1  sieve bound=3.722e-4  elementary bound=1.807e-3  ratio sieve/elem=0.206
+  z= 29 u=2.8 s=2.6 H=   12437  delta=3.565e-2  expected twins in H =    443.3  sieve bound=1.929e-4  elementary bound=6.767e-4  ratio sieve/elem=0.285
+  z= 41 u=2.8 s=2.6 H=   32794  delta=2.937e-2  expected twins in H =    963.1  sieve bound=1.579e-4  elementary bound=3.115e-4  ratio sieve/elem=0.507
+  z= 19 u=3.2 s=3 H=   12360  delta=4.363e-2  expected twins in H =    539.3  sieve bound=4.658e-5  elementary bound=5.563e-4  ratio sieve/elem=0.084
+  z= 29 u=3.2 s=3 H=   47827  delta=3.565e-2  expected twins in H =   1704.8  sieve bound=1.199e-5  elementary bound=1.760e-4  ratio sieve/elem=0.068
+  z= 31 u=3.2 s=3 H=   59205  delta=3.319e-2  expected twins in H =   1964.8  sieve bound=1.290e-5  elementary bound=1.527e-4  ratio sieve/elem=0.084
+  z=41 fitted law: <R^2> = kappa*H with kappa=1.9236e-3, M=1.9271e-2.
+    sieve mean square becomes nontrivial at H > kappa/M^2 = 5.2 = 0.027 * ln^4 z
+    elementary second moment becomes nontrivial at H > 0.30/delta = 10.2 = 0.741 * ln^2 z
+DONE 470.4s

@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "source": "https://oeis.org/history?seq=A144311",
+  "source_locator": "Jinyuan Wang, revision 18 discussion, 2024-11-26 10:42 EST",
+  "project_reproduction": "https://solveathome.org/projects/twin-primes/return/1632",
+  "new_discovery_claimed": false,
+  "prime_count": 23,
+  "largest_prime": 83,
+  "primorial": "267064515689275851355624017992790",
+  "start": "162791254787456816384305457582341",
+  "end": "162791254787456816384305457584199",
+  "covered_length": 1859,
+  "uncovered_offsets": [],
+  "both_neighbors_uncovered": true,
+  "shift_one_negative_control_rejected": true,
+  "A144311_23_lower_bound": 1859,
+  "G2_83_primorial_lower_bound": 1860,
+  "global_maximality_established": false
+}

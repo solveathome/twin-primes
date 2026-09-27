@@ -1,0 +1,43 @@
+07220a9 TODO.md exhaustive: swept memory, papers, covering-dive, ATTACKS, campaign next-steps into forward-only list
+85db061 TODO.md: forward-only shared list (charter: what to try, never what we tried)
+12e6186 Natal-cap campaign: ten attacks on per-prime removal limits + synthesis (staircase theorem, BDH identity, Mertens/parity pricing, anchored calm)
+754cd28 Natal@5 variance: exact J5 pair-correlation, almost-all bound, anchored z-drift measured
+1ca7eaf Natal@5 Scour march on the 17-tile (cumulative, per prime) + txt report
+f3c0228 Adopt terminology: Natal set @p (+ carried set, eternal edge)
+672103d Self-strike = twin prime FOUND, not a kill (Chris; proven, verified all levels)
+a1f6db9 Scour into fixed tile: the p-squared rule from the kill direction
+c1bc52f Rankin readings: define COVERED/SURVIVOR precisely; 'survivor-free' not 'twin-free'
+e6a6665 Glossary: G2 sequence extended to 12 terms (T37=528)
+2edb93f G2(37#) = 528: twelfth term (7.42e12 positions, slot count exact)
+232311f Attestation v4: first fully-verified-theorem state stamped
+09ebe1f beta2-note: FULLY VERIFIED — Definition 1.3 (Omega(kappa)) captured, ZERO open items
+12add5e Attestation v3: theorem-verified state stamped (OTS)
+5bcd9d3 beta2-note: FULLY source-verified — beta_2=4.266 read from the book (p.79)
+760aba5 beta2-note: Theorem 9.1 VERIFIED against the primary source
+c545e4d Authorship decided: sole author Chris; AI-assisted research disclosure adopted (statement in PAPERS.md)
+c290454 Attestation v2: consolidated deep-encode state stamped
+b993f12 Deep encode: root README (map + status + moratorium) and the Chronicle
+fa53ff7 Attestation: OpenTimestamps proof-of-existence for the 2026-08-14 body of work
+2069bc1 Grain census law DERIVED and verified exactly: CRT inclusion-exclusion for every gap count
+7b33844 beta2-note: all seven verification edits applied
+46af988 DHR verification: beta2 note SURVIVES — discrepancies all absorbable
+355daf9 Rich vein solved: a T11 ceiling plateau, not noise and not unique
+021df55 Paper I flagship v2: restructured around final vocabulary (~8000 words)
+96654dc PROVEN: A059861's d2=d4 identity (Labos 2001, stated without proof)
+a3600e6 Official positioning: a new framework and vocabulary over classical sieve-theoretic objects — a new lens
+f5ee83e Paper suite architecture: four papers + OEIS micro-publications (paper/PAPERS.md)
+b097f3f Draft note: G2 << p^{4.267+eps} — first two-class Jacobsthal upper bound (approach, pending DHR verification)
+b0391be Family-restricted union bound: fails 2.66x at T31; = Brun's first line; near-miss version meets the wall at the entrance (anchored window count)
+2ca17e8 Covering-systems arena encoded: house-blindness measured, Hough/FGKMT connection, the open two-class Jacobsthal as nearest unclaimed theorem
+ce992a2 T37 census verified: 217,929,355,875 over 7.42 trillion positions
+87b7754 Birth cohort closed forms: count(@p,Tx) = cohort(p)*Dx/Dp; frozen shares cohort(p)/Dp
+148eb1b Birth cohorts: exact decomposition of the census by creation fold
+cbf4179 The Scour named; the Two-Moire Argument recorded
+38ca4d8 Name the Twin Prime Grain: the tile's gap word, G2 = the coarsest grain
+6e7788c The removal ledger: capacity exceeds census; twins survive on overlap
+aa0944d Adopt shared vocabulary: tile / fold / seam / stratum / zone / frontier / family
+7800b3e Genealogy: one family tree from (5,7) mod 6; D_{n+1}=(p-2)(1 + (D_n - 1))
+be75227 Second attack wave complete: Unification Law, Exact Invariance Lemma, seam census
+4cd80f9 Fossil strata confirmed + Seam Lemma + second attack wave plan
+549cd50 Deep research batch: paper draft, variance note, anchored windows, G_d map, OEIS draft
+7b59691 Prime moiré research: proven spine, six experiments, ten wall attacks

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>primeoire bench — the dimension of a hole</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='78' font-size='80'>▩</text></svg>">
+<style>
+  :root {
+    --bg: #0b0e14; --panel: #111725; --line: #1e2942; --text: #d7dee9;
+    --dim: #7c89a5; --ok: #7fd4a8; --hot: #ff6b6b;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 13px/1.55 ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  .wrap { max-width: none; margin: 0; padding: 18px 20px 60px; }
+  h1 { font-size: 15px; font-weight: 600; margin: 0 0 2px; letter-spacing: .02em; }
+  h1 span { color: var(--dim); font-weight: 400; }
+  .sub { color: var(--dim); margin: 0 0 16px; font-size: 12px; max-width: 120ch; }
+  a { color: var(--ok); }
+
+  .panel {
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 6px; padding: 12px 14px; margin-bottom: 14px;
+  }
+  .panel h2 {
+    font-size: 11px; text-transform: uppercase; letter-spacing: .09em;
+    color: var(--dim); margin: 0 0 10px; font-weight: 600;
+  }
+
+  .controls { display: flex; flex-wrap: wrap; gap: 18px; align-items: flex-end; }
+  .ctl { display: flex; flex-direction: column; gap: 4px; }
+  .ctl label { color: var(--dim); font-size: 11px; }
+  .ctl .val { color: var(--text); font-weight: 600; }
+  input[type=range] { width: 170px; accent-color: #f0b429; }
+  button {
+    background: #17203a; color: var(--text); border: 1px solid var(--line);
+    border-radius: 4px; font: inherit; padding: 4px 8px; cursor: pointer;
+  }
+  button:hover { background: #1f2b4a; }
+  button.on { border-color: #f0b429; color: #f0b429; }
+  .toggles { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    background: #0d1424; border: 1px solid var(--line); border-radius: 4px;
+    padding: 6px 10px; min-width: 104px;
+  }
+  .chip b { display: block; font-size: 15px; font-weight: 600; color: #fff; }
+  .chip i { font-style: normal; color: var(--dim); font-size: 10.5px;
+            text-transform: uppercase; letter-spacing: .07em; }
+
+  canvas { display: block; width: 100%; background: #080b12; border-radius: 4px; }
+  .legend { color: var(--dim); font-size: 11.5px; margin-top: 10px; max-width: 130ch; }
+  .sw { display: inline-flex; align-items: center; gap: 5px; margin-right: 14px; }
+  .sw i { width: 11px; height: 11px; border-radius: 2px; display: inline-block; }
+
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 1100px) { .cols { grid-template-columns: 1fr; } }
+
+  table { border-collapse: collapse; width: 100%; font-size: 12px; }
+  th, td { text-align: right; padding: 3px 8px; border-bottom: 1px solid #161f36; }
+  th { color: var(--dim); font-weight: 600; font-size: 10.5px;
+       text-transform: uppercase; letter-spacing: .07em; }
+  td:first-child, th:first-child { text-align: left; }
+  #status { color: var(--dim); font-size: 11.5px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>primeoire bench <span>/ instrument 3 — the dimension of a hole</span></h1>
+  <p class="sub">
+    A number is k-dimensional when it can be built as a box of k factors, each
+    at least 2, which happens exactly when it has k prime factors counted with
+    multiplicity. Primes are one-dimensional. Every hole of the tile below the
+    frontier is one-dimensional by crystallization; past it, holes come in
+    higher dimensions. This colours the tile by dimension instead of by whether
+    a hole is a slot. <a href="uniquebox.html">the unique box →</a>
+    <a href="numberline.html">the number line →</a>
+    <a href="index.html">the grain census →</a>
+  </p>
+
+  <div class="panel">
+    <div class="controls">
+      <div class="ctl">
+        <label>level <span class="val" id="levelLabel">T13</span></label>
+        <div style="display:flex; gap:6px; align-items:center">
+          <button id="lPrev">−1</button>
+          <input type="range" id="level" min="2" max="7" value="5" style="width:130px">
+          <button id="lNext">+1</button>
+        </div>
+      </div>
+      <div class="ctl">
+        <label>compare against</label>
+        <div class="toggles">
+          <button id="tAll" class="on">all integers</button>
+        </div>
+      </div>
+    </div>
+    <p class="legend" id="status" style="margin-bottom:0"></p>
+  </div>
+
+  <div class="panel">
+    <h2>readouts</h2>
+    <div class="chips" id="chips"></div>
+  </div>
+
+  <div class="cols">
+    <div class="panel">
+      <h2>dimension spectrum of the tile's holes</h2>
+      <canvas id="specHoles" height="300"></canvas>
+    </div>
+    <div class="panel">
+      <h2>dimension spectrum of all integers, for comparison</h2>
+      <canvas id="specAll" height="300"></canvas>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="legend" id="dimKey" style="margin-top:0"></div>
+    <div class="legend">
+      Both charts run over the same range, position on a log scale, and each
+      column is the share of that bin sitting at each dimension. The left chart
+      counts only the holes of the tile, the right one counts every integer.
+      The difference between them is what the sieve did. Vertical marks are the
+      ignition points: the first hole of dimension k is p_next^k exactly,
+      because every hole has all its prime factors above p.
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>a window on the tile, holes coloured by dimension</h2>
+    <canvas id="strip" height="90"></canvas>
+    <div class="controls" style="margin-top:10px">
+      <div class="ctl" style="flex:1; min-width:280px">
+        <label>window start <span class="val" id="atLabel">0</span></label>
+        <input type="range" id="at" min="0" max="1000" value="0" style="width:100%">
+      </div>
+      <div class="ctl">
+        <label>span <span class="val" id="spanLabel">2000</span></label>
+        <input type="range" id="span" min="200" max="20000" step="100" value="2000">
+      </div>
+      <div class="ctl">
+        <label>jump to</label>
+        <div class="toggles" id="ignitionJumps"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>counts by dimension</h2>
+    <table id="table"><thead><tr>
+      <th>dimension</th><th>holes</th><th>share of holes</th>
+      <th>all integers</th><th>share of all</th><th>first hole at</th>
+    </tr></thead><tbody></tbody></table>
+  </div>
+
+</div>
+<script src="kernel.js"></script>
+<script src="dimensions.js"></script>
+</body>
+</html>

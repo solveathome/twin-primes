@@ -1,0 +1,23 @@
+2069bc1d93c65aed15d3c4542a4b45374597389b 2026-08-14T11:09:17+02:00 Grain census law DERIVED and verified exactly: CRT inclusion-exclusion for every gap count
+7b33844351d44ac1a4aba7bb466b05f5a30adeb3 2026-08-14T11:08:14+02:00 beta2-note: all seven verification edits applied
+46af9880271d743a9b3bdcc6209a60b991c1f461 2026-08-14T11:03:47+02:00 DHR verification: beta2 note SURVIVES — discrepancies all absorbable
+355daf91a4c9567b15defd9c234339fe7e19a4bd 2026-08-14T10:58:50+02:00 Rich vein solved: a T11 ceiling plateau, not noise and not unique
+021df55777f475567daf21588184563d1a45fb19 2026-08-14T10:56:50+02:00 Paper I flagship v2: restructured around final vocabulary (~8000 words)
+96654dc6c53ecfdac0d2283c0a483454c5ca4204 2026-08-14T10:54:23+02:00 PROVEN: A059861's d2=d4 identity (Labos 2001, stated without proof)
+a3600e6b4617f6ce1f59b15d4583e8d183627aa9 2026-08-14T10:49:07+02:00 Official positioning: a new framework and vocabulary over classical sieve-theoretic objects — a new lens
+f5ee83e16f9b1cb92f8b8af253aaeba1532d3af4 2026-08-14T10:47:54+02:00 Paper suite architecture: four papers + OEIS micro-publications (paper/PAPERS.md)
+b097f3fe6b4375ace7ee70f8af690ffd4d021e9a 2026-08-14T10:46:41+02:00 Draft note: G2 << p^{4.267+eps} — first two-class Jacobsthal upper bound (approach, pending DHR verification)
+b0391bea8ffcdc0927d87a12823fe189d35a1e55 2026-08-14T10:41:26+02:00 Family-restricted union bound: fails 2.66x at T31; = Brun's first line; near-miss version meets the wall at the entrance (anchored window count)
+2ca17e8389ace3d98e85efa58974c0b1e3a3e32d 2026-08-14T10:23:29+02:00 Covering-systems arena encoded: house-blindness measured, Hough/FGKMT connection, the open two-class Jacobsthal as nearest unclaimed theorem
+ce992a29e6a9ba0e81d639e1c4e35585779f82e3 2026-08-14T10:21:05+02:00 T37 census verified: 217,929,355,875 over 7.42 trillion positions
+87b7754a46dbbf60d0053647f5f1180ee9a374cb 2026-08-14T10:15:31+02:00 Birth cohort closed forms: count(@p,Tx) = cohort(p)*Dx/Dp; frozen shares cohort(p)/Dp
+148eb1b434abee9b10845f2a9a8357c463fd4c0c 2026-08-14T10:13:20+02:00 Birth cohorts: exact decomposition of the census by creation fold
+cbf41797414bd753573a9c60783c7f86421a570c 2026-08-14T10:03:04+02:00 The Scour named; the Two-Moire Argument recorded
+38ca4d8b1eb9bcba97aac8a995ff5b2495ff2f02 2026-08-14T09:57:42+02:00 Name the Twin Prime Grain: the tile's gap word, G2 = the coarsest grain
+6e7788c77b13488f3f895c09584449720e7d356c 2026-08-14T09:50:54+02:00 The removal ledger: capacity exceeds census; twins survive on overlap
+aa0944d3abdfb536105d4bb7ad8a4a6ac6d22e93 2026-08-14T09:21:06+02:00 Adopt shared vocabulary: tile / fold / seam / stratum / zone / frontier / family
+7800b3e4ed4a2688309a1374bfbd852d7461910c 2026-08-14T09:16:12+02:00 Genealogy: one family tree from (5,7) mod 6; D_{n+1}=(p-2)(1 + (D_n - 1))
+be752273809369ba6fd7c789093e6776a70f76eb 2026-08-14T08:05:51+02:00 Second attack wave complete: Unification Law, Exact Invariance Lemma, seam census
+4cd80f9dd8de44bc60167bb187d032df9d779de9 2026-08-14T07:56:01+02:00 Fossil strata confirmed + Seam Lemma + second attack wave plan
+549cd5062b9c579cf2fcc75fde41a75e77ea95aa 2026-08-13T19:11:08+02:00 Deep research batch: paper draft, variance note, anchored windows, G_d map, OEIS draft
+7b59691d43216e7fc3568ca7b67bc2c3f02154f0 2026-08-13T18:53:36+02:00 Prime moiré research: proven spine, six experiments, ten wall attacks

@@ -1,0 +1,138 @@
+<canvas>
+</canvas>
+
+<style>
+	canvas {
+	  image-rendering: optimizeSpeed;,    /* Older versions of FF, */
+	  image-rendering: -moz-crisp-edges;, /* FF 6.0+,,     */
+	  image-rendering: -webkit-optimize-contrast; /* Safari,,      */
+	  image-rendering: -o-crisp-edges;,   /* OS X & Windows Opera (12.02+) */
+	  image-rendering: pixelated;,,/* Awesome future-browsers,*/
+	  -ms-interpolation-mode: nearest-neighbor;   /* IE,,, */
+	}
+</style>
+
+<script>
+
+
+	var size = 2000
+
+
+	var cnv = document.getElementsByTagName("canvas")[0];
+	cnv.width = cnv.height = size
+
+	cnv.style.width = cnv.style.height = (size*3) + "px"
+
+	var ctx = cnv.getContext("2d")
+
+
+	function factor(number){
+		var sqrt = Math.sqrt(number)
+
+		//The square root is a factor of the number.
+
+		var width = sqrt>>0
+		if(width == sqrt){ 
+			console.log("Found sqrt", sqrt)
+			return sqrt
+		};
+
+		if(number%2==0){
+			console.log("Found 2", 2)
+			return 2
+		}
+
+		var height = number/width>>0
+		var mod = number%height
+
+		var steps = 0;
+
+
+		function draw(){
+			//ctx.fillRect(steps,0,1,mod)
+			ctx.clearRect(0, 0, size, size);
+
+
+/*			ctx.fillRect(0,0,width,height)
+			ctx.fillRect(width+1,0,1,mod)*/
+
+			ctx.fillRect(0,0,width,mod)
+			ctx.fillRect(0,mod+1,width,height-mod)
+			ctx.fillRect(width+1,0,1,mod)
+
+		}
+
+		function step(sets){
+
+			/*if(mod != 1){
+				var square1 = (height-mod)*width
+				if( square1%mod == 0){
+
+					console.log("Square 1 Quick exit at", width,height,mod)
+					sets = height-mod
+				}
+			}*/
+			height -= sets
+			mod += width*sets
+			width += Math.floor(mod/height)
+			mod %= height
+			steps++	
+
+		}
+
+		//We have alined with a sqare that is an equal number.
+		if(height%2==0){
+			step(1)
+		}
+
+		//while(mod != 0){step(2)}
+		document.body.onmousedown = function(){
+			if(mod != 0){
+				step(2)
+			}else{
+				console.log("We are already done")
+			}
+			
+			draw()
+			console.log("width", width, "height", height, "left", mod, "steps:", steps, "SQRT:", sqrt)
+
+			var square1 = (height-mod)*width
+			console.log(">>",square1)
+
+			//console.log(number, width*height+mod)
+
+		}	
+
+		draw()
+
+
+
+/*		while(mod != 0){
+
+			console.log(mod)
+		}*/
+
+
+		console.log("width", width, "height", height, "left", mod, "steps:", steps, "SQRT:", sqrt)
+		var square1 = (height-mod)*width
+		console.log(">>",square1)
+
+	}
+
+	factor(19*61)
+
+	/*var primes = [2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97,101,103,107,109,113,127,131,137,139,149,151,157,163,167,173 ,179,181,191,193,197,199,211,223 ,227,229,233,239,241,251,257,263 ,269,271,277,281,283,293,307,311 ,313,317,331,337,347,349,353,359 ,367,373,379,383,389,397,401,409 ,419,421,431,433,439,443,449,457 ,461,463,467,479,487,491,499,503 ,509,521,523,541,547,557,563,569 ,571,577,587,593,599,601,607,613 ,617,619,631,641,643,647,653,659 ,661,673,677,683,691,701,709,719 ,727,733,739,743,751,757,761,769 ,773,787,797,809,811,821,823,827]
+
+	var p1 = primes[primes.length*Math.random()>>0];
+	var p2 = primes[primes.length*Math.random()>>0];*/
+
+//	console.log(p1,p2)
+	//factor(8051)
+
+	//otherFactor(9007199254740992)
+	
+
+	//1522605027922533360535618378132637429718068114961380688657908494580122963258952897654000350692006139
+
+
+</script>

@@ -1,0 +1,72 @@
+<style>
+	canvas {
+	  image-rendering: optimizeSpeed;    /* Older versions of FF, */
+	  image-rendering: -moz-crisp-edges; /* FF 6.0+,,     */
+	  image-rendering: -webkit-optimize-contrast; /* Safari,,      */
+	  image-rendering: -o-crisp-edges;   /* OS X & Windows Opera (12.02+) */
+	  image-rendering: pixelated;/* Awesome future-browsers,*/
+	  -ms-interpolation-mode: nearest-neighbor;   /* IE,,, */
+	}
+	body{
+		background: #bbbbbb;
+	}
+</style>
+
+<body>
+	<canvas>
+	</canvas>
+</body>
+
+<script>
+
+
+	var size = 2000
+
+
+	var cnv = document.getElementsByTagName("canvas")[0];
+	cnv.width = cnv.height = size
+	cnv.style.width = cnv.style.height = (size*5) + "px"
+
+	var ctx = cnv.getContext("2d")
+
+	function isCubePrime(n) {
+		var max = Math.sqrt(n)
+		for( var a=2;a<max;a++){
+			for(var b=a;b<max;b++){
+
+				var set = (n/a)/b
+
+				if(set == Math.floor(set)) {
+					
+				//	console.log(n,a,b,set)
+					
+					return false
+
+
+				}
+			}
+		}
+		return true;
+	}
+
+	
+	console.log(isCubePrime(31))
+
+	var size = 100;
+	for( var a=0;a<size*size;a++){
+
+		
+		ctx.fillStyle = isCubePrime(a) ? "#000000" : "#ffffff";
+
+		var x = a%size
+		var y = a/size>>0
+
+		ctx.fillRect(x, y, 1, 1);
+
+	}
+
+
+	
+
+
+</script>

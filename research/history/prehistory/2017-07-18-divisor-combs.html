@@ -1,0 +1,55 @@
+<canvas width="1000" height="1000" id="canvas" style="border:1px solid red"></canvas>
+ 
+<script>
+	var canvas = document.getElementById('canvas')
+	var ctx = canvas.getContext('2d')
+
+	function isPrime(value) {
+	    for(var i = 2; i < value; i++) {
+	        if(value % i === 0) {
+	            return false;
+	        }
+	    }
+	    return value > 1;
+	}
+
+	var deviders = [];
+
+	for( var a=1;a<=7;a++){
+		//if(isPrime(a)){
+
+			for( var b=a;b<1000;b+=a){
+
+
+
+
+				if(deviders[b] === undefined){
+					deviders[b] = 0
+				}
+
+
+
+
+				deviders[b] ++
+			}
+		//}
+	}
+
+
+	ctx.fillStyle = "#000000"
+
+
+	var multiplier = 3
+
+	for( var a=0;a<deviders.length;a++){
+		var count = deviders[a]
+
+
+		ctx.fillRect(a*multiplier,0,1*multiplier,count*multiplier);
+
+
+
+	}
+
+
+</script>

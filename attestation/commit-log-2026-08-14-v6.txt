@@ -1,0 +1,90 @@
+a677ca2 TODO pruned: item 2 resolved into 8; item 5 = fold beta(31)/z(31) into anchored note; stale in-flight notes cleared
+c4261bd TODO: wave-5 successors (skeleton<1/2, wrap identity, Buchstab transfer, E_med(31) test)
+7ce9d01 Wave 5: analytic certificate — Legendre-comb head theorem; deviation is Buchstab (all-orders, pair-resummation refuted), collapse 3.4->0.2%; deep predictions to @97
+4b015f2 Wave 5: the -1/2 is EXACT (comb kills lags h=1..5, C(qh)=0) — not a limit; deviation = 30-skeleton discrepancy; 4 exceptions = multi-prime resonances
+65cb9c0 Wave 5: sigma-plateau DERIVED exact (P via Parseval/j^2 closed form); level law R -> 3 per fold; E_med(31)=54.98 on record
+99771cc Wave 5: T4 @13 exact (39.8e9 quadruples) — P(S=0) <= 1.898e-6, x513 beyond Chebyshev at a non-capacity level; kurtosis 2.9999
+9ff145b TODO: Cov_adj resolved -> the -1/2 equidistribution theorem
+6653bd0 Wave 4: Cov_adj — uniform claim FALSE (4 weak exceptions/599); aggregate -0.4 certified exact; mechanism = cos(2pik/q) equidistribution mean -1/2; 5 lemmas proven
+f396691 TODO: @31 done -> @37 drift point with forecasts on record
+e7e23ab Wave 4: beta(31)=0.8626 (eighth point, 132s CRT-30 engine) — classical residuals collapse 3rd time (+0.0016); limit e^2g/4 strengthening; pinned dead
+0bd9a12 TODO: excess law derived; successor = sigma-plateau spectral derivation
+7c313bc Wave 4: window-excess law DERIVED — E = 0.97*sigma*sqrt(2ln(W/l)); field hyperuniform (sigma l-flat); drift parameter-free incl the x1.56 drop
+2639942 TODO: bound(K) priced; successor = closed-form cap2 + correlation constant
+d22d071 Wave 4: bound(K) curve @23 — NO efficiency collapse (fixed relative depth improves with level); Mertens closed form within 4%; cap_full = fresh - self + s exact
+d3ed8e5 TODO + CHRONICLE: waves 2-3 complete (14 artifacts); overnight queue defined
+f8c8d41 Wave 3: FIRST beyond-Chebyshev ensemble theorem — @11 P(S=0) <= 1.49e-6 (4190x beat) via exact moment ladder; @11 P(S=0)=0 exactly (capacity); C1=2-2.9 flat
+6d74afc Anchored note: fold in @23/@29 measurements (z to -762.1; beta(29)=0.8752; pinned-linear dead, classical correction winning)
+27bae98 TODO: calm mechanism found (fusion); item 4 -> prove Cov_adj < 0
+685d5a1 Wave 3: Fused-Window Calm Lemma — anchor fuses windows (proven), W/2 duplicates (proven loud); fusion predicts calm within 7%; @19 rank 14/9.7M
+390c51d TODO: variance item -> 0.44-vs-0.61 split; anchored z now -762 at @29
+c22b9ca Wave 3: fast variance — exact product-sieve to x=31; Var(full period)=0 proven (BigInt); Var/E 0.152->0.388, limit ~0.44 vs 0.61 unsplit
+81bf195 TODO: @29 done -> @31 drift point; window-excess items merged into drift-law derivation
+662e005 Wave 3: @29 triple-decider — K*(29)=69 (phi-band law confirmed, K* sub-linear); S/E=0.8752 (limit e^2g/4 strengthened, pinned-linear dead); E_med=36.24 (multiplier drifts)
+f138136 TODO: certificate item resolved to the bound(K) depth curve
+f751506 Wave 3: head certificate — composed form dies on tail; hybrid floors 39/238/2227/25978 (best elementary); 99.9% of gain = ladder depth, head-exactness worthless
+fbdca46 TODO: zone-share thread closed; successor = derive the 1.81 extremal constant
+7761492 Wave 3: zone-share expansion DERIVED exactly — a_j=(j+1)!/2^j (1, 3/2, 3, ...); out-of-sample p=200003 hits to 2e-5; thread closed
+9c1381b TODO: anchored formalization done (item 7 -> Chris's read)
+5626dc1 Wave 3: anchored-note.md — beta(x) positivity = the whole conjecture (conditional theorem); anchored escape + calm formalized
+e7187ca TODO: items 2+6 resolved into successors (per-pair residual cap; beyond-Chebyshev theorem)
+2987f2c Wave 2: overlap sign REFUTED -> Structured-Bias Theorem (S2 formula-priceable); discrepancy lemma priced (Freedman chain, l2 ceiling e^-69, linf hinge C<=7.34)
+b1aa7f3 TODO: anchored calm sharpened to the dev(0,q) suppression lemma
+dda0d56 Wave 2: anchored calm = ONE anomaly (per-prime variance, rank 2/510510 @17), not four; house-split + overlap sightings dissolved; W/2 loudest
+d12c305 TODO: K*(23)+drift done; item 1 becomes the @29 double-decider
+abc211f Wave 2: K*(23)=27 — K* LINEAR in scour length (not explosive); phi-band law; anchored ratio 0.8930 (6th point, 1/lnW decay)
+37d65c0 TODO: items 10/11 attempted, replaced by their successors (@29 discriminator; third-order zone term)
+d348a80 Wave 2: cheap laws pack (window-excess x1.81/level over 6 levels; zone share to p=1e5, 1/ln decay, e^2g/4-consistent)
+ddb6111 TODO: staircase write-up done, item becomes Chris's read + Lemma 5 check
+6b576b7 Staircase note: print-grade draft (wave 2 item 3) + style pass per writing-style-math.md
+f898205 Math edition of the style guide (paper/writing-style-math.md); PAPERS.md points at it
+75a0418 Style ruling: math papers use authorial we + keep technical terms; guide's anti-tell rules still apply
+9fbb69f Adopt Chris's writing style guide for all paper prose (pointer in PAPERS.md)
+23425ef Record fixes (TODO item 12): attack-04 certificate flag, CHRONICLE evening entry + refutation ledger, paper §8 refresh (G2(37#), solved questions, anchored calm); TODO pruned
+94bc103 Backup policy: raw body of work only, never recursive (Chris) — recipe in attestation/README
+0b8b615 TODO: prune completed ots-upgrade item; note v5 upgrade pending + v6 ritual
+b3c49e5 Attestation ritual fix: v6+ archives exclude attestation/ (stop the snapshot snowball)
+4453cd5 Attestation v5 (post natal-cap campaign, HEAD 07220a9) + all prior OTS proofs upgraded to Bitcoin-anchored
+07220a9 TODO.md exhaustive: swept memory, papers, covering-dive, ATTACKS, campaign next-steps into forward-only list
+85db061 TODO.md: forward-only shared list (charter: what to try, never what we tried)
+12e6186 Natal-cap campaign: ten attacks on per-prime removal limits + synthesis (staircase theorem, BDH identity, Mertens/parity pricing, anchored calm)
+754cd28 Natal@5 variance: exact J5 pair-correlation, almost-all bound, anchored z-drift measured
+1ca7eaf Natal@5 Scour march on the 17-tile (cumulative, per prime) + txt report
+f3c0228 Adopt terminology: Natal set @p (+ carried set, eternal edge)
+672103d Self-strike = twin prime FOUND, not a kill (Chris; proven, verified all levels)
+a1f6db9 Scour into fixed tile: the p-squared rule from the kill direction
+c1bc52f Rankin readings: define COVERED/SURVIVOR precisely; 'survivor-free' not 'twin-free'
+e6a6665 Glossary: G2 sequence extended to 12 terms (T37=528)
+2edb93f G2(37#) = 528: twelfth term (7.42e12 positions, slot count exact)
+232311f Attestation v4: first fully-verified-theorem state stamped
+09ebe1f beta2-note: FULLY VERIFIED — Definition 1.3 (Omega(kappa)) captured, ZERO open items
+12add5e Attestation v3: theorem-verified state stamped (OTS)
+5bcd9d3 beta2-note: FULLY source-verified — beta_2=4.266 read from the book (p.79)
+760aba5 beta2-note: Theorem 9.1 VERIFIED against the primary source
+c545e4d Authorship decided: sole author Chris; AI-assisted research disclosure adopted (statement in PAPERS.md)
+c290454 Attestation v2: consolidated deep-encode state stamped
+b993f12 Deep encode: root README (map + status + moratorium) and the Chronicle
+fa53ff7 Attestation: OpenTimestamps proof-of-existence for the 2026-08-14 body of work
+2069bc1 Grain census law DERIVED and verified exactly: CRT inclusion-exclusion for every gap count
+7b33844 beta2-note: all seven verification edits applied
+46af988 DHR verification: beta2 note SURVIVES — discrepancies all absorbable
+355daf9 Rich vein solved: a T11 ceiling plateau, not noise and not unique
+021df55 Paper I flagship v2: restructured around final vocabulary (~8000 words)
+96654dc PROVEN: A059861's d2=d4 identity (Labos 2001, stated without proof)
+a3600e6 Official positioning: a new framework and vocabulary over classical sieve-theoretic objects — a new lens
+f5ee83e Paper suite architecture: four papers + OEIS micro-publications (paper/PAPERS.md)
+b097f3f Draft note: G2 << p^{4.267+eps} — first two-class Jacobsthal upper bound (approach, pending DHR verification)
+b0391be Family-restricted union bound: fails 2.66x at T31; = Brun's first line; near-miss version meets the wall at the entrance (anchored window count)
+2ca17e8 Covering-systems arena encoded: house-blindness measured, Hough/FGKMT connection, the open two-class Jacobsthal as nearest unclaimed theorem
+ce992a2 T37 census verified: 217,929,355,875 over 7.42 trillion positions
+87b7754 Birth cohort closed forms: count(@p,Tx) = cohort(p)*Dx/Dp; frozen shares cohort(p)/Dp
+148eb1b Birth cohorts: exact decomposition of the census by creation fold
+cbf4179 The Scour named; the Two-Moire Argument recorded
+38ca4d8 Name the Twin Prime Grain: the tile's gap word, G2 = the coarsest grain
+6e7788c The removal ledger: capacity exceeds census; twins survive on overlap
+aa0944d Adopt shared vocabulary: tile / fold / seam / stratum / zone / frontier / family
+7800b3e Genealogy: one family tree from (5,7) mod 6; D_{n+1}=(p-2)(1 + (D_n - 1))
+be75227 Second attack wave complete: Unification Law, Exact Invariance Lemma, seam census
+4cd80f9 Fossil strata confirmed + Seam Lemma + second attack wave plan
+549cd50 Deep research batch: paper draft, variance note, anchored windows, G_d map, OEIS draft
+7b59691 Prime moiré research: proven spine, six experiments, ten wall attacks

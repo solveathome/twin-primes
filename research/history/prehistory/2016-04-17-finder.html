@@ -1,0 +1,96 @@
+
+<style>
+	body{
+		background: #444444
+	}
+	canvas{
+		background: #000000
+	}
+</style>
+<canvas id="canvas"></canvas>
+<script>
+
+	var canvas = document.getElementById("canvas")
+	canvas.width = 1024;
+	canvas.height = 1024
+
+	var ctx = canvas.getContext("2d")
+
+	function isPrime(num){
+		if(num == 1) return false
+		var sqrt = Math.sqrt(num)
+		for( var a=2;a<=sqrt;a++){
+			//console.log(">>",num/a,sqrt,a)
+			if(num/a == num/a>>0){
+				return false
+			}
+		}
+		return true
+	}
+
+
+	var levels = [
+		[1]
+	]
+
+
+	for( var a=1;a<10;a++){
+		var arr = levels[a] = []
+		var bwidth = Math.pow(2,a)
+		for( var b=0;b<bwidth;b++){	
+			arr.push(b%2)
+		}
+	}
+
+
+
+
+	rows = [1,0,1,0]
+
+
+	function draw(offsetY){
+		var rows = levels[offsetY]
+
+
+		var width = 1024/rows.length
+		rows.forEach(function(n,i){
+
+
+			var bin = []
+			var ti = i
+			for( var a=0;a<offsetY;a++){
+				bin.push(levels[offsetY-a][ti])
+				ti = ti/2>>0
+			}
+			bin.push(1)
+			bin.reverse()
+			
+			var value = parseInt(bin.join(""),2)
+
+			//console.log(value,isPrime(value))
+
+			if(isPrime(value)){
+				ctx.fillStyle = "#ff0000"
+				ctx.fillRect(i*2,offsetY*33,1,32)
+			}
+		})
+	
+	}
+
+
+	for( var a=0;a<levels.length;a++){
+		draw(a)
+
+	}
+
+
+
+
+
+
+
+
+
+</script>
+
+

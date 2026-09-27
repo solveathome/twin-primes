@@ -1,0 +1,654 @@
+{
+  "schema": 1,
+  "scope": "Finite identities and rational diagnostics only. The full moment is proved separately in grouped-divisor-moment.md; the global twin margin remains OPEN.",
+  "phaseChecks": 177600,
+  "collisionChecks": 20736,
+  "gcdChecks": 41020,
+  "signChecks": 529,
+  "originalSignChecks": 3328,
+  "gcdAverageChecks": 960,
+  "controls": {
+    "wrongProductModulus": 67742,
+    "missingTheta": 87428,
+    "nonsquarefreeSign": 165
+  },
+  "energyRows": [
+    {
+      "N": 2,
+      "A": 1,
+      "energy": 2,
+      "parametrized": 2,
+      "largeGcdChecks": 1,
+      "bound": 24
+    },
+    {
+      "N": 2,
+      "A": 3,
+      "energy": 6,
+      "parametrized": 6,
+      "largeGcdChecks": 1,
+      "bound": 99.99999999999999
+    },
+    {
+      "N": 2,
+      "A": 7,
+      "energy": 16,
+      "parametrized": 16,
+      "largeGcdChecks": 3,
+      "bound": 233.33333333333331
+    },
+    {
+      "N": 2,
+      "A": 16,
+      "energy": 38,
+      "parametrized": 38,
+      "largeGcdChecks": 3,
+      "bound": 533.3333333333333
+    },
+    {
+      "N": 2,
+      "A": 50,
+      "energy": 118,
+      "parametrized": 118,
+      "largeGcdChecks": 3,
+      "bound": 1666.6666666666665
+    },
+    {
+      "N": 5,
+      "A": 1,
+      "energy": 5,
+      "parametrized": 5,
+      "largeGcdChecks": 1,
+      "bound": 60
+    },
+    {
+      "N": 5,
+      "A": 3,
+      "energy": 19,
+      "parametrized": 19,
+      "largeGcdChecks": 5,
+      "bound": 293.99999999999994
+    },
+    {
+      "N": 5,
+      "A": 7,
+      "energy": 47,
+      "parametrized": 47,
+      "largeGcdChecks": 13,
+      "bound": 820.1111111111111
+    },
+    {
+      "N": 5,
+      "A": 16,
+      "energy": 114,
+      "parametrized": 114,
+      "largeGcdChecks": 21,
+      "bound": 1874.5396825396824
+    },
+    {
+      "N": 5,
+      "A": 50,
+      "energy": 364,
+      "parametrized": 364,
+      "largeGcdChecks": 21,
+      "bound": 5857.936507936508
+    },
+    {
+      "N": 10,
+      "A": 1,
+      "energy": 10,
+      "parametrized": 10,
+      "largeGcdChecks": 1,
+      "bound": 120
+    },
+    {
+      "N": 10,
+      "A": 3,
+      "energy": 38,
+      "parametrized": 38,
+      "largeGcdChecks": 7,
+      "bound": 587.9999999999999
+    },
+    {
+      "N": 10,
+      "A": 7,
+      "energy": 98,
+      "parametrized": 98,
+      "largeGcdChecks": 25,
+      "bound": 1820.874902874903
+    },
+    {
+      "N": 10,
+      "A": 16,
+      "energy": 240,
+      "parametrized": 240,
+      "largeGcdChecks": 55,
+      "bound": 4605.106761143913
+    },
+    {
+      "N": 10,
+      "A": 50,
+      "energy": 808,
+      "parametrized": 808,
+      "largeGcdChecks": 87,
+      "bound": 14390.958628574728
+    },
+    {
+      "N": 20,
+      "A": 1,
+      "energy": 20,
+      "parametrized": 20,
+      "largeGcdChecks": 1,
+      "bound": 240
+    },
+    {
+      "N": 20,
+      "A": 3,
+      "energy": 76,
+      "parametrized": 76,
+      "largeGcdChecks": 7,
+      "bound": 1175.9999999999998
+    },
+    {
+      "N": 20,
+      "A": 7,
+      "energy": 206,
+      "parametrized": 206,
+      "largeGcdChecks": 39,
+      "bound": 3641.749805749806
+    },
+    {
+      "N": 20,
+      "A": 16,
+      "energy": 558,
+      "parametrized": 558,
+      "largeGcdChecks": 155,
+      "bound": 10389.747700317492
+    },
+    {
+      "N": 20,
+      "A": 50,
+      "energy": 1794,
+      "parametrized": 1794,
+      "largeGcdChecks": 299,
+      "bound": 34228.344311491004
+    },
+    {
+      "N": 40,
+      "A": 1,
+      "energy": 40,
+      "parametrized": 40,
+      "largeGcdChecks": 1,
+      "bound": 480
+    },
+    {
+      "N": 40,
+      "A": 3,
+      "energy": 154,
+      "parametrized": 154,
+      "largeGcdChecks": 7,
+      "bound": 2351.9999999999995
+    },
+    {
+      "N": 40,
+      "A": 7,
+      "energy": 414,
+      "parametrized": 414,
+      "largeGcdChecks": 43,
+      "bound": 7283.499611499612
+    },
+    {
+      "N": 40,
+      "A": 16,
+      "energy": 1080,
+      "parametrized": 1080,
+      "largeGcdChecks": 191,
+      "bound": 20779.495400634984
+    },
+    {
+      "N": 40,
+      "A": 50,
+      "energy": 4020,
+      "parametrized": 4020,
+      "largeGcdChecks": 959,
+      "bound": 79447.66846312827
+    }
+  ],
+  "fourierRows": [
+    {
+      "u": 1,
+      "v": 1,
+      "g": 1,
+      "h1": 3,
+      "h2": 5,
+      "c": "1",
+      "r": "4"
+    },
+    {
+      "u": 1,
+      "v": 1,
+      "g": 1,
+      "h1": 1,
+      "h2": 2,
+      "c": "1",
+      "r": "2"
+    },
+    {
+      "u": 1,
+      "v": 1,
+      "g": 1,
+      "h1": 7,
+      "h2": 11,
+      "c": "1",
+      "r": "8"
+    },
+    {
+      "u": 1,
+      "v": 1,
+      "g": 2,
+      "h1": 3,
+      "h2": 5,
+      "c": "1",
+      "r": "2"
+    },
+    {
+      "u": 1,
+      "v": 1,
+      "g": 2,
+      "h1": 1,
+      "h2": 2,
+      "c": "1",
+      "r": "1"
+    },
+    {
+      "u": 1,
+      "v": 1,
+      "g": 2,
+      "h1": 7,
+      "h2": 11,
+      "c": "1",
+      "r": "4"
+    },
+    {
+      "u": 6,
+      "v": 10,
+      "g": 1,
+      "h1": 3,
+      "h2": 5,
+      "c": "30",
+      "r": "0"
+    },
+    {
+      "u": 6,
+      "v": 10,
+      "g": 1,
+      "h1": 1,
+      "h2": 2,
+      "c": "30",
+      "r": "2"
+    },
+    {
+      "u": 6,
+      "v": 10,
+      "g": 1,
+      "h1": 7,
+      "h2": 11,
+      "c": "30",
+      "r": "-4"
+    },
+    {
+      "u": 6,
+      "v": 10,
+      "g": 2,
+      "h1": 3,
+      "h2": 5,
+      "c": "30",
+      "r": "0"
+    },
+    {
+      "u": 6,
+      "v": 10,
+      "g": 2,
+      "h1": 1,
+      "h2": 2,
+      "c": "30",
+      "r": "1"
+    },
+    {
+      "u": 6,
+      "v": 10,
+      "g": 2,
+      "h1": 7,
+      "h2": 11,
+      "c": "30",
+      "r": "-2"
+    },
+    {
+      "u": 12,
+      "v": 18,
+      "g": 1,
+      "h1": 3,
+      "h2": 5,
+      "c": "36",
+      "r": "2"
+    },
+    {
+      "u": 12,
+      "v": 18,
+      "g": 1,
+      "h1": 1,
+      "h2": 2,
+      "c": "36",
+      "r": "2"
+    },
+    {
+      "u": 12,
+      "v": 18,
+      "g": 1,
+      "h1": 7,
+      "h2": 11,
+      "c": "36",
+      "r": "2"
+    },
+    {
+      "u": 12,
+      "v": 18,
+      "g": 2,
+      "h1": 3,
+      "h2": 5,
+      "c": "36",
+      "r": "1"
+    },
+    {
+      "u": 12,
+      "v": 18,
+      "g": 2,
+      "h1": 1,
+      "h2": 2,
+      "c": "36",
+      "r": "1"
+    },
+    {
+      "u": 12,
+      "v": 18,
+      "g": 2,
+      "h1": 7,
+      "h2": 11,
+      "c": "36",
+      "r": "1"
+    },
+    {
+      "u": 8,
+      "v": 20,
+      "g": 1,
+      "h1": 3,
+      "h2": 5,
+      "c": "40",
+      "r": "-10"
+    },
+    {
+      "u": 8,
+      "v": 20,
+      "g": 1,
+      "h1": 1,
+      "h2": 2,
+      "c": "40",
+      "r": "-2"
+    },
+    {
+      "u": 8,
+      "v": 20,
+      "g": 1,
+      "h1": 7,
+      "h2": 11,
+      "c": "40",
+      "r": "-26"
+    },
+    {
+      "u": 8,
+      "v": 20,
+      "g": 2,
+      "h1": 3,
+      "h2": 5,
+      "c": "40",
+      "r": "-5"
+    },
+    {
+      "u": 8,
+      "v": 20,
+      "g": 2,
+      "h1": 1,
+      "h2": 2,
+      "c": "40",
+      "r": "-1"
+    },
+    {
+      "u": 8,
+      "v": 20,
+      "g": 2,
+      "h1": 7,
+      "h2": 11,
+      "c": "40",
+      "r": "-13"
+    },
+    {
+      "u": 15,
+      "v": 21,
+      "g": 1,
+      "h1": 3,
+      "h2": 5,
+      "c": "105",
+      "r": "8"
+    },
+    {
+      "u": 15,
+      "v": 21,
+      "g": 1,
+      "h1": 1,
+      "h2": 2,
+      "c": "105",
+      "r": "6"
+    },
+    {
+      "u": 15,
+      "v": 21,
+      "g": 1,
+      "h1": 7,
+      "h2": 11,
+      "c": "105",
+      "r": "12"
+    },
+    {
+      "u": 15,
+      "v": 21,
+      "g": 2,
+      "h1": 3,
+      "h2": 5,
+      "c": "105",
+      "r": "4"
+    },
+    {
+      "u": 15,
+      "v": 21,
+      "g": 2,
+      "h1": 1,
+      "h2": 2,
+      "c": "105",
+      "r": "3"
+    },
+    {
+      "u": 15,
+      "v": 21,
+      "g": 2,
+      "h1": 7,
+      "h2": 11,
+      "c": "105",
+      "r": "6"
+    },
+    {
+      "u": 9,
+      "v": 27,
+      "g": 1,
+      "h1": 3,
+      "h2": 5,
+      "c": "27",
+      "r": "-8"
+    },
+    {
+      "u": 9,
+      "v": 27,
+      "g": 1,
+      "h1": 1,
+      "h2": 2,
+      "c": "27",
+      "r": "-2"
+    },
+    {
+      "u": 9,
+      "v": 27,
+      "g": 1,
+      "h1": 7,
+      "h2": 11,
+      "c": "27",
+      "r": "-20"
+    },
+    {
+      "u": 9,
+      "v": 27,
+      "g": 2,
+      "h1": 3,
+      "h2": 5,
+      "c": "27",
+      "r": "-4"
+    },
+    {
+      "u": 9,
+      "v": 27,
+      "g": 2,
+      "h1": 1,
+      "h2": 2,
+      "c": "27",
+      "r": "-1"
+    },
+    {
+      "u": 9,
+      "v": 27,
+      "g": 2,
+      "h1": 7,
+      "h2": 11,
+      "c": "27",
+      "r": "-10"
+    },
+    {
+      "u": 5,
+      "v": 7,
+      "g": 1,
+      "h1": 3,
+      "h2": 5,
+      "c": "35",
+      "r": "8"
+    },
+    {
+      "u": 5,
+      "v": 7,
+      "g": 1,
+      "h1": 1,
+      "h2": 2,
+      "c": "35",
+      "r": "6"
+    },
+    {
+      "u": 5,
+      "v": 7,
+      "g": 1,
+      "h1": 7,
+      "h2": 11,
+      "c": "35",
+      "r": "12"
+    },
+    {
+      "u": 5,
+      "v": 7,
+      "g": 2,
+      "h1": 3,
+      "h2": 5,
+      "c": "35",
+      "r": "4"
+    },
+    {
+      "u": 5,
+      "v": 7,
+      "g": 2,
+      "h1": 1,
+      "h2": 2,
+      "c": "35",
+      "r": "3"
+    },
+    {
+      "u": 5,
+      "v": 7,
+      "g": 2,
+      "h1": 7,
+      "h2": 11,
+      "c": "35",
+      "r": "6"
+    }
+  ],
+  "spectralRows": [
+    {
+      "commonFactorExponent": "0/1",
+      "L": "9/20",
+      "H": "9/100",
+      "generic": "9/25",
+      "structured": "9/25",
+      "extra": "0/1"
+    },
+    {
+      "commonFactorExponent": "1/10",
+      "L": "7/20",
+      "H": "9/100",
+      "generic": "13/50",
+      "structured": "13/50",
+      "extra": "0/1"
+    },
+    {
+      "commonFactorExponent": "27/100",
+      "L": "9/50",
+      "H": "9/100",
+      "generic": "9/100",
+      "structured": "9/100",
+      "extra": "0/1"
+    },
+    {
+      "commonFactorExponent": "3/10",
+      "L": "3/20",
+      "H": "9/100",
+      "generic": "3/50",
+      "structured": "9/100",
+      "extra": "3/100"
+    },
+    {
+      "commonFactorExponent": "9/25",
+      "L": "9/100",
+      "H": "9/100",
+      "generic": "0/1",
+      "structured": "9/100",
+      "extra": "9/100"
+    },
+    {
+      "commonFactorExponent": "2/5",
+      "L": "1/20",
+      "H": "9/100",
+      "generic": "0/1",
+      "structured": "9/100",
+      "extra": "9/100"
+    }
+  ],
+  "conditionalBudgets": [
+    "41/50",
+    "199/200",
+    "16/25"
+  ],
+  "hypotheticalSaving": "9/320",
+  "oldDeficit": "1/25"
+}

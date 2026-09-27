@@ -1,0 +1,212 @@
+==============================================================================
+  ATTACK D — TWO-POINT DATA AGAINST DP1: sharp Boole-Frechet certificates
+  2026-08-19, 6-lattice, sieve form of {0,-2}
+==============================================================================
+
+--- A. THE OBJECT AND THE UNITS (slots, never integers) ---
+  x |    M = x#/6 |  survivors |    d     | maxgap slots | 6*maxgap | G2(x#) | ok
+   5 |           5 |          3 | 0.600000 |            2 |       12 |     12 | yes
+   7 |          35 |         15 | 0.428571 |            5 |       30 |     30 | yes
+  11 |         385 |        135 | 0.350649 |            7 |       42 |     42 | yes
+  13 |        5005 |       1485 | 0.296703 |           11 |       66 |     66 | yes
+  17 |       85085 |      22275 | 0.261797 |           18 |      108 |    108 | yes
+  19 |     1616615 |     378675 | 0.234239 |           25 |      150 |    150 | yes
+  23 |    37182145 |    7952175 | 0.213871 |           34 |      204 |    204 | yes
+  A window of L slots is empty iff it fits inside a gap, so L slots is
+  gap-free for every position iff L >= maxgap, and L_crit = G2(x#)/6 EXACTLY.
+
+--- B. WHAT THE CERTIFICATE CONSUMES: S_1 and S_2 against direct counts ---
+  x |  L |     S_1 = L*#surv     |  S_2 (from X_a)  |  sum_d (L-d) N_2(d)  | match
+   5 |  2 |                     6 |                1 |                    1 | yes
+   7 |  5 |                    75 |               51 |                   51 | yes
+  11 |  7 |                   945 |              835 |                  835 | yes
+  13 | 11 |                 16335 |            21752 |                21752 | yes
+  S_1 = L * (#survivors) and S_2 = sum_d (L-d) N_2(d): degree-2 data is
+  the one-point count plus the pair-correlation function and NOTHING else,
+  neither of which is a function of the divisor-class vector (|A_d|). The
+  certificate therefore lives strictly outside DP1.
+
+--- C. CLAIM (i): the true threshold degree against max_r X_r ---
+  First: is the attained set {X_a} an integer interval? Sliding by one slot
+  changes X by at most 1, so it must be. Checked over every L below.
+
+  x |  L | Xmin | Xmax | |S| | k* (sharp LP) | claim (i) says | agree
+   5 |  2 |    1 |    2 |   2 |             2 |              2 | yes
+   5 |  4 |    2 |    3 |   2 |             2 |              3 | NO
+   7 |  5 |    1 |    3 |   3 |             4 |              3 | NO
+   7 | 10 |    2 |    6 |   5 |             4 |              6 | NO
+   7 | 20 |    6 |   11 |   6 |             2 |             11 | NO
+  11 |  7 |    1 |    5 |   5 |             5 |              5 | yes
+  11 | 14 |    2 |    7 |   6 |             5 |              7 | NO
+  11 | 28 |    7 |   12 |   6 |             4 |             12 | NO
+  13 | 11 |    1 |    7 |   7 |             8 |              7 | NO
+  13 | 22 |    2 |   10 |   9 |             6 |             10 | NO
+  13 | 44 |    9 |   17 |   9 |             4 |             17 | NO
+  17 | 18 |    1 |    9 |   9 |            10 |              9 | NO
+  17 | 36 |    5 |   14 |  10 |             8 |             14 | NO
+  17 | 72 |   12 |   25 |  14 |             6 |             25 | NO
+  attained set was an integer interval in every row: yes
+
+  The closed form the LP is reproducing: k* = |S| rounded UP TO EVEN,
+  |S| = Xmax - Xmin + 1.  P(z) = prod_{v in S}(z-v) / prod_{v in S}(-v) is
+  admissible exactly when |S| is even (else its sign is wrong past Xmax),
+  and no polynomial of degree < |S| can vanish on |S| points.
+  x |  L | |S| | |S| rounded even | k* measured | agree
+   5 |  2 |   2 |                2 |           2 | yes
+   5 |  4 |   2 |                2 |           2 | yes
+   7 |  5 |   3 |                4 |           4 | yes
+   7 | 10 |   5 |                6 |           4 | NO
+   7 | 20 |   6 |                6 |           2 | NO
+  11 |  7 |   5 |                6 |           5 | NO
+  11 | 14 |   6 |                6 |           5 | NO
+  11 | 28 |   6 |                6 |           4 | NO
+  13 | 11 |   7 |                8 |           8 | yes
+  13 | 22 |   9 |               10 |           6 | NO
+  13 | 44 |   9 |               10 |           4 | NO
+  17 | 18 |   9 |               10 |          10 | yes
+  17 | 36 |  10 |               10 |           8 | NO
+  17 | 72 |  14 |               14 |           6 | NO
+
+  Two synthetic counterexamples to claim (i) as an identity:
+   (a) survivors every 3rd slot, L = 9: X == 3 always, max_r X_r = 3,
+       sharp threshold degree k* = 2 (P(z) = (z-3)^2/9). Claim (i) overstates by 1.
+   (b) real tile x = 13, L = 44 slots: Xmin = 9, Xmax = 17,
+       k* = 4 against claim (i)'s 17. Xmin > 1 is what claim (i) drops.
+
+--- D. CLAIM (ii): degree 2 works iff Var < (t-1)(2-t) + 2/M ? ---
+  Derivation. P_s(z) = (z-s)(z-s-1)/(s(s+1)) has P_s(0) = 1 and P_s(j) >= 0
+  for every integer j >= 0. sum_a P_s(X_a) = M[Var + (t-s)(t-s-1)]/(s(s+1)),
+  and #empty is an integer, so degree 2 SUCCEEDS as soon as
+        Var(X_L)  <  (t-s)(s+1-t) + s(s+1)/M      for some integer s >= 1.
+  (t-s)(s+1-t) is maximised over integer s at s = floor(t), where it equals
+  frac(t)(1-frac(t)) <= 1/4.  The inherited claim is the s = 1 member, and
+  s = 1 is optimal only while 1 <= t <= 2.
+
+  s* = argmax over s | inherited RHS (t-1)(2-t)+2/M | correct RHS | Var | LP verdict
+  x |  L |    t    |   Var   | inherited RHS | correct RHS | V_2 (sharp) | deg-2 works
+   5 |  2 |  1.2000 |  0.1600 |      0.560000 |    0.560000 (s=1) |    0.000e+0 | YES
+   7 |  5 |  2.1429 |  0.4653 |     -0.106122 |    0.293878 (s=2) |    2.000e+0 | no
+  11 |  7 |  2.4545 |  0.7674 |     -0.655962 |    0.263518 (s=2) |    3.333e+1 | no
+  13 | 11 |  3.2637 |  1.3039 |     -2.860366 |    0.196577 (s=3) |    4.628e+2 | no
+  17 | 18 |  4.7123 |  1.6633 |    -10.069146 |    0.205144 (s=4) |    5.768e+3 | no
+
+  Agreement test of the closed form against the sharp LP, over every L
+  from 1 to 3*L_crit at x = 5,7,11,13 (does "Var < max_s RHS" match V_2 < 1?):
+  agree on 73/73 window lengths; no mismatch
+
+  The Fano form. Var < frac(t)(1-frac(t)) + O(t^2/M) means
+        Fano(X_L) < frac(t)(1-frac(t))/t + O(t/M)  <=  1/(4t).
+  1/6 is that threshold AT t = 3/2 and nowhere else. Threshold by level:
+  x |  L |    t    | 1/(4t)  | correct Fano threshold | measured Fano | passes
+   5 |  2 |  1.2000 | 0.20833 |               0.466667 |      0.133333 | YES
+   7 |  5 |  2.1429 | 0.11667 |               0.137143 |      0.217143 | no
+  11 |  7 |  2.4545 | 0.10185 |               0.107359 |      0.312650 | no
+  13 | 11 |  3.2637 | 0.07660 |               0.060231 |      0.399502 | no
+  17 | 18 |  4.7123 | 0.05305 |               0.043533 |      0.352973 | no
+
+--- E. CLAIM (iii): natal5-variance.js reading 2, re-derived here ---
+  Independent re-implementation of the exact J5 rotation variance:
+    delta = (2/30) prod_{7<=p<=y} (p-2)/p,  J5(d) = rho30(d)/30 * prod rho_p(d)/p,
+    rho30 = 2 / 1 / 0 at d = 0 / +-6 / other (mod 30),
+    rho_p = p-2 if p|d,  p-3 if d = +-2 (mod p),  p-4 otherwise,
+    Var[N_L] = sum_{|d|<L} (L-|d|)(J5(d) - delta^2).
+
+   x |    W = x# |   y  |   E[N]    |    Var    | Var/E | correct threshold at this t | passes
+   7 |       210 |   13 |      6.92 |      1.05 | 0.152 |                    1.026e-2 | no
+  11 |      2310 |   47 |     39.27 |     10.06 | 0.256 |                    5.060e-3 | no
+  13 |     30030 |  173 |    304.28 |     91.13 | 0.299 |                    6.656e-4 | no
+  17 |    510510 |  709 |   3245.51 |   1060.54 | 0.327 |                    7.698e-5 | no
+  19 |   9699690 | 3109 |  41441.19 |  14392.59 | 0.347 |                    3.673e-6 | no
+  Reading 2 IS reproduced: Var/E = 0.152 -> 0.347 across x = 7 to 19.
+  But its window is L = W = x# INTEGERS, where t = E[N] = 6.92 .. 41441,
+  not t = 3/2. 1/6 is the threshold only at t = 3/2. At the t these rows
+  actually carry, the threshold is the last column, and 0.152 misses it by
+  the ratio printed below.
+   x= 7: measured Fano 0.1521 / threshold 1.03e-2 = 1.48e+1x too large
+   x=11: measured Fano 0.2563 / threshold 5.06e-3 = 5.06e+1x too large
+   x=13: measured Fano 0.2995 / threshold 6.66e-4 = 4.50e+2x too large
+   x=17: measured Fano 0.3268 / threshold 7.70e-5 = 4.24e+3x too large
+   x=19: measured Fano 0.3473 / threshold 3.67e-6 = 9.46e+4x too large
+  The 6-lattice tile at its own L_crit is the right place to ask, and part D
+  did: degree 2 passes at x = 5 and fails from x = 7, which is the boundary
+  the inherited text names, reached by a different road.
+
+--- F. CLAIM (iv): needed degree at L = L_crit = G2(x#)/6 ---
+   x |  L_crit | Xmin | Xmax |    t     | ceil(t) | |S| | k* | G2*delta_int
+   5 |       2 |    1 |    2 |   1.2000 |       2 |   2 |  2 | 1.2000
+   7 |       5 |    1 |    3 |   2.1429 |       3 |   3 |  4 | 2.1429
+  11 |       7 |    1 |    5 |   2.4545 |       3 |   5 |  5 | 2.4545
+  13 |      11 |    1 |    7 |   3.2637 |       4 |   7 |  8 | 3.2637
+  17 |      18 |    1 |    9 |   4.7123 |       5 |   9 | 10 | 4.7123
+  19 |      25 |    1 |   11 |   5.8560 |       6 |  11 | 12 | 5.8560
+  23 |      34 |    1 |   13 |   7.2716 |       8 |  13 | 14 | 7.2716
+  Xmin = 1 at L_crit at every level, by construction: the maximal gap is
+  one slot longer than the longest empty run, so the window that starts at
+  the last survivor before the record gap holds exactly one. Hence
+  |S| = Xmax there, and claim (iv)'s "k >= max_r X_r" is RIGHT at this L
+  and only at this L.
+
+  Growth of the needed degree. Fits over x = 7..23 (log-log against x):
+   d log Xmax / d log x = 1.262
+   d log t    / d log x = 1.096
+   d log k*   / d log x = 1.127
+   the claimed law x^1.70/ln^2 x, evaluated and compared to t = L_crit*d:
+    x |    t     | x^1.70/ln^2 x | ratio
+    7 |   2.1429 |        7.2181 | 0.2969
+   11 |   2.4545 |       10.2496 | 0.2395
+   13 |   3.2637 |       11.9000 | 0.2743
+   17 |   4.7123 |       15.3888 | 0.3062
+   19 |   5.8560 |       17.2138 | 0.3402
+   23 |   7.2716 |       21.0051 | 0.3462
+   and G2(x#)/6 * d, i.e. the claim's ceil(G2*delta) in SLOT units:
+   x= 7: L_crit*d = 2.1429, ceil = 3, Xmax = 3 (Xmax >= ceil(t): yes)
+   x=11: L_crit*d = 2.4545, ceil = 3, Xmax = 5 (Xmax >= ceil(t): yes)
+   x=13: L_crit*d = 3.2637, ceil = 4, Xmax = 7 (Xmax >= ceil(t): yes)
+   x=17: L_crit*d = 4.7123, ceil = 5, Xmax = 9 (Xmax >= ceil(t): yes)
+   x=19: L_crit*d = 5.8560, ceil = 6, Xmax = 11 (Xmax >= ceil(t): yes)
+   x=23: L_crit*d = 7.2716, ceil = 8, Xmax = 13 (Xmax >= ceil(t): yes)
+
+  Local slope of the claimed law. d log(x^1.70/ln^2 x)/d log x = 1.70 - 2/ln x,
+  which is what the fitted slopes above have to be compared against:
+   at the log-mean level x = 14.0: 1.70 - 2/ln x = 0.942
+   measured d log t / d log x = 1.096
+   so over x = 7..23 the claimed law is INDISTINGUISHABLE from the measurement;
+   the range is far too short to separate x^1.70/ln^2 x from anything near it.
+
+  What degree 2 can certify on its own. The closed form of part D agreed with
+  the sharp LP on every one of the 73 window lengths tested, so it drives the
+  long sweep here and the answer is re-checked against the exact LP.
+   x | L_crit | first L with deg-2 valid | gap bound proved | true G2 | ratio | LP recheck at L, L-1
+   5 |      2 |                        2 |               12 |      12 | 1.0 | V_2(2)=0.000, V_2(1)=2.000
+   7 |      5 |                       19 |              114 |      30 | 3.8 | V_2(19)=0.889, V_2(18)=1.107
+  11 |      7 |                       65 |              390 |      42 | 9.3 | V_2(65)=0.945, V_2(64)=1.004
+  13 |     11 |                      376 |             2256 |      66 | 34.2 | V_2(376)=0.966, V_2(375)=1.017
+  17 |     18 |                     3150 |            18900 |     108 | 175.0 | -
+  19 |     25 |                    19593 |           117558 |     150 | 783.7 | -
+   d log(ratio) / d log x = 5.20 over x = 7..19: the price of
+   stopping at two-point data is not a constant factor, it grows as a power of x.
+
+--- G. THE QUANTIFIER ARGUMENT, checked ---
+  Inherited claim: over a finite period the number of bad positions is a
+  non-negative integer, so a failure-density bound below 1/M forces it to
+  zero; the all-positions quantifier is therefore NOT a logical barrier.
+   x = 5, L = 2 slots: M = 5, t = 1.2000, Var = 0.1600.
+   sum_a P_1(X_a) = M[Var + (t-1)(t-2)]/2 = 0.000000 < 1, and #empty is a
+   non-negative integer, so #empty = 0. Direct count of empty windows: 0.
+   The certificate concludes at EVERY one of the 5 positions, the anchor included.
+   G2(5#) <= 6*2 = 12; truth 12. PROVED from one-point and two-point data only.
+
+  So the barrier is not the quantifier. Where it does bite: the same step
+  at higher x needs the SHARP degree-2 value below 1, and V_2 is not small,
+  it is of order M. Chebyshev is the crude version of the same step:
+   x |  L_crit |     M      | Var/E^2 (Chebyshev density) |  1/M  | ratio needed
+   7 |       5 |         35 |                   1.0133e-1 | 2.86e-2 | 3.55e+0
+  11 |       7 |        385 |                   1.2738e-1 | 2.60e-3 | 4.90e+1
+  13 |      11 |       5005 |                   1.2241e-1 | 2.00e-4 | 6.13e+2
+  17 |      18 |      85085 |                   7.4904e-2 | 1.18e-5 | 6.37e+3
+  19 |      25 |    1616615 |                   5.0454e-2 | 6.19e-7 | 8.16e+4
+
+--- H. CROSS-VALIDATION: simplex against brute-force vertex enumeration ---
+  24/24 agree to 1e-6; no disagreement
+
+DONE in 70.5 s. READINGS are in the tail of this file.

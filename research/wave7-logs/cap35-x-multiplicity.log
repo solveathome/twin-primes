@@ -1,0 +1,237 @@
+CUSTODY @11: VR(0)=0.344 [0.344 PASS]  S(0)=45 [45 PASS]  X(0)=28 [28 PASS]  X̄=19.26 [19.26 PASS]  X(0)/X̄=1.4541 [1.4541 PASS]
+          P2(0)=30 [30 PASS]  z(X)=2.25 [2.25 PASS]  z(P2)=0.45 [0.45 PASS]  corr(X,S)=0.481 [0.481 PASS]  corr(VR,S)=0.088
+
+===== @11: W=2310 N̄=90 K=10 (13..47) H=0.7891  weight identity ΣW=N̄W PASS  [u-form vs sweep: PASS]
+  S(0)=45 S̄=38.24 S_CRT=39.27 | X(0)=28 X̄=19.26 X_CRT=20.29 | X(0)/X̄=1.4541 S(0)/S̄=1.1768 β=S(0)/S_CRT=1.1458
+  identity X = Σ_{j≥2}(−1)^j B_j : anchored 28 vs 28.000  PASS
+   k |  anchored |  ensemble |    CRT    |   z(anch) | (k−1)·[A−E] | (k−1)·[A−C] | (k−1)·[E−C]
+   0 |        45 |     38.24 |     39.27 |      1.83 |        0.00 |        0.00 |        0.00
+   1 |        19 |     35.82 |     34.28 |     -2.81 |        0.00 |        0.00 |        0.00
+   2 |        24 |     13.29 |     13.11 |      3.03 |       10.71 |       10.89 |        0.19
+   3 |         2 |      2.44 |      2.89 |     -0.30 |       -0.89 |       -1.79 |       -0.90
+   4 |         0 |      0.12 |      0.41 |     -0.34 |       -0.37 |       -1.23 |       -0.85
+   5 |         0 |      0.00 |      0.04 |       NaN |        0.00 |       -0.16 |       -0.16
+   6 |         0 |      0.00 |      0.00 |       NaN |        0.00 |       -0.01 |       -0.01
+   7 |         0 |      0.00 |      0.00 |       NaN |        0.00 |       -0.00 |       -0.00
+   8 |         0 |      0.00 |      0.00 |       NaN |        0.00 |       -0.00 |       -0.00
+   9 |         0 |      0.00 |      0.00 |       NaN |        0.00 |       -0.00 |       -0.00
+  10 |         0 |      0.08 |      0.00 |     -0.29 |       -0.70 |       -0.00 |        0.70
+  CHANNELS  X-gap anchored−ensemble = 8.74  =  m=2 cell 10.71  +  m≥3 cells -1.96
+  DEFICIT NORMALISED FOR THE X-FLOOR:  (X̄−X(0))/S̄ = -0.2287   [Assumption A: stays below 1−ε]
+  ONE-SIDED ω_s over v ∈ [1,W)   (the ensemble's own arithmetic, no anchoring)
+   j | Σ_v C(a,j) exact | Σ_{∏Q<W} ⌊(W−1)/∏Q⌋ | id | (W−1)·e_j(1/q) CRT | missing mass Σ_{∏Q>W} | #subsets ∏Q<W
+   1 |              906 |                   906 | PASS |              911.0 |              0.000000 |             10
+   2 |              136 |                   136 | PASS |              158.3 |             -0.000000 |             45
+   3 |                0 |                     0 | PASS |               16.0 |              0.006909 |              0
+   4 |                0 |                     0 | PASS |                1.0 |              0.000448 |              0
+   5 |                0 |                     0 | PASS |                0.0 |              0.000020 |              0
+  ω_s law k=0..4  truth 0.6665 0.2746 0.0589 0.0000 0.0000 | CRT 0.6675 0.2765 0.0503 0.0053 0.0004
+  CONVOLUTION TEST (are the two sides independent?): max|conv−ens| = 1.4 at k=1; conv n_0=39.2 vs exact S̄=38.2 (2.42%)
+  COFACTOR TRICHOTOMY: violations (c ∉ {1} ∪ primes>y) = 0  [I3 PASS]   p_nat=0.18750  λ=4.8125  λN̄/W=0.18750
+   i | #{ω_s(r)=i} | c=1 | c=prime>y | Π_i | p_nat·Π_i | prime room | p_nat·(Π_i+room) | ratio
+   0 |          62 |     0 |        62 |       0 |       0.0 |          0 |   n/a — the m=0 cell: r itself prime, no scour part
+   1 |          18 |     2 |        16 |      21 |       3.9 |         85 |             19.9 | 0.906
+   2 |          10 |    10 |         0 |      45 |       8.4 |          0 |              8.4 | 1.185
+  CENSUS j=2: B_2(0) from census = 30, from spectrum ΣC(k,2)n_k = 30  [I2 PASS]  CRT N̄·e_2(2/q) = 24.7  ratio 1.216
+    aligned  obs=19 CRT=12.3 ratio=1.540   |   mixed  obs=11 CRT=12.3 ratio=0.892
+    ∏Q > W:  obs=0 CRT=0.0 ratio=NaN  vs P1 prediction (aligned share removed) NaN   sub-W aligned enhancement 1.540
+    enhancement obs/CRT by cofactor range, rows=bin(W/d₁) cols=bin(W/d₂):
+      b0      ·       ·       ·       ·      1.88
+      b1      ·       ·       ·       ·      1.23
+      b2      ·       ·      0.62    1.43     ·  
+      b3      ·       ·      0.57    0.95     ·  
+      b4     2.14    0.41     ·       ·       ·  
+  CENSUS j=3: B_3(0) from census = 2, from spectrum ΣC(k,3)n_k = 2  [I2 PASS]  CRT N̄·e_3(2/q) = 5.0  ratio 0.402
+    aligned  obs=0 CRT=1.2 ratio=0.000   |   mixed  obs=2 CRT=3.7 ratio=0.536
+    ∏Q > W:  obs=2 CRT=5.0 ratio=0.402  vs P1 prediction (aligned share removed) 0.750   sub-W aligned enhancement NaN
+    enhancement obs/CRT by cofactor range, rows=bin(W/d₁) cols=bin(W/d₂):
+      b0      ·       ·      1.63    1.74    0.00
+      b1      ·       ·      0.00    0.00     ·  
+      b2     0.00    0.00     ·       ·       ·  
+      b3     0.00    0.00     ·       ·       ·  
+      b4     0.00     ·       ·       ·       ·  
+  [level time 0.046s]
+CUSTODY @13: VR(0)=0.623 [0.623 PASS]  S(0)=307 [307 PASS]  X(0)=452 [452 PASS]  X̄=456.18 [456.18 PASS]  X(0)/X̄=0.9908 [0.9908 PASS]
+          P2(0)=601 [601 PASS]  z(X)=-0.16 [-0.16 PASS]  z(P2)=-0.16 [-0.16 PASS]  corr(X,S)=0.908 [0.908 PASS]  corr(VR,S)=0.004
+
+===== @13: W=30030 N̄=990 K=34 (17..173) H=1.1468  weight identity ΣW=N̄W PASS  [u-form vs sweep: PASS]
+  S(0)=307 S̄=310.88 S_CRT=304.28 | X(0)=452 X̄=456.18 X_CRT=449.58 | X(0)/X̄=0.9908 S(0)/S̄=0.9875 β=S(0)/S_CRT=1.0089
+  identity X = Σ_{j≥2}(−1)^j B_j : anchored 452 vs 452.000  PASS
+   k |  anchored |  ensemble |    CRT    |   z(anch) | (k−1)·[A−E] | (k−1)·[A−C] | (k−1)·[E−C]
+   0 |       307 |    310.88 |    304.28 |     -0.16 |        0.00 |        0.00 |        0.00
+   1 |       348 |    337.86 |    369.58 |      0.25 |        0.00 |        0.00 |        0.00
+   2 |       249 |    245.84 |    213.23 |      0.19 |        3.16 |       35.77 |       32.60
+   3 |        56 |     78.25 |     77.91 |     -2.72 |      -44.50 |      -43.82 |        0.68
+   4 |        29 |     16.74 |     20.27 |      1.62 |       36.78 |       26.18 |      -10.60
+   5 |         1 |      0.36 |      4.01 |      0.89 |        2.56 |      -12.03 |      -14.59
+   6 |         0 |      0.00 |      0.63 |       NaN |        0.00 |       -3.13 |       -3.13
+   7 |         0 |      0.00 |      0.08 |       NaN |        0.00 |       -0.48 |       -0.48
+   8 |         0 |      0.00 |      0.01 |       NaN |        0.00 |       -0.06 |       -0.06
+   9 |         0 |      0.00 |      0.00 |       NaN |        0.00 |       -0.01 |       -0.01
+  10 |         0 |      0.00 |      0.00 |       NaN |        0.00 |       -0.00 |       -0.00
+  11 |         0 |      0.00 |      0.00 |       NaN |        0.00 |       -0.00 |       -0.00
+  12 |         0 |      0.00 |      0.00 |       NaN |        0.00 |       -0.00 |       -0.00
+  13 |         0 |      0.00 |      0.00 |       NaN |        0.00 |       -0.00 |       -0.00
+  34 |         0 |      0.07 |      0.00 |       NaN |       -2.18 |       -0.00 |        2.18
+  CHANNELS  X-gap anchored−ensemble = -4.18  =  m=2 cell 3.16  +  m≥3 cells -7.34
+  DEFICIT NORMALISED FOR THE X-FLOOR:  (X̄−X(0))/S̄ = 0.0134   [Assumption A: stays below 1−ε]
+  ONE-SIDED ω_s over v ∈ [1,W)   (the ensemble's own arithmetic, no anchoring)
+   j | Σ_v C(a,j) exact | Σ_{∏Q<W} ⌊(W−1)/∏Q⌋ | id | (W−1)·e_j(1/q) CRT | missing mass Σ_{∏Q>W} | #subsets ∏Q<W
+   1 |            17201 |                 17201 | PASS |            17218.1 |              0.000000 |             34
+   2 |             4420 |                  4420 | PASS |             4701.6 |             -0.000000 |            561
+   3 |               85 |                    85 | PASS |              814.9 |              0.023518 |             71
+   4 |                0 |                     0 | PASS |              100.8 |              0.003357 |              0
+   5 |                0 |                     0 | PASS |                9.5 |              0.000316 |              0
+  ω_s law k=0..4  truth 0.5715 0.2869 0.1387 0.0028 0.0000 | CRT 0.5591 0.3297 0.0925 0.0164 0.0021
+  CONVOLUTION TEST (are the two sides independent?): max|conv−ens| = 7.0 at k=2; conv n_0=316.0 vs exact S̄=310.9 (1.63%)
+  COFACTOR TRICHOTOMY: violations (c ∉ {1} ∪ primes>y) = 0  [I3 PASS]   p_nat=0.17188  λ=5.2135  λN̄/W=0.17188
+   i | #{ω_s(r)=i} | c=1 | c=prime>y | Π_i | p_nat·Π_i | prime room | p_nat·(Π_i+room) | ratio
+   0 |         558 |     0 |       558 |       0 |       0.0 |          0 |   n/a — the m=0 cell: r itself prime, no scour part
+   1 |         310 |     7 |       303 |      73 |      12.5 |       1790 |            320.2 | 0.968
+   2 |         110 |   110 |         0 |     617 |     106.0 |          0 |            106.0 | 1.037
+   3 |          12 |    12 |         0 |      71 |      12.2 |          0 |             12.2 | 0.983
+  CENSUS j=2: B_2(0) from census = 601, from spectrum ΣC(k,2)n_k = 601  [I2 PASS]  CRT N̄·e_2(2/q) = 620.0  ratio 0.969
+    aligned  obs=283 CRT=310.0 ratio=0.913   |   mixed  obs=318 CRT=310.0 ratio=1.026
+    ∏Q > W:  obs=0 CRT=0.0 ratio=NaN  vs P1 prediction (aligned share removed) NaN   sub-W aligned enhancement 0.913
+    enhancement obs/CRT by cofactor range, rows=bin(W/d₁) cols=bin(W/d₂):
+      b0      ·       ·       ·       ·      1.51
+      b1      ·       ·       ·       ·      0.66
+      b2      ·       ·      1.49    0.93    1.27
+      b3      ·       ·      1.06    0.92     ·  
+      b4     1.44    0.64    0.76     ·       ·  
+  CENSUS j=3: B_3(0) from census = 182, from spectrum ΣC(k,3)n_k = 182  [I2 PASS]  CRT N̄·e_3(2/q) = 214.9  ratio 0.847
+    aligned  obs=23 CRT=53.7 ratio=0.428   |   mixed  obs=159 CRT=161.2 ratio=0.986
+    ∏Q > W:  obs=143 CRT=186.3 ratio=0.768  vs P1 prediction (aligned share removed) 0.750   sub-W aligned enhancement 3.210
+    enhancement obs/CRT by cofactor range, rows=bin(W/d₁) cols=bin(W/d₂):
+      b0      ·       ·      2.99    1.47    0.45
+      b1      ·       ·      0.85    0.53     ·  
+      b2     2.53    0.30    0.31    1.91     ·  
+      b3     1.72    0.41    0.48     ·       ·  
+      b4     0.41     ·       ·       ·       ·  
+  [level time 0.484s]
+CUSTODY @17: VR(0)=0.553 [0.553 PASS]  S(0)=3099 [3099 PASS]  X(0)=10381 [10381 PASS]  X̄=10947.70 [10947.7 PASS]  X(0)/X̄=0.9482 [0.9482 PASS]
+          P2(0)=15770 [15770 PASS]  z(X)=-2.71 [-2.71 PASS]  z(P2)=-0.30 [-0.3 PASS]  corr(X,S)=0.987 [0.987 PASS]  corr(VR,S)=0.002
+
+===== @17: W=510510 N̄=14850 K=120 (19..709) H=1.4938  weight identity ΣW=N̄W PASS  [u-form vs sweep: PASS]
+  S(0)=3099 S̄=3614.93 S_CRT=3245.51 | X(0)=10381 X̄=10947.70 X_CRT=10578.28 | X(0)/X̄=0.9482 S(0)/S̄=0.8573 β=S(0)/S_CRT=0.9549
+  identity X = Σ_{j≥2}(−1)^j B_j : anchored 10381 vs 10381.000  PASS
+   k |  anchored |  ensemble |    CRT    |   z(anch) | (k−1)·[A−E] | (k−1)·[A−C] | (k−1)·[E−C]
+   0 |      3099 |   3614.93 |   3245.51 |     -2.49 |        0.00 |        0.00 |        0.00
+   1 |      5278 |   4081.48 |   5026.88 |      4.00 |        0.00 |        0.00 |        0.00
+   2 |      3820 |   4327.46 |   3797.48 |     -2.68 |     -507.46 |       22.52 |      529.98
+   3 |      1583 |   1958.64 |   1866.42 |     -4.43 |     -751.28 |     -566.84 |      184.43
+   4 |       926 |    776.66 |    671.70 |      1.90 |      448.03 |      762.90 |      314.87
+   5 |       103 |     87.83 |    188.88 |      0.36 |       60.68 |     -343.53 |     -404.21
+   6 |        41 |      2.95 |     43.25 |     10.11 |      190.24 |      -11.23 |     -201.47
+   7 |         0 |      0.00 |      8.29 |       NaN |        0.00 |      -49.77 |      -49.77
+   8 |         0 |      0.00 |      1.36 |       NaN |        0.00 |       -9.53 |       -9.53
+   9 |         0 |      0.00 |      0.19 |       NaN |        0.00 |       -1.55 |       -1.55
+  10 |         0 |      0.00 |      0.02 |       NaN |        0.00 |       -0.22 |       -0.22
+  11 |         0 |      0.00 |      0.00 |       NaN |        0.00 |       -0.03 |       -0.03
+  12 |         0 |      0.00 |      0.00 |       NaN |        0.00 |       -0.00 |       -0.00
+  13 |         0 |      0.00 |      0.00 |       NaN |        0.00 |       -0.00 |       -0.00
+  14 |         0 |      0.00 |      0.00 |       NaN |        0.00 |       -0.00 |       -0.00
+  15 |         0 |      0.00 |      0.00 |       NaN |        0.00 |       -0.00 |       -0.00
+  16 |         0 |      0.00 |      0.00 |       NaN |        0.00 |       -0.00 |       -0.00
+  120 |         0 |      0.06 |      0.00 |       NaN |       -6.92 |       -0.00 |        6.92
+  CHANNELS  X-gap anchored−ensemble = -566.70  =  m=2 cell -507.46  +  m≥3 cells -59.24
+  DEFICIT NORMALISED FOR THE X-FLOOR:  (X̄−X(0))/S̄ = 0.1568   [Assumption A: stays below 1−ε]
+  ONE-SIDED ω_s over v ∈ [1,W)   (the ensemble's own arithmetic, no anchoring)
+   j | Σ_v C(a,j) exact | Σ_{∏Q<W} ⌊(W−1)/∏Q⌋ | id | (W−1)·e_j(1/q) CRT | missing mass Σ_{∏Q>W} | #subsets ∏Q<W
+   1 |           381238 |                381238 | PASS |           381296.3 |              0.000000 |            120
+   2 |           135556 |                135556 | PASS |           139100.8 |              0.000000 |           7140
+   3 |            10661 |                 10661 | PASS |            33059.5 |              0.039784 |           5246
+   4 |                3 |                     3 | PASS |             5760.4 |              0.011277 |              3
+   5 |                0 |                     0 | PASS |              785.2 |              0.001538 |              0
+  ω_s law k=0..4  truth 0.4979 0.2783 0.2029 0.0209 0.0000 | CRT 0.4707 0.3579 0.1328 0.0321 0.0057
+  CONVOLUTION TEST (are the two sides independent?): max|conv−ens| = 70.5 at k=2; conv n_0=3664.4 vs exact S̄=3614.9 (1.37%)
+  COFACTOR TRICHOTOMY: violations (c ∉ {1} ∪ primes>y) = 0  [I3 PASS]   p_nat=0.16113  λ=5.5394  λN̄/W=0.16113
+   i | #{ω_s(r)=i} | c=1 | c=prime>y | Π_i | p_nat·Π_i | prime room | p_nat·(Π_i+room) | ratio
+   0 |        6813 |     0 |      6813 |       0 |       0.0 |          0 |   n/a — the m=0 cell: r itself prime, no scour part
+   1 |        5863 |    22 |      5841 |     257 |      41.4 |      36249 |           5882.3 | 0.997
+   2 |        1326 |  1309 |        17 |    8046 |    1296.5 |        127 |           1316.9 | 1.007
+   3 |         848 |   848 |         0 |    5273 |     849.7 |          0 |            849.7 | 0.998
+   4 |           0 |     0 |         0 |       3 |       0.5 |          0 |              0.5 | 0.000
+  CENSUS j=2: B_2(0) from census = 15770, from spectrum ΣC(k,2)n_k = 15770  [I2 PASS]  CRT N̄·e_2(2/q) = 16185.0  ratio 0.974
+    aligned  obs=7715 CRT=8092.5 ratio=0.953   |   mixed  obs=8055 CRT=8092.5 ratio=0.995
+    ∏Q > W:  obs=0 CRT=0.0 ratio=NaN  vs P1 prediction (aligned share removed) NaN   sub-W aligned enhancement 0.953
+    enhancement obs/CRT by cofactor range, rows=bin(W/d₁) cols=bin(W/d₂):
+      b0      ·       ·       ·       ·      1.11
+      b1      ·       ·       ·       ·      0.88
+      b2      ·       ·      0.99    0.99    1.03
+      b3      ·       ·      0.99    1.00     ·  
+      b4     1.09    0.88    1.03     ·       ·  
+  CENSUS j=3: B_3(0) from census = 7137, from spectrum ΣC(k,3)n_k = 7137  [I2 PASS]  CRT N̄·e_3(2/q) = 7693.2  ratio 0.928
+    aligned  obs=1695 CRT=1923.3 ratio=0.881   |   mixed  obs=5442 CRT=5769.9 ratio=0.943
+    ∏Q > W:  obs=3199 CRT=4726.4 ratio=0.677  vs P1 prediction (aligned share removed) 0.750   sub-W aligned enhancement 2.285
+    enhancement obs/CRT by cofactor range, rows=bin(W/d₁) cols=bin(W/d₂):
+      b0      ·       ·      1.11    1.20    0.89
+      b1      ·       ·      0.87    0.85    0.59
+      b2     1.08    0.82    0.94    1.04     ·  
+      b3     1.05    0.89    1.05     ·       ·  
+      b4     0.89    0.48     ·       ·       ·  
+  [level time 160.698s]
+
+===== @19: W=9699690 N̄=252450 K=435 (23..3109) H=1.7857  weight identity ΣW=N̄W PASS
+  S(0)=38380 S̄=49238.76 S_CRT=41441.19 | X(0)=236625 X̄=247579.81 X_CRT=239782.23 | X(0)/X̄=0.9558 S(0)/S̄=0.7795 β=S(0)/S_CRT=0.9261
+  identity X = Σ_{j≥2}(−1)^j B_j : anchored 236625 vs 236625.000  PASS
+   k |  anchored |  ensemble |    CRT    |   z(anch) | (k−1)·[A−E] | (k−1)·[A−C] | (k−1)·[E−C]
+   0 |     38380 |  49238.76 |  41441.19 |       NaN |        0.00 |        0.00 |        0.00
+   1 |     83780 |  59824.54 |  75794.25 |       NaN |        0.00 |        0.00 |        0.00
+   2 |     64624 |  73002.24 |  68367.12 |       NaN |    -8378.24 |    -3743.12 |     4635.12
+   3 |     34026 |  43097.56 |  40562.03 |       NaN |   -18143.12 |   -13072.06 |     5071.06
+   4 |     25281 |  21329.08 |  17812.15 |       NaN |    11855.76 |    22406.56 |    10550.80
+   5 |      3787 |   5422.39 |   6176.91 |       NaN |    -6541.55 |    -9559.63 |    -3018.08
+   6 |      2474 |    529.22 |   1762.44 |       NaN |     9723.89 |     3557.82 |    -6166.07
+   7 |        98 |      6.16 |    425.67 |       NaN |      551.04 |    -1966.03 |    -2517.07
+   8 |         0 |      0.00 |     88.86 |       NaN |        0.00 |     -622.01 |     -622.01
+   9 |         0 |      0.00 |     16.29 |       NaN |        0.00 |     -130.32 |     -130.32
+  10 |         0 |      0.00 |      2.66 |       NaN |        0.00 |      -23.90 |      -23.90
+  11 |         0 |      0.00 |      0.39 |       NaN |        0.00 |       -3.89 |       -3.89
+  12 |         0 |      0.00 |      0.05 |       NaN |        0.00 |       -0.57 |       -0.57
+  13 |         0 |      0.00 |      0.01 |       NaN |        0.00 |       -0.08 |       -0.08
+  14 |         0 |      0.00 |      0.00 |       NaN |        0.00 |       -0.01 |       -0.01
+  15 |         0 |      0.00 |      0.00 |       NaN |        0.00 |       -0.00 |       -0.00
+  16 |         0 |      0.00 |      0.00 |       NaN |        0.00 |       -0.00 |       -0.00
+  17 |         0 |      0.00 |      0.00 |       NaN |        0.00 |       -0.00 |       -0.00
+  18 |         0 |      0.00 |      0.00 |       NaN |        0.00 |       -0.00 |       -0.00
+  19 |         0 |      0.00 |      0.00 |       NaN |        0.00 |       -0.00 |       -0.00
+  435 |         0 |      0.05 |      0.00 |       NaN |      -22.59 |        0.00 |       22.59
+  CHANNELS  X-gap anchored−ensemble = -10954.81  =  m=2 cell -8378.24  +  m≥3 cells -2576.56
+  DEFICIT NORMALISED FOR THE X-FLOOR:  (X̄−X(0))/S̄ = 0.2225   [Assumption A: stays below 1−ε]
+  ONE-SIDED ω_s over v ∈ [1,W)   (the ensemble's own arithmetic, no anchoring)
+   j | Σ_v C(a,j) exact | Σ_{∏Q<W} ⌊(W−1)/∏Q⌋ | id | (W−1)·e_j(1/q) CRT | missing mass Σ_{∏Q>W} | #subsets ∏Q<W
+   1 |          8659976 |               8659976 | PASS |          8660196.0 |              0.000000 |            435
+   2 |          3769311 |               3769311 | PASS |          3816192.4 |             -0.000000 |          94395
+   3 |           544464 |                544464 | PASS |          1106885.0 |              0.050943 |         162982
+   4 |             4946 |                  4946 | PASS |           237788.8 |              0.023876 |           3520
+   5 |                0 |                     0 | PASS |            40366.0 |              0.004162 |              0
+  ω_s law k=0..4  truth 0.4402 0.2820 0.2233 0.0541 0.0005 | CRT 0.4074 0.3680 0.1640 0.0481 0.0104
+  CONVOLUTION TEST (are the two sides independent?): max|conv−ens| = 662.2 at k=2; conv n_0=49733.9 vs exact S̄=49238.8 (1.01%)
+  COFACTOR TRICHOTOMY: violations (c ∉ {1} ∪ primes>y) = 0  [I3 PASS]   p_nat=0.15218  λ=5.8471  λN̄/W=0.15218
+   i | #{ω_s(r)=i} | c=1 | c=prime>y | Π_i | p_nat·Π_i | prime room | p_nat·(Π_i+room) | ratio
+   0 |       98340 |     0 |     98340 |       0 |       0.0 |          0 |   n/a — the m=0 cell: r itself prime, no scour part
+   1 |      109234 |    75 |    109159 |     918 |     139.7 |     717851 |         109383.0 | 0.999
+   2 |       19098 | 15778 |      3320 |  103331 |   15725.0 |      21737 |          19033.0 | 1.003
+   3 |       25245 | 25245 |         0 |  165936 |   25252.3 |          0 |          25252.3 | 1.000
+   4 |         533 |   533 |         0 |    3520 |     535.7 |          0 |            535.7 | 0.995
+  CENSUS j=2: B_2(0) from census = 395426, from spectrum ΣC(k,2)n_k = 395426  [I2 PASS]  CRT N̄·e_2(2/q) = 397290.2  ratio 0.995
+    aligned  obs=196092 CRT=198645.1 ratio=0.987   |   mixed  obs=199334 CRT=198645.1 ratio=1.003
+    ∏Q > W:  obs=0 CRT=0.0 ratio=NaN  vs P1 prediction (aligned share removed) NaN   sub-W aligned enhancement 0.987
+    enhancement obs/CRT by cofactor range, rows=bin(W/d₁) cols=bin(W/d₂):
+      b0      ·       ·       ·       ·      0.87
+      b1      ·       ·       ·       ·      1.01
+      b2      ·       ·      1.01    1.00    0.99
+      b3      ·       ·      1.01    1.00    1.01
+      b4     0.87    1.01    1.00    1.00     ·  
+  [level time 2.273s]
+
+===== PART 6 — THE CROSSING, FACTORED =====
+  S(0)/S̄ = β · (S_CRT/S̄):  β is the classical HL-vs-Mertens ratio (crosses 1 late),
+  S_CRT/S̄ is the m≥3 product-truncation factor of the rotation ensemble (falls monotonically).
+   x |   lnW  |  S(0)  |    S̄     |  S_CRT   |   β    | S_CRT/S̄ | S(0)/S̄ | X(0)/X̄ | (X̄−X(0))/S̄ | classical (e^2γ/4)(1+2/L+6/L²)
+  11 | 7.745 |     45 |    38.24 |    39.27 | 1.1458 |  1.0271 | 1.1768 | 1.4541 |     -0.2287 | 1.0772
+  13 | 10.310 |    307 |   310.88 |   304.28 | 1.0089 |  0.9788 | 0.9875 | 0.9908 |      0.0134 | 0.9917
+  17 | 13.143 |   3099 |  3614.93 |  3245.51 | 0.9549 |  0.8978 | 0.8573 | 0.9482 |      0.1568 | 0.9413
+  19 | 16.088 |  38380 | 49238.76 | 41441.19 | 0.9261 |  0.8416 | 0.7795 | 0.9558 |      0.2225 | 0.9100
+[total 163.501s]

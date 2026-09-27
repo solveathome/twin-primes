@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Ulam Spiral</title>
+<meta name="Keywords" content="">
+<meta name="Description" content="">
+<style type="text/css">
+    body, h1{margin:0;}
+    canvas{margin: 20px; }
+</style>
+</head>
+<body onload="draw()">
+<canvas id="canvas" width=1000 height=1000 style="border: 0px;"></canvas>
+<script>
+function isPrime(n) {
+    if (isNaN(n) || !isFinite(n) || n%1 || n<2) return false; 
+    if (n%2==0) return (n==2);
+    if (n%3==0) return (n==3);
+    var m=Math.sqrt(n);
+    for (var i=5;i<=m;i+=6) {
+        if (n%i==0)     return false;
+        if (n%(i+2)==0) return false;
+    }
+    return true;
+}
+
+var prime_colors = ["#444444", "#007FFF", "#cccccc", "green", "#ff3300"];
+function dot(context, x, y, r, num) {
+    context.beginPath();
+    context.arc(x, y, r, 0, Math.PI * 2, true);
+    if (isPrime(num)) {
+        context.fillStyle = prime_colors[(num-1)%10/2];
+    } else {
+        context.fillStyle = "#f3f3f3";
+    }
+    context.fill();
+
+    if (1) {
+        if (isPrime(num)) {
+            context.fillStyle = "white";
+        } else {
+            context.fillStyle = "#aaaaaa";
+        }
+
+        context.textAlign='center';
+        context.textBaseline='middle';
+        context.font = (r*0.9)+"px Courier New";
+        context.fillText(num, x, y);
+    }
+}
+
+function draw() {
+    var a = 40;
+    var r = a/2;
+    var border_length = 22;
+    var cx = r+1000/2;
+    var cy = r+1000/2;
+
+    var canvas=document.getElementById('canvas');
+    var context=canvas.getContext('2d');
+    var num = 1;
+
+    var direction = 0;
+    var stride = 1;
+
+    for (k=0; k<border_length; k++) {
+        for (var i=0; i<stride; i++) {
+            dot(context, cx, cy, r, num);
+            if (direction == 0) cx += a;
+            if (direction == 1) cx -= a;
+            num+=1;
+        }
+        for (var i=0; i<stride; i++) {
+            dot(context, cx, cy, r, num);
+            if (direction == 0) cy -= a;
+            if (direction == 1) cy += a;
+            num+=1;
+        }
+        direction = ++direction%2;
+        stride++;
+    }
+}
+</script>
+</body>
+</html>
